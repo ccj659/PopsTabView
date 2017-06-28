@@ -84,6 +84,12 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
         }
     }
 
+
+    public void clearSelected() {
+            checkedId = null;
+            notifyDataSetChanged();
+    }
+
     public void setExpand(boolean isExpand) {
         this.isExpand = isExpand;
         notifyDataSetChanged();

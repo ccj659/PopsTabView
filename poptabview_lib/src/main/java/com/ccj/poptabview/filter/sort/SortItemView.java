@@ -23,7 +23,7 @@ import com.ccj.poptabview.R;
 import java.util.List;
 
 /**
- * 复合筛选 项item 的view
+ * 复合筛选 项item 的
  * Created by chenchangjun on 17/6/22.
  */
 
@@ -187,8 +187,8 @@ public class SortItemView extends LinearLayout {
         iv_expand_border.animate().rotation(0).start();
         isMallInlandExpand = false;
         rv_cat.setVisibility(View.VISIBLE);
-        mAdapterInland.clear();
-
+        //mAdapterInland.clear();//
+        mAdapterInland.clearSelected();
     }
 
     public void setCheckedState() {

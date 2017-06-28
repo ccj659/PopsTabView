@@ -16,6 +16,7 @@ import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,13 +43,14 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
     int tag;
 
     private SortItemView sort_channel, sort_date, sort_time, sort_theme, sort_mall;
-    private List<FilterBean.CategoryMall> inlandMallList;
+    private List<FilterBean.CategoryMall> inlandMallList=new ArrayList<>();
     private HashMap<String, String> paramsMap = new HashMap<>();
 
     public SortPopupWindow(Context context, List data, OnFilterSetListener onFilterSetListener, int tag) {
         mContext = context;
         this.onFilterSetListener = onFilterSetListener;
         this.tag = tag;
+        inlandMallList.addAll(data);
         initView();
     }
 
@@ -101,11 +103,11 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         resetView();
         showAsDropDown(anchor);
         setButtonEnabled(true);
-        if (inlandMallList == null || inlandMallList.size() == 0) {
-            loadData();
-        } else {
+        //if (inlandMallList == null || inlandMallList.size() == 0) {
+           // loadData();
+        //} else {
             loadSortItem();
-        }
+        //}
     }
 
     private void resetView() {
@@ -121,7 +123,7 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
 
     private void loadData() {
 
-        mLoadingView.setVisibility(View.VISIBLE);
+      //  mLoadingView.setVisibility(View.VISIBLE);
 
     }
 

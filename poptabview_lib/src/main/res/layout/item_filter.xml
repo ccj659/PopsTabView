@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tv_filter"
     android:layout_width="match_parent"
     android:layout_height="24dp"
     style="@style/filter_tag"
     android:layout_margin="5dp"
     android:maxLines="1"
-    android:ellipsize="end"/>
+    android:text="sss"
+    android:ellipsize="end" />

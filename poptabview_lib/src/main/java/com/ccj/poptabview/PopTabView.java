@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.bean.SingleFilterBean;
 import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.loader.PopEntityLoaderImp;
 import com.ccj.poptabview.loader.PopTypeLoader;
 
 import java.util.ArrayList;
@@ -34,12 +35,12 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     private Context mContext;
     private int mTabPostion = -1; //记录TAB页号
     private int index;
-
+    private PopEntityLoaderImp popEntityLoader;
 
 
     private void init(Context context, AttributeSet attrs) {
     /*    TypedArray a = null;
-        try {
+        try { //目前还没用到~ ,留着费劲
             a = context.obtainStyledAttributes(attrs, R.styleable.PopTabView);
             mToggleBtnBackground = a.getResourceId(R.styleable.PopTabView_tab_toggle_btn_bg, -1);
             mToggleBtnBackgroundColor = a.getColor(R.styleable.PopTabView_tab_toggle_btn_color, getResources().getColor(R.color.white));
@@ -55,13 +56,15 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         }*/
         mContext = context;
         setOrientation(LinearLayout.HORIZONTAL);
+        popEntityLoader = new PopEntityLoaderImp();
     }
 
     /**
      * 增加新的筛选popwindow
+     *
      * @param title 筛选初始显示字段
-     * @param data 数据集合
-     * @param tag 业务类型,可以在{PopTypeLoader}中定义
+     * @param data  数据集合
+     * @param tag   业务类型,可以在{PopTypeLoader}中定义
      * @return
      */
     public PopTabView addFilterItem(String title, List data, int tag) {
@@ -72,9 +75,9 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         labView.setLayoutParams(params);
 
-        int type = popTypeLoader.getPopType(tag);
+        int type = popTypeLoader.getPopType(tag); //注意啦~ 这里
 
-        SuperPopWindow mPopupWindow = (SuperPopWindow) popTypeLoader.getPopEntity(getContext(), data, this, type);
+        SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, type);//还有这里~
         mPopupWindow.setOnDismissListener(this);
         addView(labView);
         labButton.setText(title);
@@ -97,6 +100,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
     /**
      * 设置箭头方向及文字颜色
+     *
      * @param isUp true 设置为向上箭头，文字红色
      */
     private void setMenuDrawble(TextView tv_checked, boolean isUp) {
@@ -113,6 +117,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
     /**
      * 遍历,选取,显示
+     *
      * @param position
      */
     public void showPopView(int position) {
@@ -129,30 +134,30 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
             if (mViewLists.get(position).isShowing()) {
                 mViewLists.get(position).dismiss();
             } else {
-                mViewLists.get(position).show(this,0);
+                mViewLists.get(position).show(this, 0);
             }
         }
     }
 
-/*****************************筛选成功,回调~************************************/
+    /*****************************筛选成功,回调~************************************/
     @Override
     public void onFilterSet(SingleFilterBean selectionBean) {
         mTextViewLists.get(index).setText(selectionBean.getTitle());
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(),selectionBean.getTitle());
+        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(), selectionBean.getTitle());
 
     }
 
     @Override
     public void onSecondFilterSet(SingleFilterBean firstBean, SingleFilterBean.SecondFilterBean selectionBean) {
         mTextViewLists.get(index).setText(selectionBean.getTitle());
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(),selectionBean.getTitle());
+        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(), selectionBean.getTitle());
 
     }
 
     @Override
     public void onSortFilterSet(String params) {
         //mTextViewLists.get(index).setText(params);
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), params,params);//// TODO: 17/6/27 第三个参数
+        onPopTabSetListener.onPopTabSet(mTagLists.get(index), params, params);//// TODO: 17/6/27 第三个参数
     }
 
     @Override
@@ -174,22 +179,20 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     }
 
 
-
-
-
-
-
-
-
     /**
      * ExpandPopTabView筛选器外部,回调
+     *
      */
     public interface OnPopTabSetListener {
+
+        /**
+         * filter根据回调,得到的参数集合,以及选中名称
+         * @param tag 业务类型
+         * @param params 需要给接口的传参
+         * @param value //要显示的值
+         */
         void onPopTabSet(int tag, String params, String value);
     }
-
-
-
 
 
     public OnPopTabSetListener getOnPopTabSetListener() {
@@ -223,7 +226,6 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         init(context, attrs);
 
     }
-
 
 
     public PopTypeLoader getPopTypeLoader() {
