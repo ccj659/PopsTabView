@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * 左侧一级筛选adapter
- * @author Aidi on 17/3/23.
+ * @author ccj on 17/3/23.
  */
 public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 

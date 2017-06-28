@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 单栏筛选adapter
  *
- * @author Aidi on 17/3/23.
+ * @author ccj on 17/3/23.
  */
 public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
@@ -23,7 +23,8 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     private List<SingleFilterBean> beanList;
 
-    private int checkedPosition = 0;//选中项的position
+    private String checkedId = "";//选中项的id
+
 
     public SingleFilterAdapter(List<SingleFilterBean> beanList, OnSingleItemClickListener listener) {
         this.beanList = beanList;
@@ -36,17 +37,22 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
         return new FilterViewHolder(v, this);
     }
 
+
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        FilterViewHolder viewHolder = (FilterViewHolder) holder;
-        viewHolder.tv_filter.setText(beanList.get(position).getTitle());
-        if (position == checkedPosition) {
-            viewHolder.tv_filter.setChecked(true);
-            viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_result_menu_selected, 0);
-        } else {
-            viewHolder.tv_filter.setChecked(false);
-            viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        if (beanList!=null&&beanList.size()>position){
+            FilterViewHolder viewHolder = (FilterViewHolder) holder;
+            viewHolder.tv_filter.setText(beanList.get(position).getTitle());
+            if (beanList.get(position).getId().equals(checkedId) ) {
+                viewHolder.tv_filter.setChecked(true);
+                viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_result_menu_selected, 0);
+            } else {
+                viewHolder.tv_filter.setChecked(false);
+                viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            }
         }
+
     }
 
     @Override
@@ -56,7 +62,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     @Override
     public void onItemClick(int position, int viewType) {
-        checkedPosition = position;
+        checkedId = beanList.get(position).getId();
         notifyDataSetChanged();
         mListener.onSingleItemClick(position);
     }

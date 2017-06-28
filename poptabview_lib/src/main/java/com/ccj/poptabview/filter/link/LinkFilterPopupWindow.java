@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 左右双栏筛选PopupWindow
  *
- * @author Aidi on 17/3/23.
+ * @author ccj on 17/3/23.
  */
 public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClickListener, FirstFilterAdapter.OnFirstItemClickListener, SecondFilterAdapter.OnSecondItemClickListener {
 
