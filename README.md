@@ -6,6 +6,14 @@ PopsTabView
 
 目前版本,支持 **单列单选**,**双列单选**,**复杂筛选**.后续筛选会不断完善补充.
 
+Show
+-------
+
+![两个筛选菜单](http://img.blog.csdn.net/20170628171403407?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2NqNjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![四个筛选菜单](http://img.blog.csdn.net/20170628171538096?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2NqNjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
 Introduction
 -------
 
