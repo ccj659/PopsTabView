@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
-import com.ccj.poptabview.single.SingleFilterBean;
+import com.ccj.poptabview.bean.SingleFilterBean;
+import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.loader.PopTypeLoader;
 
 import java.util.ArrayList;
 import java.util.List;

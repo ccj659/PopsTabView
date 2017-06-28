@@ -1,6 +1,6 @@
-package com.ccj.poptabview;
+package com.ccj.poptabview.listener;
 
-import com.ccj.poptabview.single.SingleFilterBean;
+import com.ccj.poptabview.bean.SingleFilterBean;
 
 /**
  * 各种筛选扩展

@@ -1,36 +1,41 @@
-package com.ccj.poptabview.link;
+package com.ccj.poptabview.filter.sort;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import com.ccj.poptabview.OnHolderClickListener;
+import com.ccj.poptabview.bean.FilterBean;
+import com.ccj.poptabview.FilterConfig;
+import com.ccj.poptabview.listener.OnHolderClickListener;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.single.SingleFilterBean;
 
 import java.util.List;
 
 /**
- * 左侧一级筛选adapter
- * @author Aidi on 17/3/23.
+ * 筛选器adapter
+ * @update ccj sj
  */
-public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    private OnFirstItemClickListener mListener;
+    public static final int INITIAL_COUNT = 6;//初始状态显示6个项目
 
-    private List<SingleFilterBean> mData;
+    private ComFilterTagClickListener mListener;
+
+    private List<FilterBean.CategoryMall> mData;
+    private int mType;
+    private boolean isExpand = false;//是否已展开
     private String checkedId;//选中的项的id
 
-    public FirstFilterAdapter(OnFirstItemClickListener listener) {
+    public CommonSortFilterAdapter(ComFilterTagClickListener listener, int type) {
         mListener = listener;
+        mType = type;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter_primary, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_filter, parent, false);
         return new FilterViewHolder(v, this);
     }
 
@@ -38,13 +43,11 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mData != null && position < mData.size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
-            viewHolder.tv_filter.setText(mData.get(position).title);
-            if (mData.get(position).id != null && mData.get(position).id.equals(checkedId)) {
+            viewHolder.tv_filter.setText(mData.get(position).getName());
+            if (mData.get(position).getId().equals(checkedId)) {
                 viewHolder.tv_filter.setChecked(true);
-                viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_left, 0);
             } else {
                 viewHolder.tv_filter.setChecked(false);
-                viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
         }
     }
@@ -53,11 +56,13 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     public int getItemCount() {
         if (mData == null) {
             return 0;
+        } else if (mData.size() > 6 && !isExpand) {
+            return INITIAL_COUNT;
         }
         return mData.size();
     }
 
-    public void setData(List<SingleFilterBean> data) {
+    public void setData(List<FilterBean.CategoryMall> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -66,6 +71,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         if (mData != null) {
             mData.clear();
             checkedId = null;
+            isExpand = false;
             notifyDataSetChanged();
         }
     }
@@ -78,35 +84,39 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         }
     }
 
-    /**
-     * 设置选中的id
-     * @param checkedId
-     */
-    public void setCheckedId(String checkedId) {
-        this.checkedId = checkedId;
+    public void setExpand(boolean isExpand) {
+        this.isExpand = isExpand;
         notifyDataSetChanged();
     }
 
-    public String getCheckedName() {
-        if (!TextUtils.isEmpty(checkedId) && mData != null && mData.size() > 0) {
-            for (SingleFilterBean data : mData) {
-                if (checkedId.equals(data.id)) {
-                    return data.title;
-                }
-            }
-        }
-        return "无";
+    public void setCheckedId(String checkedId) {
+        this.checkedId = checkedId;
+        notifyDataSetChanged();
+
     }
 
     @Override
     public void onItemClick(int position, int viewType) {
-        if (position < mData.size()) {
-            SingleFilterBean data = mData.get(position);
-            if (!data.getId().equals(checkedId)) {
-                mListener.onFirstItemClick(position, data.getId(), data.getTitle());
-                checkedId = data.getId();
+        if (position >= 0 && position < mData.size()) {
+            FilterBean.CategoryMall data = mData.get(position);
+            //商城筛选需要记住当前选中的项目
+            if (data.getId().equals(checkedId)) {
+                checkedId = null;
+            } else if (mType == FilterConfig.FILTER_TYPE_SINGLE) {//单选
+//                List<FilterBean.CategoryMall> temp = new ArrayList<>();
+//                temp.add(data);
+//                mData = temp;
+                this.checkedId = data.getId();
+                notifyDataSetChanged();
+            }else if (mType == FilterConfig.FILTER_TYPE_MUTIFY){//多选
+                //// TODO: 17/6/22  多选
+
+            }else {
+                this.checkedId = data.getId();
                 notifyDataSetChanged();
             }
+
+            mListener.onComFilterTagClick(position,data.getId(), data.getName(), null);//此处的mType无用~
         }
     }
 
@@ -124,15 +134,9 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
 
         @Override
         public void onClick(View v) {
-            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                if (v instanceof CheckedTextView) {
-                    mListener.onItemClick(getAdapterPosition(), 0);
-                }
+            if (v instanceof CheckedTextView) {
+                mListener.onItemClick(getAdapterPosition(), 0);
             }
         }
-    }
-
-    public interface OnFirstItemClickListener {
-        void onFirstItemClick(int position, String id, String title);
     }
 }

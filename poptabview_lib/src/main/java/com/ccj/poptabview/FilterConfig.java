@@ -28,7 +28,9 @@ public class FilterConfig {
     public static final int FILTER_TYPE_MUTIFY = 2;
 
 
-
+    /**
+     * 测试json
+     */
     public static String sortTestJson="{\n" +
             "    \"error_code\": \"0\",\n" +
             "    \"error_msg\": \"\",\n" +

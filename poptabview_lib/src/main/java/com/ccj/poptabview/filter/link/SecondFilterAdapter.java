@@ -1,4 +1,4 @@
-package com.ccj.poptabview.link;
+package com.ccj.poptabview.filter.link;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import com.ccj.poptabview.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnHolderClickListener;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.single.SingleFilterBean;
+import com.ccj.poptabview.bean.SingleFilterBean;
 
 import java.util.ArrayList;
 import java.util.List;

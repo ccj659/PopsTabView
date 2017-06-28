@@ -1,11 +1,14 @@
-package com.ccj.poptabview;
+package com.ccj.poptabview.loader;
 
 import android.content.Context;
 import android.widget.PopupWindow;
 
+import com.ccj.poptabview.listener.OnFilterSetListener;
+
 import java.util.List;
 
 /**
+ *  popwindow 分类 的加载器
  * Created by chenchangjun on 17/6/26.
  */
 

@@ -3,11 +3,11 @@ package com.ccj.tabview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ccj.poptabview.FilterBean;
+import com.ccj.poptabview.bean.FilterBean;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.PopTabView;
-import com.ccj.poptabview.PopTypeLoaderImpl;
-import com.ccj.poptabview.single.SingleFilterBean;
+import com.ccj.poptabview.loader.PopTypeLoaderImpl;
+import com.ccj.poptabview.bean.SingleFilterBean;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

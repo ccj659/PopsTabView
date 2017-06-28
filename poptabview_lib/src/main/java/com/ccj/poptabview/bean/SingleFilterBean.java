@@ -1,4 +1,4 @@
-package com.ccj.poptabview.single;
+package com.ccj.poptabview.bean;
 
 import java.util.List;
 

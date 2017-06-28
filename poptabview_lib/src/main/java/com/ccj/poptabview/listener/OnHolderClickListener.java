@@ -1,4 +1,4 @@
-package com.ccj.poptabview;
+package com.ccj.poptabview.listener;
 
 public interface OnHolderClickListener {
 

@@ -1,4 +1,4 @@
-package com.ccj.poptabview.link;
+package com.ccj.poptabview.filter.link;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
-import com.ccj.poptabview.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
-import com.ccj.poptabview.single.SingleFilterBean;
+import com.ccj.poptabview.bean.SingleFilterBean;
 
 import java.util.List;
 

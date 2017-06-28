@@ -1,4 +1,4 @@
-package com.ccj.poptabview.sort;
+package com.ccj.poptabview.filter.sort;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ccj.poptabview.FilterBean;
-import com.ccj.poptabview.OnFilterSetListener;
+import com.ccj.poptabview.bean.FilterBean;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
 

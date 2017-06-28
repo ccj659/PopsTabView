@@ -1,4 +1,4 @@
-package com.ccj.poptabview.single;
+package com.ccj.poptabview.filter.single;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ccj.poptabview.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
+import com.ccj.poptabview.bean.SingleFilterBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class CommonFilterWindow extends SuperPopWindow implements View.OnClickListener, SingleFilterAdapter.OnSingleItemClickListener {
+public class SingleFilterWindow extends SuperPopWindow implements View.OnClickListener, SingleFilterAdapter.OnSingleItemClickListener {
 
     public static final int TYPE_FILTER = 0;
     public static final int TYPE_SORT = 1;
@@ -46,7 +47,7 @@ public class CommonFilterWindow extends SuperPopWindow implements View.OnClickLi
      * @param listener 监听
      * @param tag 标记对象
      */
-    public CommonFilterWindow(Context context, List data, OnFilterSetListener listener, int tag) {
+    public SingleFilterWindow(Context context, List data, OnFilterSetListener listener, int tag) {
         mContext = context;
         mListener = listener;
         mSelectionData=data;

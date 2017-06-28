@@ -1,4 +1,4 @@
-package com.ccj.poptabview.sort;
+package com.ccj.poptabview.filter.sort;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ccj.poptabview.FilterBean;
+import com.ccj.poptabview.bean.FilterBean;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 

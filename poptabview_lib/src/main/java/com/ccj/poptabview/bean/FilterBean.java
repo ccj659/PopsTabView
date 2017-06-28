@@ -1,4 +1,4 @@
-package com.ccj.poptabview;
+package com.ccj.poptabview.bean;
 
 /**
  * Created by chenchangjun on 17/6/27.
