@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_travel_type"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center">
+
+    <TextView
+
+        android:id="@+id/tv_travel_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:drawablePadding="4dp"
+        android:drawableRight="@drawable/filter_down"
+        android:gravity="center"
+        android:text="全部分类"
+        android:textColor="@color/color333"
+        android:textSize="13dp" />
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="40dp"
+         android:layout_gravity="bottom"
+         android:orientation="horizontal"
+         android:paddingLeft="96dp">
+
+         <com.smzdm.client.android.view.ForegroundTextView
+             android:id="@+id/tv_reset"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:background="@color/coloreee"
+             android:foreground="?selectableItemBackground"
+             android:gravity="center"
+             android:text="@string/filter_reset"
+             android:textColor="@color/filter_reset_text"
+             android:textSize="14dp"/>
+
+         <com.smzdm.client.android.view.ForegroundTextView
+             android:id="@+id/tv_confirm"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:background="@drawable/filter_confirm_bg"
+             android:foreground="?selectableItemBackground"
+             android:gravity="center"
+             android:text="@string/confirm"
+             android:textColor="@color/filter_confirm_text"
+             android:textSize="14dp"
+             android:layout_marginLeft="1dp"/>
+
+     </LinearLayout>
+ -->
+    <ViewStub
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/load_failed" />
+
+    <include layout="@layout/loading_progress_trans"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_primary"
+            android:layout_width="96dp"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_secondary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f6f6f6"
+            android:clipToPadding="false"
+            android:paddingBottom="40dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
+    </LinearLayout>
+
+</FrameLayout>

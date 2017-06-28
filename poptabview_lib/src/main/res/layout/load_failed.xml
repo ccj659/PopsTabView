@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ry_loadfailed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="请确保您的手机已经联网"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_load_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_hint"
+        android:layout_marginBottom="15dp"
+        android:text="数据加载失败"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/iv_load_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_load_failed"
+        android:layout_marginBottom="25dp"
+
+        />
+
+    <Button
+        android:id="@+id/btn_reload"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/tv_hint"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="重新加载"
+        />
+
+</RelativeLayout>

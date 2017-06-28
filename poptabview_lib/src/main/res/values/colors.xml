@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color333">#333333</color>
+    <color name="product_color">#f04848</color>
+    <color name="color666">#666666</color>
+    <color name="white">#ffffff</color>
+    <color name="colorddd">#dddddd</color>
+    <color name="coloreee">#eeeeee</color>
+    <color name="colordc">#dcdcdc</color>
+    <color name="color48">#f04848</color>
+    <color name="colorf6">#f6f6f6</color>
+</resources>

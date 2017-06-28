@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--filtermenu pop style-->
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
+
+        <style name="filter_tag">
+            <item name="android:textColor">@color/filter_tag_text</item>
+            <item name="android:textSize">12dp</item>
+            <item name="android:background">@drawable/sub_category_tag_bg</item>
+            <item name="android:gravity">center</item>
+        </style>
+
+    <style name="style_common_second_filter">
+        <item name="android:textColor">@color/item_common_second_filter_text</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:background">@drawable/item_common_second_filter_bg</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+</resources>

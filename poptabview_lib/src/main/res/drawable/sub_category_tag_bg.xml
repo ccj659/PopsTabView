@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/subscribe_rule_channel_tag_pressed" android:state_enabled="true" android:state_selected="true" />
+    <item android:drawable="@drawable/subscribe_rule_channel_tag_pressed" android:state_enabled="true" android:state_pressed="true" />
+    <item android:drawable="@drawable/subscribe_rule_channel_tag_pressed" android:state_checked="true" android:state_enabled="true" />
+    <item android:drawable="@drawable/subscribe_rule_channel_tag_unable" android:state_enabled="false" />
+    <item android:drawable="@drawable/subscribe_rule_channel_tag_normal" />
+
+</selector>

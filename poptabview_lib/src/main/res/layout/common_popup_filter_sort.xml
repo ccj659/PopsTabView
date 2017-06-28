@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fl_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:paddingBottom="48dp">
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+
+            <com.ccj.poptabview.sort.SortItemView
+                android:id="@+id/sort_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lable="频道"
+                />
+            <com.ccj.poptabview.sort.SortItemView
+                android:id="@+id/sort_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lable="出行时间"
+                />
+            <com.ccj.poptabview.sort.SortItemView
+                android:id="@+id/sort_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lable="出游天数"
+                />
+            <com.ccj.poptabview.sort.SortItemView
+                android:id="@+id/sort_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lable="游玩主题"
+                />
+            <com.ccj.poptabview.sort.SortItemView
+                android:id="@+id/sort_mall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lable="商城"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorddd" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_collapse"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="centerInside"
+                android:src="@drawable/haowu_detail_buy_up"
+                android:tint="@color/product_color" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorddd" />
+
+            <TextView
+                android:id="@+id/tv_reset"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/coloreee"
+                android:foreground="?selectableItemBackground"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="重置"
+                android:textColor="@color/color666"
+                android:textSize="14dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorddd" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/coloreee"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:text="确认"
+                android:textColor="@color/color666"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ViewStub
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/load_failed" />
+
+    <include layout="@layout/loading_progress_trans"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp"/>
+
+</FrameLayout>
