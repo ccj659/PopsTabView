@@ -61,7 +61,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
     }
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int position) {
         checkedId = beanList.get(position).getId();
         notifyDataSetChanged();
         mListener.onSingleItemClick(position);
@@ -83,7 +83,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
         public void onClick(View v) {
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 if (v instanceof CheckedTextView) {
-                    mListener.onItemClick(getAdapterPosition(), 0);
+                    mListener.onItemClick(getAdapterPosition());
                 }
             }
         }

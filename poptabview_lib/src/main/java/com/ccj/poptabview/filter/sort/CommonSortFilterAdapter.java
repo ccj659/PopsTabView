@@ -96,7 +96,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
     }
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int position) {
         if (position >= 0 && position < mData.size()) {
             FilterBean.CategoryMall data = mData.get(position);
             //商城筛选需要记住当前选中的项目
@@ -135,7 +135,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
         @Override
         public void onClick(View v) {
             if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition(), 0);
+                mListener.onItemClick(getAdapterPosition());
             }
         }
     }

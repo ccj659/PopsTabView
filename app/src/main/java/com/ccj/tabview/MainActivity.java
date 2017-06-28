@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements  PopTabView.OnPop
                 .addFilterItem( "哈哈1", getData(), FilterConfig.LVYOU_FILTER_POSITION_FROME)
                 .addFilterItem( "哈哈2", getData(), FilterConfig.LVYOU_FILTER_POSITION_TO)
                 .addFilterItem( "哈哈3", getData(), FilterConfig.LVYOU_FILTER_POSITION_TYPE)
-                .addFilterItem("哈哈4", getSortData(), FilterConfig.LVYOU_FILTER_POSITION_FILTER);
+                .addFilterItem( "哈哈4", getSortData(), FilterConfig.LVYOU_FILTER_POSITION_FILTER);
     }
 
 

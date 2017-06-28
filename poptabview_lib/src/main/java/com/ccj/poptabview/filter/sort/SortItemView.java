@@ -23,6 +23,7 @@ import com.ccj.poptabview.R;
 import java.util.List;
 
 /**
+ * 复合筛选 项item 的view
  * Created by chenchangjun on 17/6/22.
  */
 

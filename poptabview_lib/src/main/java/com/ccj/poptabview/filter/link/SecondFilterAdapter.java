@@ -102,7 +102,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int position) {
         if (position >= 0 && position < mData.size()) {
             SingleFilterBean.SecondFilterBean data = mData.get(position);
             checkedItem = data;
@@ -128,7 +128,7 @@ public static class FilterViewHolder extends RecyclerView.ViewHolder implements 
     @Override
     public void onClick(View v) {
         if (v instanceof CheckedTextView) {
-            mListener.onItemClick(getAdapterPosition(), 0);
+            mListener.onItemClick(getAdapterPosition());
         }
     }
 }

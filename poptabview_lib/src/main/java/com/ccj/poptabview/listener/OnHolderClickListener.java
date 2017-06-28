@@ -2,5 +2,9 @@ package com.ccj.poptabview.listener;
 
 public interface OnHolderClickListener {
 
-    void onItemClick(int position, int viewType);
+    /**
+     * adapter中viewholder的选中回调
+     * @param position
+     */
+    void onItemClick(int position);
 }
