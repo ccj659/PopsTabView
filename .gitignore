@@ -4,3 +4,8 @@
 .idea/workspace.xml
 
 
+app/libs/
+app/src/main/res/drawable/
+build/android-profile/
+poptabview_lib/build/
+
