@@ -57,6 +57,13 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         setOrientation(LinearLayout.HORIZONTAL);
     }
 
+    /**
+     * 增加新的筛选popwindow
+     * @param title 筛选初始显示字段
+     * @param data 数据集合
+     * @param tag 业务类型,可以在{PopTypeLoader}中定义
+     * @return
+     */
     public PopTabView addFilterItem(String title, List data, int tag) {
 
         View labView = inflate(getContext(), R.layout.item_expand_pop_window, null);
@@ -154,7 +161,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     }
 
 
-
+/*****************************************end******************************************/
 
     /**
      * popwindow的ondisms
@@ -180,6 +187,10 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     public interface OnPopTabSetListener {
         void onPopTabSet(int tag, String params, String value);
     }
+
+
+
+
 
     public OnPopTabSetListener getOnPopTabSetListener() {
         return onPopTabSetListener;
