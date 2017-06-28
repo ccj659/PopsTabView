@@ -1,16 +1,19 @@
-#PopsTabView
 
+PopsTabView
+====
 
 **PopsTabView是个filter容器,他可以快速,构建不同筛选样式,自由组合成一组tab.**
 
 目前版本,支持 **单列单选**,**双列单选**,**复杂筛选**.后续筛选会不断完善补充.
 
-##Introduction
+Introduction
+-------
 
 用户只需要,知道自己 的filter 需要哪种filter,然后将数据进行转化,最后自己在`onPopTabSet()`回调,即可使用.
 
 
-###优点:
+**优点**:
+
 
 - 支持快速,构建不同筛选样式,自由组合成一组filter的tab.
 
@@ -19,7 +22,7 @@
 - 用接口抽象出 可配置的 的配置器loader,和功能代码解耦.
 - 可以自由扩展,其他类型的Filter类型.
 
-###待完善:
+**待完善**:
 - 增加其他类型的筛选样式
 - 回调参数,需待调整
 - view的样式可配置为可自定义
@@ -27,9 +30,9 @@
 
 
 ##TO USE
+-------
 
-
-###1.用业务类型 区分,筛选器类型. 将`PopTypeLoader`暴露,用于用户 自定义业务线,以及对应的筛选器类型. 需要自己按照该模式进行扩展.
+**1.用业务类型 区分,筛选器类型. 将`PopTypeLoader`暴露,用于用户 自定义业务线,以及对应的筛选器类型. 需要自己按照该模式进行扩展.**
 
 ```java
 
@@ -58,7 +61,7 @@ public class PopTypeLoaderImpl implements PopTypeLoader {
 
 
 
-###2.使用方式 Builder模式,完成筛选器的创建.
+**2.使用方式 Builder模式,完成筛选器的创建.**
 
 ```java
 
@@ -73,7 +76,7 @@ public class PopTypeLoaderImpl implements PopTypeLoader {
 
 
 ```
-###3.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
+**3.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.**
 
 ```java
   /**
@@ -104,7 +107,7 @@ public class PopTypeLoaderImpl implements PopTypeLoader {
 ```
 
 
-###4.用`PopEntityLoader` 创建 具体 popwindow 实体对象. 创建对象和 功能代码解耦和,细节在`PopTabView.addItem()`中.若有需要,需要自由扩展,配置.
+**4.用`PopEntityLoader` 创建 具体 popwindow 实体对象. 创建对象和 功能代码解耦和,细节在`PopTabView.addItem()`中.若有需要,需要自由扩展,配置.**
 
 ```java
 public class PopEntityLoaderImp implements PopEntityLoader {
