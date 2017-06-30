@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import com.ccj.poptabview.R;
-import com.ccj.poptabview.filter.single.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.R;
+import com.ccj.poptabview.bean.SingleFilterBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,10 @@ import java.util.List;
 public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
     private OnSecondItemClickListener listener;
-    private List<FilterTabBean.TabsBean> mData;
+    private List<SingleFilterBean.SecondFilterBean> mData;
 
 
-    private FilterTabBean.TabsBean checkedItem;// 选中的 项目
+    private SingleFilterBean.SecondFilterBean checkedItem;// 选中的 项目
     private int firstPosition; //一级菜单 选中
 
     public SecondFilterAdapter(OnSecondItemClickListener listener) {
@@ -44,9 +44,9 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
             //if (position == 0) {
                 //viewHolder.tv_filter.setText("全部");
             //} else {
-                viewHolder.tv_filter.setText(mData.get(position).getTag_name());
+                viewHolder.tv_filter.setText(mData.get(position).getTitle());
             //}
-            if (checkedItem != null && checkedItem.getTab_id() == mData.get(position).getTab_id()) {
+            if (checkedItem != null && checkedItem.id == mData.get(position).getId()) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
@@ -72,7 +72,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
         return mData.size();
     }
 
-    public void setData(int firstPosition, List<FilterTabBean.TabsBean> data) {
+    public void setData(int firstPosition, List<SingleFilterBean.SecondFilterBean> data) {
 
         this.firstPosition = firstPosition;
         mData = new ArrayList<>();
@@ -80,7 +80,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
             mData.addAll(data);
         }
         //增加"全部"
-        //FilterTabBean.TabsBean all = new FilterTabBean.TabsBean();
+        //SingleFilterBean.SecondFilterBean all = new SingleFilterBean.SecondFilterBean();
         //all.title = "全部";
         //mData.add(0, all);
         notifyDataSetChanged();
@@ -95,16 +95,16 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
     }
 
 
-    public void setCheckedItem(FilterTabBean.TabsBean secondFilterBean) {
+    public void setCheckedItem(SingleFilterBean.SecondFilterBean secondFilterBean) {
         this.checkedItem = secondFilterBean;
         notifyDataSetChanged();
     }
 
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int position) {
         if (position >= 0 && position < mData.size()) {
-            FilterTabBean.TabsBean data = mData.get(position);
+            SingleFilterBean.SecondFilterBean data = mData.get(position);
             checkedItem = data;
             listener.onSecondItemClick(position, checkedItem);
         }
@@ -128,14 +128,14 @@ public static class FilterViewHolder extends RecyclerView.ViewHolder implements 
     @Override
     public void onClick(View v) {
         if (v instanceof CheckedTextView) {
-            mListener.onItemClick(getAdapterPosition(), 0);
+            mListener.onItemClick(getAdapterPosition());
         }
     }
 }
 
 
 public interface OnSecondItemClickListener {
-    void onSecondItemClick(int secondPos, FilterTabBean.TabsBean secondFilterBean);
+    void onSecondItemClick(int secondPos, SingleFilterBean.SecondFilterBean secondFilterBean);
 }
 
 }
