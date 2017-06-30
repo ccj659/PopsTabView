@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import com.ccj.poptabview.bean.FilterBean;
-import com.ccj.poptabview.FilterConfig;
-import com.ccj.poptabview.listener.OnHolderClickListener;
-import com.ccj.poptabview.R;
+import com.smzdm.client.android.C;
+import com.smzdm.client.android.R;
+import com.smzdm.client.android.listener.OnHolderClickListener;
+import com.smzdm.client.android.view.commonfilter.single.FilterTabBean;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
 
     private ComFilterTagClickListener mListener;
 
-    private List<FilterBean.CategoryMall> mData;
+    private List<FilterTabBean.TabsBean> mData;
     private int mType;
     private boolean isExpand = false;//是否已展开
     private String checkedId;//选中的项的id
@@ -43,8 +43,8 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mData != null && position < mData.size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
-            viewHolder.tv_filter.setText(mData.get(position).getName());
-            if (mData.get(position).getId().equals(checkedId)) {
+            viewHolder.tv_filter.setText(mData.get(position).getTag_name());
+            if (mData.get(position).getTab_id().equals(checkedId)) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
@@ -62,7 +62,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
         return mData.size();
     }
 
-    public void setData(List<FilterBean.CategoryMall> data) {
+    public void setData(List<FilterTabBean.TabsBean> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -84,12 +84,6 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
         }
     }
 
-
-    public void clearSelected() {
-            checkedId = null;
-            notifyDataSetChanged();
-    }
-
     public void setExpand(boolean isExpand) {
         this.isExpand = isExpand;
         notifyDataSetChanged();
@@ -102,28 +96,33 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, int viewType) {
         if (position >= 0 && position < mData.size()) {
-            FilterBean.CategoryMall data = mData.get(position);
+            FilterTabBean.TabsBean data = mData.get(position);
             //商城筛选需要记住当前选中的项目
-            if (data.getId().equals(checkedId)) {
+            if (data.getTab_id().equals(checkedId)) {
                 checkedId = null;
-            } else if (mType == FilterConfig.FILTER_TYPE_SINGLE) {//单选
+            } else if (mType == C.FILTER_TYPE_SINGLE) {//单选
 //                List<FilterBean.CategoryMall> temp = new ArrayList<>();
 //                temp.add(data);
 //                mData = temp;
-                this.checkedId = data.getId();
+                this.checkedId = data.getTab_id();
                 notifyDataSetChanged();
-            }else if (mType == FilterConfig.FILTER_TYPE_MUTIFY){//多选
+            }else if (mType == C.FILTER_TYPE_MUTIFY){//多选
                 //// TODO: 17/6/22  多选
 
             }else {
-                this.checkedId = data.getId();
+                this.checkedId = data.getTab_id();
                 notifyDataSetChanged();
             }
 
-            mListener.onComFilterTagClick(position,data.getId(), data.getName(), null);//此处的mType无用~
+            mListener.onComFilterTagClick(position,data.getTab_id(), data.getTag_name(), null);//此处的mType无用~
         }
+    }
+
+    public void clearChecked() {
+        checkedId=null;
+        notifyDataSetChanged();
     }
 
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -141,7 +140,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
         @Override
         public void onClick(View v) {
             if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition());
+                mListener.onItemClick(getAdapterPosition(), 0);
             }
         }
     }

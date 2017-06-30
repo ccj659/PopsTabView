@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
-import com.ccj.poptabview.bean.SingleFilterBean;
+import com.ccj.poptabview.filter.single.FilterTabBean;
 import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.loader.PopEntityLoaderImp;
 import com.ccj.poptabview.loader.PopTypeLoader;
@@ -140,30 +140,30 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     }
 
     /*****************************筛选成功,回调~************************************/
-    @Override
-    public void onFilterSet(SingleFilterBean selectionBean) {
-        mTextViewLists.get(index).setText(selectionBean.getTitle());
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(), selectionBean.getTitle());
+    public void onFilterSet(FilterTabBean selectionBean) {
+        mTextViewLists.get(index).setText(selectionBean.getTab_name());
+        onPopTabSetListener.onPopTabSet(index, selectionBean.getTab_id(),selectionBean.getTab_name());
 
     }
 
     @Override
-    public void onSecondFilterSet(SingleFilterBean firstBean, SingleFilterBean.SecondFilterBean selectionBean) {
-        mTextViewLists.get(index).setText(selectionBean.getTitle());
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), selectionBean.getId(), selectionBean.getTitle());
+    public void onSecondFilterSet(FilterTabBean firstBean, FilterTabBean.TabsBean selectionBean) {
+        mTextViewLists.get(index).setText(selectionBean.getTag_name());
+        onPopTabSetListener.onPopTabSet(index, selectionBean.getTab_id(),selectionBean.getTag_name());
 
     }
 
     @Override
-    public void onSortFilterSet(String params) {
+    public void onSortFilterSet(String params, String values) {
         //mTextViewLists.get(index).setText(params);
-        onPopTabSetListener.onPopTabSet(mTagLists.get(index), params, params);//// TODO: 17/6/27 第三个参数
+        onPopTabSetListener.onPopTabSet(index, params,values);//// TODO: 17/6/27 第三个参数
     }
 
     @Override
     public void OnFilterCanceled() {
 
     }
+
 
 
 /*****************************************end******************************************/

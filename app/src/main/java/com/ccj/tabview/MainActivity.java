@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity implements  PopTabView.OnPop
         popTabView.setOnPopTabSetListener(this)
                 .setPopTypeLoader(new PopTypeLoaderImpl())
                 .addFilterItem( "筛选1", getData(), FilterConfig.LVYOU_FILTER_POSITION_FROME)
-                .addFilterItem( "筛选2", getData(), FilterConfig.LVYOU_FILTER_POSITION_TO);
-               /* .addFilterItem( "筛选3", getData(), FilterConfig.LVYOU_FILTER_POSITION_TYPE)
-                .addFilterItem( "筛选4", getSortData(), FilterConfig.LVYOU_FILTER_POSITION_FILTER);*/
+                .addFilterItem( "筛选2", getData(), FilterConfig.LVYOU_FILTER_POSITION_TO)
+               .addFilterItem( "筛选3", getData(), FilterConfig.LVYOU_FILTER_POSITION_TYPE)
+                .addFilterItem( "筛选4", getSortData(), FilterConfig.LVYOU_FILTER_POSITION_FILTER);
     }
 
 

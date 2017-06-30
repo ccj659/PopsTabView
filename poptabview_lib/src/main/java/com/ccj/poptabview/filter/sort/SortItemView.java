@@ -16,14 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ccj.poptabview.bean.FilterBean;
-import com.ccj.poptabview.FilterConfig;
-import com.ccj.poptabview.R;
+import com.smzdm.client.android.C;
+import com.smzdm.client.android.R;
+import com.smzdm.client.android.view.commonfilter.single.FilterTabBean;
 
 import java.util.List;
 
 /**
- * 复合筛选 项item 的
  * Created by chenchangjun on 17/6/22.
  */
 
@@ -136,7 +135,7 @@ public class SortItemView extends LinearLayout {
             public void onComFilterTagClick(int position, String id, String name, String type) {
                 filterTagClick.onComFilterTagClick( position,id, name,SORT_TYPE_NOW );
             }
-        }, FilterConfig.FILTER_TYPE_SINGLE);//cat 则为单选
+        }, C.FILTER_TYPE_SINGLE);//cat 则为单选
         rv_cat.setLayoutManager(mLayoutManager);
         rv_cat.setAdapter(mAdapterInland);
 
@@ -152,7 +151,7 @@ public class SortItemView extends LinearLayout {
             checkedId=defaultId;
         }
 
-        List<FilterBean.CategoryMall> inlandMallList = data;
+        List<FilterTabBean.TabsBean> inlandMallList = data;
         if (inlandMallList != null && inlandMallList.size() > 0) {
             tv_empty_border.setVisibility(View.GONE);
             mAdapterInland.setData(inlandMallList);
@@ -187,8 +186,8 @@ public class SortItemView extends LinearLayout {
         iv_expand_border.animate().rotation(0).start();
         isMallInlandExpand = false;
         rv_cat.setVisibility(View.VISIBLE);
-        //mAdapterInland.clear();//
-        mAdapterInland.clearSelected();
+        mAdapterInland.clearChecked();
+
     }
 
     public void setCheckedState() {
@@ -207,7 +206,9 @@ public class SortItemView extends LinearLayout {
     public void setTv_title(TextView tv_title) {
         this.tv_title = tv_title;
     }
-
+    public void setLabTitle(String tv_title) {
+        this.tv_title.setText(tv_title);
+    }
     public TextView getTv_empty_border() {
         return tv_empty_border;
     }
