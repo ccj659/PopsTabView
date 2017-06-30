@@ -9,9 +9,9 @@ PopsTabView
 Show
 -------
 
-![两个筛选菜单](http://img.blog.csdn.net/20170628171403407?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2NqNjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![两个筛选菜单](https://github.com/ccj659/PopsTabView/blob/master/popsTabview_gif_0.gif)
 
-![四个筛选菜单](http://img.blog.csdn.net/20170628171538096?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2NqNjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![四个筛选菜单](https://github.com/ccj659/PopsTabView/blob/master/popsTabview_gif_1.gif)
 
 
 Introduction
