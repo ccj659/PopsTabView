@@ -45,7 +45,7 @@
 ----
 
 ##1.设定,筛选器类型. 将`PopTypeLoader`暴露,用于用户 筛选器类型.
-======
+---
 
 **需要自己按照该模式进行扩展.创建 具体 popwindow 实体对象. 创建对象和 功能代码解耦和,细节在`PopTabView.addItem()`中.若有需要,需要自由扩展,配置.**
 
@@ -76,7 +76,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
 
 ##2.使用方式 
-======
+---
 
 ###2.1 Builder模式,完成筛选器的创建.
 ```java
@@ -101,7 +101,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
 
 ##3.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
-======
+---
 ```java
    /**
      * @param index  操作的 filter的下标号 0.1.2.3
