@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
-import com.ccj.poptabview.bean.SingleFilterBean;
+import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +27,13 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
     public static final int TYPE_SORT = 1;
 
     private Context mContext;
-
     private View mParentView;
     private View mRootView;//根布局
     private RecyclerView recyclerView;
     private SingleFilterAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    private List<SingleFilterBean> mSelectionData = new ArrayList<>();
+    private List<FilterTabBean> mSelectionData = new ArrayList<>();
 
     private int tag;//单栏筛选的 tag,来标记对象的类型
 
@@ -54,7 +53,6 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
         this.tag = tag;
         initView();
     }
-
 
     private void initView() {
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
@@ -94,17 +92,13 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
 
     @Override
     public void onSingleItemClick(int position) {
+        if (position<0){
+            mListener.onFilterSet(null);
 
-        mListener.onFilterSet(mSelectionData.get(position));
+        }else {
+            mListener.onFilterSet(mSelectionData.get(position));
+        }
         dismiss();
-    }
-
-    public View getmParentView() {
-        return mParentView;
-    }
-
-    public void setmParentView(View mParentView) {
-        this.mParentView = mParentView;
     }
 
 }

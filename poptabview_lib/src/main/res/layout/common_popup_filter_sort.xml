@@ -19,39 +19,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:visibility="invisible">
-
-
-            <com.ccj.poptabview.filter.sort.SortItemView
-                android:id="@+id/sort_channel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lable="频道"
-                />
-            <com.ccj.poptabview.filter.sort.SortItemView
-                android:id="@+id/sort_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lable="出行时间"
-                />
-            <com.ccj.poptabview.filter.sort.SortItemView
-                android:id="@+id/sort_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lable="出游天数"
-                />
-            <com.ccj.poptabview.filter.sort.SortItemView
-                android:id="@+id/sort_theme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lable="游玩主题"
-                />
-            <com.ccj.poptabview.filter.sort.SortItemView
-                android:id="@+id/sort_mall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lable="商城"
-                />
-
         </LinearLayout>
     </ScrollView>
 

@@ -9,27 +9,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.Button;
 
-import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
-import com.ccj.poptabview.bean.SingleFilterBean;
+import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 
 import java.util.List;
 
 /**
  * 左右双栏筛选PopupWindow
  *
- * @author ccj on 17/3/23.
+ * @author Aidi on 17/3/23.
  */
-public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClickListener, FirstFilterAdapter.OnFirstItemClickListener, SecondFilterAdapter.OnSecondItemClickListener {
+public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClickListener, FirstFilterAdapter.OnFirstItemClickListener,SecondFilterAdapter.OnSecondItemClickListener {
 
     private static final int SPAN_COUNT = 2;
     public static final String TYPE_MALL = "mall";
     public static final String TYPE_CAT = "category";
 
     private Context mContext;
-
     private View mParentView;
     private View mRootView;//根布局，底部收起按钮
 
@@ -39,7 +39,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
     private ViewStub mErrorView;
     private View mInflatedErrorView;
 
-    private List<SingleFilterBean> mSelectionData;
+    private List<FilterTabBean> mSelectionData;
     private int type;
 
     private RecyclerView rv_primary, rv_secondary;
@@ -51,16 +51,15 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
     private int firstPosition; //一级菜单下标
     private int secondPosition;//二级菜单下标
     private String firstCheckedId;
-    private SingleFilterBean.SecondFilterBean checkedSecondItem;
+    private FilterTabBean.TabsBean checkedSecondItem;
 
-    public LinkFilterPopupWindow(Context context, List<SingleFilterBean> filterBeanList, OnFilterSetListener listener, int type) {
+    public LinkFilterPopupWindow(Context context, List<FilterTabBean> filterBeanList, OnFilterSetListener listener, int type) {
         mContext = context;
         this.mSelectionData = filterBeanList;
         mListener = listener;
         this.type = type;
         initView();
     }
-
 
     private void initView() {
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_link, null);
@@ -78,7 +77,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
         mLayoutManagerSecondary = new GridLayoutManager(mContext, SPAN_COUNT);
         mSecondAdapter = new SecondFilterAdapter(this);
 
-        rv_secondary.setLayoutManager(mLayoutManagerSecondary);
+        rv_secondary.setLayoutManager( mLayoutManagerSecondary);
         rv_secondary.setAdapter(mSecondAdapter);
 
         mRootView.setOnClickListener(this);
@@ -100,6 +99,21 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
     }
 
 
+    private void showErrorView() {
+        if (mInflatedErrorView == null) {
+            mInflatedErrorView = mErrorView.inflate();
+            Button btn_reload = (Button) mInflatedErrorView.findViewById(R.id.btn_reload);
+            btn_reload.setOnClickListener(this);
+        }
+        mInflatedErrorView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideErrorView() {
+        if (mInflatedErrorView != null) {
+            mInflatedErrorView.setVisibility(View.GONE);
+        }
+    }
+
     /**
      * 设置默认选中状态,每次pop都要设置一次
      */
@@ -108,15 +122,17 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
 
         if (mSelectionData != null && mSelectionData.size() > firstPosition) {
 
-            mFirstAdapter.setCheckedId(mSelectionData.get(firstPosition).id);//一级默认选择
+            mFirstAdapter.setCheckedPosition(firstPosition);//一级默认选择
 
-            mSecondAdapter.setData(firstPosition, mSelectionData.get(firstPosition).childFilterList);
+            mSecondAdapter.setData(firstPosition,mSelectionData.get(firstPosition).getTabs());
 
-            if (mSelectionData.get(firstPosition) != null && mSelectionData.get(firstPosition).childFilterList.size() > 0) {//二级默认选中
-                if (checkedSecondItem != null) {
+            if (mSelectionData.get(firstPosition) != null && mSelectionData.get(firstPosition).getTabs().size() > 0){//二级默认选中
+                if (checkedSecondItem==null){
+                    mSecondAdapter.setCheckedItem(null);
+
+                }else {
                     mSecondAdapter.setCheckedItem(checkedSecondItem);
-                } else {
-                    mSecondAdapter.setCheckedItem(mSelectionData.get(firstPosition).childFilterList.get(0));
+
                 }
             }
         }
@@ -128,28 +144,30 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
 
     /**
      * 一级菜单点击事件 回调,刷新二级菜单列表,以及默认
-     *
      * @param position
-     * @param id
+     * @param selectedId 这里的值 是空
      * @param title
      */
     @Override
-    public void onFirstItemClick(int position, String id, String title) {
-        firstPosition = position;
-        if (mSelectionData != null && mSelectionData.size() > firstPosition) {
+    public void onFirstItemClick(int position, String selectedId, String title) {
+        firstPosition=position;
+        if (mSelectionData!=null&&mSelectionData.size()>firstPosition){
 
-            // mFirstAdapter.setCheckedId(mSelectionData.get(firstPosition).id);//一级默认选择
+            mSecondAdapter.setData(firstPosition,mSelectionData.get(firstPosition).getTabs());
 
-            mSecondAdapter.setData(firstPosition, mSelectionData.get(firstPosition).childFilterList);
-
-            if (mSelectionData.get(firstPosition).childFilterList != null && mSelectionData.get(firstPosition).childFilterList.size() > 0) {
-                if (checkedSecondItem != null) {
+            if (mSelectionData.get(firstPosition).getTabs()!=null&&mSelectionData.get(firstPosition).getTabs().size()>0){
+                if (checkedSecondItem==null){
+                    mSecondAdapter.setCheckedItem(null);
+                }else {
                     mSecondAdapter.setCheckedItem(checkedSecondItem);
-                } else {
-                    mSecondAdapter.setCheckedItem(mSelectionData.get(firstPosition).childFilterList.get(0));
+
                 }
             }
         }
+
+
+
+
 
     }
 
@@ -160,30 +178,46 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
      * @param secondFilterBean
      */
     @Override
-    public void onSecondItemClick(int secondPos, SingleFilterBean.SecondFilterBean secondFilterBean) {
-        secondPosition = secondPos;
-        checkedSecondItem = secondFilterBean;
+    public void onSecondItemClick(int secondPos, FilterTabBean.TabsBean secondFilterBean) {
+        secondPosition=secondPos;
+        checkedSecondItem=secondFilterBean;
 
-        if (mSelectionData.get(firstPosition).childFilterList != null && mSelectionData.get(firstPosition).childFilterList.size() > 0) {
-            mListener.onSecondFilterSet(mSelectionData.get(firstPosition), secondFilterBean);
+
+
+        if (mSelectionData.get(firstPosition).getTabs()!=null&&mSelectionData.get(firstPosition).getTabs().size()>0) {
+            mListener.onSecondFilterSet(mSelectionData.get(firstPosition),secondFilterBean);
         }
         dismiss();
 
     }
 
-    public View getmParentView() {
-        return mParentView;
-    }
-
-    public void setmParentView(View mParentView) {
-        this.mParentView = mParentView;
-    }
 
 
     @Override
     public void onClick(View v) {
-        mListener.OnFilterCanceled();
-        this.dismiss();
+        int i = v.getId();
+        if (i == R.id.btn_reload) {//loadData();
 
+//            case R.id.tv_confirm:
+//                if (mListener != null) {
+//                    if (mSecondAdapter.getCheckedIdList().size() > 0) {//右侧有选中才需要设置统计用的一级Name
+//                        mSelectionData.setMallPrimaryName(mFirstAdapter.getCheckedName());
+//                    } else {
+//                        mSelectionData.setMallPrimaryName("无");
+//                    }
+//                    mSelectionData.setMallIdList(mSecondAdapter.getCheckedIdList());
+//                    mSelectionData.setMallNameList(mSecondAdapter.getCheckedNameList());
+//                    //mListener.onFilterSet(mSelectionData);
+//                }
+//                this.dismiss();
+//                break;
+        } else if (i == R.id.tv_reset) {//  mSecondAdapter.setCheckedIdList(new ArrayList<String>());
+            // mSecondAdapter.setCheckedNameList(new ArrayList<String>());
+
+        } else {
+            mListener.OnFilterCanceled();
+            this.dismiss();
+
+        }
     }
 }
