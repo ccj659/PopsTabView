@@ -17,5 +17,8 @@
         android:gravity="center"
         android:text="全部分类"
         android:textColor="@color/color333"
+        android:singleLine="true"
+        android:maxEms="4"
+        android:ellipsize="end"
         android:textSize="13dp" />
 </LinearLayout>

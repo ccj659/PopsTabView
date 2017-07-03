@@ -12,7 +12,7 @@ import java.util.List;
  * Created by chenchangjun on 17/6/28.
  */
 
-public interface PopEntityLoader {
+public interface PopTypeLoader {
 
     /**
      * 由 getPopType 得到不同的类型的filter实体

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnFilterSetListener;
-import com.ccj.poptabview.loader.PopEntityLoader;
+import com.ccj.poptabview.loader.PopTypeLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     private OnPopTabSetListener onPopTabSetListener;
 
 
-    private PopEntityLoader popEntityLoader;
+    private PopTypeLoader popEntityLoader;
 
     private Context mContext;
     private int mTabPostion = -1; //记录TAB页号
@@ -248,11 +248,11 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
 
 
-    public PopEntityLoader getPopEntityLoader() {
+    public PopTypeLoader getPopEntityLoader() {
         return popEntityLoader;
     }
 
-    public PopTabView setPopEntityLoader(PopEntityLoader popEntityLoader) {
+    public PopTabView setPopEntityLoader(PopTypeLoader popEntityLoader) {
         this.popEntityLoader = popEntityLoader;
         return this;
     }

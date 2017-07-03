@@ -12,17 +12,14 @@ import com.ccj.poptabview.filter.sort.SortPopupWindow;
 import java.util.List;
 
 /**
- * 由业务tag --->建立实体 的loader
+ * 由筛选器类型 --->建立实体 的loader
  * Created by chenchangjun on 17/6/28.
  */
 
-public class PopEntityLoaderImp implements PopEntityLoader {
-
+public class PopTypeLoaderImp implements PopTypeLoader {
 
     @Override
     public PopupWindow getPopEntity(Context context,  List data, OnFilterSetListener filterSetListener, int tag) {
-
-
         PopupWindow popupWindow = null;
         switch (tag) {
             case FilterConfig.TYPE_POPWINDOW_LINKED:
