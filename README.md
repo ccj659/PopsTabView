@@ -1,4 +1,4 @@
-#PopsTabView
+# PopsTabView
 ----
 
 
@@ -8,9 +8,9 @@
 
 [项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
 
-#Show
+# Show
 -----
-图片如果显示不了,青岛github查看
+图片如果显示不了,请到 GitHub 查看
 
 
 ![两个筛选菜单](https://github.com/ccj659/PopsTabView/blob/master/popsTabview_gif_0.gif)
@@ -19,13 +19,13 @@
 
 
 
-#Introduction
+# Introduction
 ----
 
 用户只需要,知道自己 的filter 需要哪种filter,然后将数据进行转化,最后自己在`onPopTabSet()`回调,即可使用,简单粗暴.
 
 
-##优点:
+## 优点:
 
 - 支持用`for()循环`全自动配置,自动记住位置,并在点击时,返回位置以及选取值.
 - 支持快速,构建不同筛选样式,自由组合成一组filter的tab.
@@ -34,17 +34,17 @@
 - 用接口抽象出 可配置的 的配置器loader,和功能代码解耦.
 - 可以自由扩展,其他类型的Filter类型.
 
-##待完善:
+## 待完善:
 - 增加其他类型的筛选样式
 - 回调参数,需待调整
 - view的样式可配置为可自定义
 - 代码冗余还需优化.
 
 
-#TO USE
+# TO USE
 ----
 
-##1.设定,筛选器类型. 将`PopTypeLoader`暴露,用于用户 筛选器类型.
+## 1.设定,筛选器类型. 将`PopTypeLoader`暴露,用于用户 筛选器类型.
 ---
 
 **需要自己按照该模式进行扩展.创建 具体 popwindow 实体对象. 创建对象和 功能代码解耦和,细节在`PopTabView.addItem()`中.若有需要,需要自由扩展,配置.**
@@ -75,10 +75,10 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
 
 
-##2.使用方式 
+## 2.使用方式 
 ---
 
-###2.1 Builder模式,完成筛选器的创建.
+### 2.1 Builder模式,完成筛选器的创建.
 ```java
 
   popTabView.setOnPopTabSetListener(this)
@@ -89,7 +89,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
                 .addFilterItem("筛选4", sortFilterList.getFilter_tab(), sortFilterList.getTab_group_type());
 
 ```
-###2.2 `for()循环`全自动配置模式,完成筛选器的创建.
+### 2.2 `for()循环`全自动配置模式,完成筛选器的创建.
 
 ```java
     for (int i = 0; i < 5; i++) {
@@ -100,7 +100,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 ```
 
 
-##3.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
+## 3.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
 ---
 ```java
    /**
@@ -121,7 +121,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
 
 
-about me
+# about me
 ---
 
 CSDN : http://blog.csdn.net/ccj659/article/
