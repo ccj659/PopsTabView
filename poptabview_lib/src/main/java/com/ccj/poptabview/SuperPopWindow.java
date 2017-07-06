@@ -15,13 +15,17 @@ public  class SuperPopWindow extends PopupWindow {
 
     protected View mParentView;
 
-    public View getmParentView() {
-        return mParentView;
-    }
 
-    public void setmParentView(View mParentView) {
-        this.mParentView = mParentView;
-    }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 如果有需要,子类会重写该方法,
@@ -46,6 +50,17 @@ public  class SuperPopWindow extends PopupWindow {
         }
         super.showAsDropDown(anchor);
     }
+
+
+
+    public View getmParentView() {
+        return mParentView;
+    }
+
+    public void setmParentView(View mParentView) {
+        this.mParentView = mParentView;
+    }
+
 
     public SuperPopWindow() {
     }

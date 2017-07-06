@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 单栏筛选adapter
  *
- * @author Aidi on 17/3/23.
+ * @author ccj on 17/3/23.
  */
 public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 

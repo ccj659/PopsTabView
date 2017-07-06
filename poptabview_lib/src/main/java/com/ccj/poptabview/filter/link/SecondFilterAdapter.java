@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 右侧二级筛选adapter
  *
- * @author Aidi on 17/3/23.
+ * @author ccj on 17/3/23.
  */
 public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
@@ -113,7 +113,6 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
             }
             listener.onSecondItemClick(position, checkedItem);
         }
-
         //dismiss();
         notifyDataSetChanged();
 }
