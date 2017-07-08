@@ -189,5 +189,5 @@ public class ResultLoaderImp implements ResultLoader<String> {
 
 [简书：http://www.jianshu.com/u/94423b4ef5cf](http://www.jianshu.com/u/94423b4ef5cf)
 
-[github:  https//github.com/ccj659/](github：https：//github.com/ccj659/)
+[github:  https//github.com/ccj659/](https//github.com/ccj659/)
 
