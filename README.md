@@ -20,9 +20,13 @@
 #Show
 ===
 
-<figure class="half">
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip" width="300" height="25%" >
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="300" height="25%" >
+
+
+
+<figure class="third">
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
+      <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
 </figure>
 
 #Introduction
