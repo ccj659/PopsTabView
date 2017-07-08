@@ -19,13 +19,11 @@
 
 #Show
 ===
-图片如果显示不了,[麻烦到项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
 
 <figure class="half">
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip">
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip">
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip" width="50%" height="50%" >
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="50%" height="50%" >
 </figure>
-
 
 #Introduction
 ===
