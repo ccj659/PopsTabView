@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <com.ccj.poptabview.PopTabView
-            android:elevation="4dip"
-            android:background="@color/white"
-            android:id="@+id/expandpop"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"/>
+    <com.ccj.poptabview.PopTabView
+        android:id="@+id/expandpop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:elevation="4dip" />
 
-
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

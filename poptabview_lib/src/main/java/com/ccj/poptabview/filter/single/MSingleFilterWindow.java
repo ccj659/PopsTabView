@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnMultipleItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class SingleFilterWindow extends SuperPopWindow implements View.OnClickListener, SingleFilterAdapter.OnSingleItemClickListener {
+public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickListener, OnMultipleItemClickListener {
 
     public static final int TYPE_FILTER = 0;
     public static final int TYPE_SORT = 1;
@@ -30,26 +31,26 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
     private View mParentView;
     private View mRootView;//根布局
     private RecyclerView recyclerView;
-    private SingleFilterAdapter mAdapter;
+    private MSingleFilterAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    private List<FilterTabBean> mSelectionData = new ArrayList<>();
+    private List<FilterTabBean> mData = new ArrayList<>();
+    private List<FilterTabBean> mSelectedData = new ArrayList<>();
 
     private int tag;//单栏筛选的 tag,来标记对象的类型
 
-    private OnFilterSetListener mListener;
+    private OnMultipeFilterSetListener mListener;
 
     /**
-     *
      * @param context
-     * @param data 要筛选的数据
+     * @param data     要筛选的数据
      * @param listener 监听
-     * @param tag 标记对象
+     * @param tag      标记对象
      */
-    public SingleFilterWindow(Context context, List data, OnFilterSetListener listener, int tag) {
+    public MSingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag) {
         mContext = context;
         mListener = listener;
-        mSelectionData=data;
+        mData = data;
         this.tag = tag;
         initView();
     }
@@ -60,7 +61,7 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
 
         mLayoutManager = new LinearLayoutManager(mContext);
 
-        mAdapter = new SingleFilterAdapter(mSelectionData, this);
+        mAdapter = new MSingleFilterAdapter(mData, this, tag);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
@@ -84,21 +85,26 @@ public class SingleFilterWindow extends SuperPopWindow implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             default:
-                mListener.OnFilterCanceled();
+                mListener.OnMultipeFilterCanceled();
                 this.dismiss();
                 break;
         }
     }
 
-    @Override
-    public void onSingleItemClick(int position) {
-        if (position<0){
-            mListener.onFilterSet(null);
 
-        }else {
-            mListener.onFilterSet(mSelectionData.get(position));
+    @Override
+    public void onMultipleItemClickListener(List<Integer> integerList) {
+        if (mSelectedData != null) {
+            mSelectedData.clear();
+            if (integerList.isEmpty()) {
+                mListener.onMultipeFilterSet(null);
+            } else {
+                for (int i = 0; i < integerList.size(); i++) {
+                    mSelectedData.add(mData.get(integerList.get(i)));
+                }
+                mListener.onMultipeFilterSet(mSelectedData);
+            }
         }
         dismiss();
     }
-
 }

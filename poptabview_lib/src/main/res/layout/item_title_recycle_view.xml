@@ -16,7 +16,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="出游天数"
-            android:textColor="@color/color333"
+            android:textColor="@color/tab_black"
             android:textSize="14dp"
 
             />

@@ -1,10 +1,6 @@
 package com.ccj.poptabview.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +19,7 @@ public class FilterTabBean implements Serializable {
 
     private String tab_id;
 
-    private List<TabsBean> tabs;
+    private List<FilterTabBean> tabs;
 
     public String getTab_id() {
         return tab_id;
@@ -41,29 +37,30 @@ public class FilterTabBean implements Serializable {
         this.tab_name = tab_name;
     }
 
-    public List<TabsBean> getTabs() {
+    public List<FilterTabBean> getTabs() {
         return tabs;
     }
 
-    public void setTabs(List<TabsBean> tabs) {
+    public void setTabs(List<FilterTabBean> tabs) {
         this.tabs = tabs;
     }
 
-    public static class TabsBean implements Serializable {
-        /**
+
+   /* public static class TabsBean extends FilterTabBean implements Serializable {
+        *//**
          * tag_name : 上海
          * tab_id : p5
-         */
+         *//*
 
-        private String tag_name;
+        private String tab_name;
         private String tab_id;
 
         public String getTag_name() {
-            return tag_name;
+            return tab_name;
         }
 
         public void setTag_name(String tag_name) {
-            this.tag_name = tag_name;
+            this.tab_name = tag_name;
         }
 
         public String getTab_id() {
@@ -74,7 +71,7 @@ public class FilterTabBean implements Serializable {
             this.tab_id = tab_id;
         }
 
-    }
+    }*/
 
 
 

@@ -2,6 +2,7 @@ package com.ccj.poptabview.filter.sort;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,11 @@ import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,20 +39,21 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
     private ViewStub mErrorView;
     private View mInflatedErrorView, iv_collapse;
     private TextView tv_reset, tv_confirm;
-    OnFilterSetListener onFilterSetListener;
-    int tag;
+    OnMultipeFilterSetListener onFilterSetListener;
+   private int tag; //一级目录下标
+    private  int type;//筛选类型,单选多选
 
     private List<FilterTabBean> data = new ArrayList<>();
     private List<SortItemView> sortItemViewLists = new ArrayList<>();
 
-    private HashMap<String, String> paramsMap = new HashMap<>();
-    private HashMap<String, String> valueMap = new HashMap<>();
+    private HashMap<Integer, ArrayList<Integer>> checkedIndex = new HashMap<>();
 
-    public SortPopupWindow(Context context, List data, OnFilterSetListener onFilterSetListener, int tag) {
+    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int tag, int type) {
         mContext = context;
         this.data = data;
         this.onFilterSetListener = onFilterSetListener;
         this.tag = tag;
+        this.type=type;
         initView();
 
         for (int i = 0; i < data.size(); i++) {
@@ -61,8 +62,9 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
             SortItemView sortItemView = new SortItemView(mContext);
             sortItemView.setLayoutParams(layoutParams);
             sortItemView.setLabTitle(filterTabBean.getTab_name());
-            sortItemView.setAdapter(filterTabBean.getTab_name());//将getTab_name 作为 唯一标示
+            sortItemView.setAdapter(filterTabBean.getTab_name(),type);//将getTab_name 作为 唯一标示
             sortItemView.setFilterTagClick(this);
+            sortItemView.setIndex(i);
             sortItemViewLists.add(sortItemView);
             ll_content.addView(sortItemView);
         }
@@ -101,73 +103,31 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         resetView();
         showAsDropDown(anchor);
         setButtonEnabled(true);
-       /* if (inlandMallList==null||inlandMallList.size()==0){
-            loadData();
-        }else {*/
         loadSortItem();
-        //    }
     }
 
     private void resetView() {
 
+
         for (int i = 0; i < data.size(); i++) {
-
             sortItemViewLists.get(i).resetView();
-
         }
-
         setButtonEnabled(false);
-
     }
 
-/*    private void loadData() {
-
-        mLoadingView.setVisibility(View.VISIBLE);
-        RequestManager.addRequest(new GsonRequest<>(
-                Request.Method.GET,//// "home","","",0
-                UrlCat.getFilterListUrl("", "home", "", "", "", 0),
-                FilterBean.class, null, null,
-                new Response.Listener<FilterBean>() {
-                    @Override
-                    public void onResponse(FilterBean response) {
-                        mLoadingView.setVisibility(View.GONE);
-                        if (response != null && response.getData() != null && response.getError_code() == 0) {
-                            inlandMallList = response.getData().getMall().getGuonei();
-                            hideErrorView();
-                            loadSortItem();
-                        } else {
-                            showErrorView();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mLoadingView.setVisibility(View.GONE);
-                        showErrorView();
-                        LogUtil.logWrite("filter", error.getMessage());
-                    }
-                }
-        ), this);
-    }*/
 
     private void loadSortItem() {
 
-
         for (int i = 0; i < data.size(); i++) {
-
-            sortItemViewLists.get(i).setData(data.get(i).getTabs(), paramsMap.get(data.get(i).getTab_name()));
-
+            sortItemViewLists.get(i).setData(data.get(i).getTabs(), checkedIndex.get(i));
         }
 
-
         ll_content.setVisibility(View.VISIBLE);
-        if (paramsMap != null && paramsMap.size() > 0) {
+        if (checkedIndex != null && checkedIndex.size() > 0) {
             setButtonEnabled(true);
 
         } else {
             setButtonEnabled(false);
-
         }
     }
 
@@ -192,17 +152,14 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         if (i == R.id.btn_reload) {//loadData();
 
         } else if (i == R.id.tv_confirm) {
-            if (tv_reset.isEnabled()) {
-                onFilterSetListener.onSortFilterSet(getParams(), getValues());
+                List list = getSortList();
+                onFilterSetListener.onMultipeSortFilterSet(list);
                 this.dismiss();
-            } else {
-                Toast.makeText(mContext,"请选择筛选条件",Toast.LENGTH_SHORT).show();
-            }
 
         } else if (i == R.id.tv_reset) {
             if (v.isEnabled()) {
                 resetView();
-                paramsMap.clear();
+                checkedIndex.clear();
                 loadSortItem();
             }
 
@@ -215,8 +172,25 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         }
     }
 
+    @NonNull
+    private List getSortList() {
+        List list =new ArrayList();
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : checkedIndex.entrySet()) {
+            List list1 =data.get(entry.getKey()).getTabs();
+            if (list1!=null){
+                for (int j = 0; j <list1.size(); j++) {
+                    if (entry.getValue().contains(j)) {
+                        list.add(list1.get(j));
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
 
     private void setButtonEnabled(boolean enabled) {
+        enabled=!checkedIndex.isEmpty();
         tv_reset.setEnabled(enabled);
         if (enabled) {
             tv_confirm.setBackgroundColor(ContextCompat.getColor(mContext, R.color.product_color));
@@ -229,58 +203,18 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
 
     /**
      *
-     * @param position
-     * @param id
-     * @param name
+     * @param firstPos
      * @param type 1分类 2商城  这里选tab_name
      */
     @Override
-    public void onComFilterTagClick(int position, String id, String name, String type) {
+    public void onComFilterTagClick(int firstPos,int secondPos, ArrayList<Integer> filterTabBeen, String type) {
+        if (filterTabBeen==null){
+            return;
+        }
+
+        checkedIndex.put(firstPos, (ArrayList<Integer>) (filterTabBeen).clone()); //需要克隆之前的集合,避免item.clean 造成数据消失
         setButtonEnabled(true);
-        paramsMap.put(type, id);
-        valueMap.put(type, name);
 
-
-    }
-
-
-    /**
-     * 拼参数
-     *
-     * @return
-     */
-    public String getParams() {
-        StringBuilder params = new StringBuilder();
-        for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
-            params.append(entry.getValue()+",");
-
-        }
-        String paramString=params.toString();
-
-        if (paramString.endsWith(",")){
-            paramString = paramString.substring(0,paramString.length() - 1);
-        }
-
-        return paramString;
-    }
-    /**
-     * 拼参数
-     *
-     * @return
-     */
-    public String getValues() {
-        StringBuilder params = new StringBuilder();
-        for (Map.Entry<String, String> entry : valueMap.entrySet()) {
-
-            params.append(entry.getKey()+"/");
-            params.append(entry.getValue()+"_");
-        }
-        String paramString=params.toString();
-
-        if (paramString.endsWith("_")){
-            paramString = paramString.substring(0,paramString.length() - 1);
-        }
-        return paramString;
     }
 
 }

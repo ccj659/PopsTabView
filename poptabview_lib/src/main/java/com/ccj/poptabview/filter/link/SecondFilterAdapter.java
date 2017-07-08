@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
+import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
@@ -20,15 +21,17 @@ import java.util.List;
  */
 public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    private OnSecondItemClickListener listener;
-    private List<FilterTabBean.TabsBean> mData;
+    private int type;
+    private OnMSecondItemClickListener listener;
+    private List<FilterTabBean> mData;
 
+    private ArrayList<Integer> mSelectedList = new ArrayList<>();
 
-    private FilterTabBean.TabsBean checkedItem;// 选中的 项目
     private int firstPosition; //一级菜单 选中
 
-    public SecondFilterAdapter(OnSecondItemClickListener listener) {
+    public SecondFilterAdapter(OnMSecondItemClickListener listener, int type) {
         this.listener = listener;
+        this.type = type;
     }
 
     @Override
@@ -41,25 +44,12 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mData != null && position < mData.size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
-            //if (position == 0) {
-                //viewHolder.tv_filter.setText("全部");
-            //} else {
-                viewHolder.tv_filter.setText(mData.get(position).getTag_name());
-            //}
-            if (checkedItem != null && checkedItem.getTab_id() == mData.get(position).getTab_id()) {
+            viewHolder.tv_filter.setText(mData.get(position).getTab_name());
+            if (mSelectedList.contains(position)) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
             }
-
-           /* if (tListFlag.get(position)) {
-                holder.textView.setTextColor(Color.parseColor("#f04848"));
-                holder.textView.setBackground(context.getResources().getDrawable(R.drawable.tag_group_bg_shape_on));
-            } else {
-                holder.textView.setTextColor(Color.parseColor("#333333"));
-
-                holder.textView.setBackground(context.getResources().getDrawable(R.drawable.tag_group_bg_shape_off));
-            }*/
 
         }
     }
@@ -72,31 +62,31 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
         return mData.size();
     }
 
-    public void setData(int firstPosition, List<FilterTabBean.TabsBean> data) {
+    public void setData(int firstPosition, List<FilterTabBean> data) {
 
         this.firstPosition = firstPosition;
         mData = new ArrayList<>();
         if (data != null) {
             mData.addAll(data);
         }
-        //增加"全部"
-        //FilterTabBean.TabsBean all = new FilterTabBean.TabsBean();
-        //all.title = "全部";
-        //mData.add(0, all);
         notifyDataSetChanged();
     }
 
     public void clear() {
         if (mData != null) {
             mData.clear();
-            checkedItem = null;
+            mSelectedList.clear();
             notifyDataSetChanged();
         }
     }
 
 
-    public void setCheckedItem(FilterTabBean.TabsBean secondFilterBean) {
-        this.checkedItem = secondFilterBean;
+    public void setCheckedItem(List<Integer> secondFilterBean) {
+        mSelectedList.clear();
+        if (secondFilterBean != null && !secondFilterBean.isEmpty()) {
+            mSelectedList.addAll(secondFilterBean);
+        }
+
         notifyDataSetChanged();
     }
 
@@ -104,42 +94,45 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
     @Override
     public void onItemClick(int position, int viewType) {
         if (position >= 0 && position < mData.size()) {
-            FilterTabBean.TabsBean data = mData.get(position);
-           String checkedId= checkedItem==null? "":checkedItem.getTab_id();
-            if (data.getTab_id().equals(checkedId)){
-                checkedItem = null;
-            }else {
-                checkedItem = data;
+            if (mSelectedList.contains(position)) {
+                mSelectedList.remove(position);
+            } else if (type == FilterConfig.FILTER_TYPE_SINGLE) {
+                mSelectedList.clear();
+                mSelectedList.add(position);
+            } else {
+                mSelectedList.add(position);
+
             }
-            listener.onSecondItemClick(position, checkedItem);
+
+            listener.onSecondItemClick(firstPosition, mData.get(position), mSelectedList);
         }
         //dismiss();
         notifyDataSetChanged();
-}
-
-public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-    CheckedTextView tv_filter;
-    OnHolderClickListener mListener;
-
-    public FilterViewHolder(View itemView, OnHolderClickListener listener) {
-        super(itemView);
-        tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
-        tv_filter.setOnClickListener(this);
-        mListener = listener;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v instanceof CheckedTextView) {
-            mListener.onItemClick(getAdapterPosition(), 0);
+    public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        CheckedTextView tv_filter;
+        OnHolderClickListener mListener;
+
+        public FilterViewHolder(View itemView, OnHolderClickListener listener) {
+            super(itemView);
+            tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
+            tv_filter.setOnClickListener(this);
+            mListener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v instanceof CheckedTextView) {
+                mListener.onItemClick(getAdapterPosition(), 0);
+            }
         }
     }
-}
 
 
-public interface OnSecondItemClickListener {
-    void onSecondItemClick(int secondPos, FilterTabBean.TabsBean secondFilterBean);
-}
+    public interface OnMSecondItemClickListener {
+        void onSecondItemClick(int secondPos, FilterTabBean filterTabBean, ArrayList<Integer> secondFilterBean);
+    }
 
 }

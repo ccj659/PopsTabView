@@ -12,7 +12,7 @@ public interface OnFilterSetListener {
 
     void onFilterSet(FilterTabBean selectionBean);
 
-    void onSecondFilterSet(FilterTabBean filterTabBean, FilterTabBean.TabsBean selectionBean);
+    void onSecondFilterSet(FilterTabBean filterTabBean, FilterTabBean selectionBean);
 
     void onSortFilterSet(String params, String values);
 

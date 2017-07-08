@@ -6,40 +6,8 @@
     android:background="@android:color/white">
 
 
-    <!-- <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="40dp"
-         android:layout_gravity="bottom"
-         android:orientation="horizontal"
-         android:paddingLeft="96dp">
 
-         <com.smzdm.client.android.view.ForegroundTextView
-             android:id="@+id/tv_reset"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:background="@color/coloreee"
-             android:foreground="?selectableItemBackground"
-             android:gravity="center"
-             android:text="@string/filter_reset"
-             android:textColor="@color/filter_reset_text"
-             android:textSize="14dp"/>
 
-         <com.smzdm.client.android.view.ForegroundTextView
-             android:id="@+id/tv_confirm"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:background="@drawable/filter_confirm_bg"
-             android:foreground="?selectableItemBackground"
-             android:gravity="center"
-             android:text="@string/confirm"
-             android:textColor="@color/filter_confirm_text"
-             android:textSize="14dp"
-             android:layout_marginLeft="1dp"/>
-
-     </LinearLayout>
- -->
     <ViewStub
         android:id="@+id/error"
         android:layout_width="match_parent"
@@ -67,9 +35,85 @@
             android:layout_height="match_parent"
             android:background="#f6f6f6"
             android:clipToPadding="false"
-            android:paddingBottom="40dp"
+            android:paddingBottom="48dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp" />
     </LinearLayout>
+
+
+
+<!--重置 确认按钮,为多选准备,暂无用,~~~-->
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="96dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorddd" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorddd" />
+
+            <ImageView
+                android:id="@+id/iv_collapse"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="centerInside"
+                android:src="@drawable/haowu_detail_buy_up"
+                android:tint="@color/product_color" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorddd" />
+
+            <TextView
+                android:id="@+id/tv_reset"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/coloreee"
+                android:foreground="?selectableItemBackground"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="重置"
+                android:textColor="@color/color666"
+                android:textSize="14dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorddd" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/coloreee"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:text="确认"
+                android:textColor="@color/color666"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </FrameLayout>

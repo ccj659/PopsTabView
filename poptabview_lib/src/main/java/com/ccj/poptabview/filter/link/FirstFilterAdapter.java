@@ -18,12 +18,21 @@ import java.util.List;
  */
 public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    private OnFirstItemClickListener mListener;
+    private OnMFirstItemClickListener mListener;
 
     private List<FilterTabBean> mData;
-    private int checkedPosition;//选中的项的id
 
-    public FirstFilterAdapter(OnFirstItemClickListener listener) {
+    private int checkedPosition=0;
+    private int type=-1;
+    public FirstFilterAdapter(List<FilterTabBean> beanList, OnMFirstItemClickListener listener, int single2mutiple) {
+        this.mData = beanList;
+        mListener = listener;
+        this.type=single2mutiple;
+    }
+
+
+
+    public FirstFilterAdapter(OnMFirstItemClickListener listener) {
         mListener = listener;
     }
 
@@ -38,7 +47,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         if (mData != null && position < mData.size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
             viewHolder.tv_filter.setText(mData.get(position).getTab_name());
-            if (position==checkedPosition) {
+            if (checkedPosition==(position)) {
                 viewHolder.tv_filter.setChecked(true);
                 viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_left, 0);
             } else {
@@ -64,7 +73,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     public void clear() {
         if (mData != null) {
             mData.clear();
-            checkedPosition = -1;
+            checkedPosition=0;
             notifyDataSetChanged();
         }
     }
@@ -72,7 +81,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     public void clearData() {
         if (mData != null) {
             mData.clear();
-            checkedPosition = -1;
+            checkedPosition=0;
             notifyDataSetChanged();
         }
     }
@@ -82,30 +91,18 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
      * @param checkedPosition
      */
     public void setCheckedPosition(int checkedPosition) {
-        this.checkedPosition = checkedPosition;
+        this.checkedPosition=checkedPosition;
         notifyDataSetChanged();
     }
-
- /*   public String getCheckedName() {
-        if (!TextUtils.isEmpty(checkedPosition) && mData != null && mData.size() > 0) {
-            for (FilterTabBean data : mData) {
-                if (checkedPosition.equals(data.getTab_id())) {
-                    return data.getTab_name();
-                }
-            }
-        }
-        return "无";
-    }*/
 
     @Override
     public void onItemClick(int position, int viewType) {
         if (position < mData.size()) {
-            FilterTabBean data = mData.get(position);
-            if (position!=checkedPosition) {
-                mListener.onFirstItemClick(position, data.getTab_id(), data.getTab_name());
-                checkedPosition = position;
-                notifyDataSetChanged();
-            }
+            checkedPosition=position;
+            mListener.onFirstItemClick(position,mData.get(position) );
+            notifyDataSetChanged();
+
+
         }
     }
 
@@ -131,7 +128,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         }
     }
 
-    public interface OnFirstItemClickListener {
-        void onFirstItemClick(int position, String id, String title);
+    public interface OnMFirstItemClickListener {
+        void onFirstItemClick(int position, FilterTabBean filterTabBeen);
     }
 }

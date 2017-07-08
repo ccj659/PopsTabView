@@ -6,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
+import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnMultipleItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,17 +20,21 @@ import java.util.List;
  *
  * @author ccj on 17/3/23.
  */
-public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class MSingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    private OnSingleItemClickListener mListener;
+    private OnMultipleItemClickListener mListener;
 
     private List<FilterTabBean> beanList;
 
-    private int checkedPosition = -1;//选中项的position
 
-    public SingleFilterAdapter(List<FilterTabBean> beanList, OnSingleItemClickListener listener) {
+    private List<Integer> checkedLists = new ArrayList();//选中的项的id
+
+    int single2mutiple;
+
+    public MSingleFilterAdapter(List<FilterTabBean> beanList, OnMultipleItemClickListener listener, int single2mutiple) {
         this.beanList = beanList;
         mListener = listener;
+        this.single2mutiple=single2mutiple;
     }
 
     @Override
@@ -40,7 +47,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         FilterViewHolder viewHolder = (FilterViewHolder) holder;
         viewHolder.tv_filter.setText(beanList.get(position).getTab_name());
-        if (position == checkedPosition) {
+        if (checkedLists.contains(position)) {
             viewHolder.tv_filter.setChecked(true);
             viewHolder.tv_filter.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_result_menu_selected, 0);
         } else {
@@ -51,19 +58,21 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     @Override
     public int getItemCount() {
-        return beanList==null?0:beanList.size();
+        return beanList == null ? 0 : beanList.size();
     }
 
     @Override
     public void onItemClick(int position, int viewType) {
-        if (position==checkedPosition){
-            checkedPosition=-1;
-        }else {
-            checkedPosition = position;
-
+        if (checkedLists.contains(position)) {
+            checkedLists.remove(position);
+        } else if (single2mutiple == FilterConfig.FILTER_TYPE_SINGLE) { //单选
+            checkedLists.clear();
+            checkedLists.add(position);
+        } else {
+            checkedLists.add(position); //多选
         }
         notifyDataSetChanged();
-        mListener.onSingleItemClick(checkedPosition);
+        mListener.onMultipleItemClickListener(checkedLists);
     }
 
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

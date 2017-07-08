@@ -13,8 +13,11 @@ import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.loader.PopTypeLoader;
+import com.ccj.poptabview.loader.PopTypeLoaderImp;
+import com.ccj.poptabview.loader.ResultLoader;
+import com.ccj.poptabview.loader.ResultLoaderImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,7 @@ import java.util.List;
  * popwindow的容器tab
  * Created by chenchangjun on 17/6/20.
  */
-public class PopTabView extends LinearLayout implements OnFilterSetListener, OnDismissListener {
+public class PopTabView extends LinearLayout implements OnMultipeFilterSetListener,OnDismissListener {
     private ArrayList<SuperPopWindow> mViewLists = new ArrayList<>();
     private ArrayList<TextView> mTextViewLists = new ArrayList<TextView>();
     private ArrayList<String> mLableLists = new ArrayList<>();
@@ -34,6 +37,18 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
 
     private PopTypeLoader popEntityLoader;
+    private  ResultLoader resultLoader;
+
+    public ResultLoader getResultLoader() {
+        return resultLoader;
+    }
+
+    public void setResultLoader(ResultLoader resultLoader) {
+        this.resultLoader = resultLoader;
+    }
+
+
+
 
     private Context mContext;
     private int mTabPostion = -1; //记录TAB页号
@@ -59,6 +74,9 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         }*/
         mContext = context;
         setOrientation(LinearLayout.HORIZONTAL);
+
+
+
     }
 
     /**
@@ -71,7 +89,16 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         mTagLists.clear();
     }
 
-    public PopTabView addFilterItem(String title, List data, int tag ) {
+
+    /**
+     *
+     * @param title 筛选标题
+     * @param data 筛选数据
+     * @param tag 筛选类别- 一级筛选,二级筛选,复杂筛选
+     * @param type 筛选方式-单选or多选
+     * @return
+     */
+    public PopTabView addFilterItem(String title, List data, int tag,int type ) {
 
         View labView = inflate(getContext(), R.layout.item_expand_pop_window, null);
         TextView labButton = (TextView) labView.findViewById(R.id.tv_travel_type);
@@ -79,8 +106,10 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         labView.setLayoutParams(params);
 
-
-        SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, tag);
+        if (popEntityLoader==null){
+            popEntityLoader=new PopTypeLoaderImp();
+        }
+        SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, tag,type);
 
         mPopupWindow.setOnDismissListener(this);
         addView(labView);
@@ -143,48 +172,6 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     }
 
 /*****************************筛选成功,回调~************************************/
-    @Override
-    public void onFilterSet(FilterTabBean selectionBean) {
-        if (selectionBean==null){
-
-            mTextViewLists.get(index).setText(mLableLists.get(index));
-            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), null,null);
-
-        }else {
-            mTextViewLists.get(index).setText(selectionBean.getTab_name());
-            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), selectionBean.getTab_id(),selectionBean.getTab_name());
-
-        }
-
-    }
-
-    @Override
-    public void onSecondFilterSet(FilterTabBean firstBean, FilterTabBean.TabsBean selectionBean) {
-
-        if (selectionBean==null){
-
-            mTextViewLists.get(index).setText(mLableLists.get(index));
-            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), null,null);
-
-        }else {
-            mTextViewLists.get(index).setText(selectionBean.getTag_name());
-            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), selectionBean.getTab_id(),selectionBean.getTag_name());
-
-        }
-
-
-    }
-
-    @Override
-    public void onSortFilterSet(String params, String values) {
-        //mTextViewLists.get(index).setText(params);
-        onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), params,values);//// TODO: 17/6/27 第三个参数
-    }
-
-    @Override
-    public void OnFilterCanceled() {
-
-    }
 
     /**
      * popwindow的ondisms
@@ -197,6 +184,48 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     }
 
 
+
+    private void handleFilterSetData(List<FilterTabBean> selectedList) {
+        if (selectedList==null||selectedList.isEmpty()){
+            mTextViewLists.get(index).setText(mLableLists.get(index));
+            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), null,null);
+
+        }else {
+            if (resultLoader==null){
+                resultLoader=new ResultLoaderImp();
+            }
+            String showValues= (String) resultLoader.getResultShowValues(selectedList);
+            String paramsIds=resultLoader.getResultParamsIds(selectedList).toString();
+            mTextViewLists.get(index).setText(showValues);
+            onPopTabSetListener.onPopTabSet(index,mLableLists.get(index), paramsIds,showValues);
+
+        }
+    }
+
+    /*****************************筛选成功,回调~************************************/
+
+    @Override
+    public void onMultipeFilterSet(List<FilterTabBean> selectedList) {
+        handleFilterSetData(selectedList);
+    }
+
+
+    @Override
+    public void onMultipeSecondFilterSet(int firstPos, List<FilterTabBean> selectedSecondList) {
+        handleFilterSetData(selectedSecondList);
+    }
+
+    @Override
+    public void onMultipeSortFilterSet(List<FilterTabBean> selectedList) {
+
+        handleFilterSetData(selectedList);
+
+    }
+
+    @Override
+    public void OnMultipeFilterCanceled() {
+
+    }
 
 
     /**

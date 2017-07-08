@@ -16,10 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,6 +52,7 @@ public class SortItemView extends LinearLayout {
     private boolean isCatExpand = false;///展开状态
     private boolean isMallInlandExpand;
     private ComFilterTagClickListener filterTagClick;
+    private int index;
 
 
     private void init(Context context, AttributeSet attrs) {
@@ -127,15 +128,16 @@ public class SortItemView extends LinearLayout {
      * tag 作为唯一标识,区分view类型
      * @param tag
      */
-    public void setAdapter(String tag) {
+    public void setAdapter(String tag,int type) {
         setTAG(tag);
         mLayoutManager = new GridLayoutManager(context, SPAN_COUNT);
-        mAdapterInland = new CommonSortFilterAdapter(new ComFilterTagClickListener() {
+        mAdapterInland = new CommonSortFilterAdapter(new SortItemClickListener() {
             @Override
-            public void onComFilterTagClick(int position, String id, String name, String type) {
-                filterTagClick.onComFilterTagClick( position,id, name,SORT_TYPE_NOW );
+            public void onSortItemClick(int position, List<Integer> filterTabBeen) {
+                filterTagClick.onComFilterTagClick(index,position, (ArrayList<Integer>) filterTabBeen,SORT_TYPE_NOW);
             }
-        }, FilterConfig.FILTER_TYPE_SINGLE);//cat 则为单选
+        }, type);//cat 则为单选
+
         rv_cat.setLayoutManager(mLayoutManager);
         rv_cat.setAdapter(mAdapterInland);
 
@@ -143,19 +145,13 @@ public class SortItemView extends LinearLayout {
 
 
 
-    public void setData(List data, String defaultId) {
-        String checkedId="";
-        if (defaultId==null||defaultId.isEmpty()){
-            checkedId="";
-        }else {
-            checkedId=defaultId;
-        }
+    public void setData(List data, List index) {
 
-        List<FilterTabBean.TabsBean> inlandMallList = data;
+        List<FilterTabBean> inlandMallList = data;
         if (inlandMallList != null && inlandMallList.size() > 0) {
             tv_empty_border.setVisibility(View.GONE);
             mAdapterInland.setData(inlandMallList);
-            mAdapterInland.setCheckedId(checkedId);
+            mAdapterInland.setCheckedList(index);
             rv_cat.setVisibility(View.VISIBLE);
             if (inlandMallList.size() > 6) {
                 iv_expand_border.setVisibility(View.VISIBLE);
@@ -253,5 +249,9 @@ public class SortItemView extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
 
+    }
+
+    public void setIndex(int index) {
+        this.index=index;
     }
 }
