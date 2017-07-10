@@ -19,18 +19,15 @@
 
 #Show
 ===
-图片如果显示不了,[麻烦到项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
-![两个筛选菜单](https://github.com/ccj659/PopsTabView/blob/master/popsTabview_gif_0.gif)
-
-![四个筛选菜单](https://github.com/ccj659/PopsTabView/blob/master/popsTabview_gif_1.gif)
 
 
 
-![popsTabview_gif_0.gif](http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip)
 
-![popsTabview_gif_1.gif](http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip)
+<figure class="half">
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
+    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
 
-
+</figure>
 
 #Introduction
 ===
