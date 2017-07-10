@@ -10,6 +10,7 @@ import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.SortItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
