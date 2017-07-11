@@ -102,7 +102,6 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
             mListener.onFirstItemClick(position,mData.get(position) );
             notifyDataSetChanged();
 
-
         }
     }
 

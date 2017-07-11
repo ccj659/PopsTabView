@@ -6,7 +6,7 @@ import java.util.List;
  * Created by chenchangjun on 17/7/7.
  */
 
-public interface SortItemClickListener {
+public interface OnSortItemClickListener {
     /**
      * 筛选分类、商城点击
      */

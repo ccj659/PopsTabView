@@ -17,16 +17,6 @@ public  class SuperPopWindow extends PopupWindow {
 
 
 
-
-
-
-
-
-
-
-
-
-
     /**
      * 如果有需要,子类会重写该方法,
      * @param anchor

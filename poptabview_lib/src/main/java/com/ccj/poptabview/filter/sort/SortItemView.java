@@ -1,11 +1,10 @@
 package com.ccj.poptabview.filter.sort;
 
 import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.ComFilterTagClickListener;
-import com.ccj.poptabview.listener.SortItemClickListener;
+import com.ccj.poptabview.listener.OnSortItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,23 +32,15 @@ public class SortItemView extends LinearLayout {
     private Context context;
 
 
-    public static final String SORT_TYPE_CHANNEL = "channel";
-    public static final String SORT_TYPE_DATE = "date";
-    public static final String SORT_TYPE_TIME = "time";
-    public static final String SORT_TYPE_THEME = "theme";
-    public static final String SORT_TYPE_MALL = "mall";
     public String SORT_TYPE_NOW = "";//静态变量无论有几个对象,值只有一个~~,被坑了,麻蛋
-
 
     private TextView tv_title, tv_empty_border;
     private RecyclerView rv_cat;
     private ImageView iv_expand_border;
-    private boolean show_other_line;
-    private int row_count;
     private String title_lable = "";
     private GridLayoutManager mLayoutManager;
     private int SPAN_COUNT = 3;
-    private CommonSortFilterAdapter mAdapterInland;
+    private SortFilterAdapter mAdapterInland;
 
     private boolean isCatExpand = false;///展开状态
     private boolean isMallInlandExpand;
@@ -67,9 +58,7 @@ public class SortItemView extends LinearLayout {
 
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SortItemView);
-            show_other_line = typedArray.getBoolean(R.styleable.SortItemView_show_other_line, false);
             SPAN_COUNT = typedArray.getInteger(R.styleable.SortItemView_row_count, 3);
-            show_other_line = typedArray.getBoolean(R.styleable.SortItemView_show_other_line, false);
             title_lable = typedArray.getString(R.styleable.SortItemView_lable);
 
         }
@@ -115,11 +104,6 @@ public class SortItemView extends LinearLayout {
 
             }
         }).start();
-
-        if (isMallInlandExpand) {
-            //  UMengUtils.event(1419, UMengUtils.PRO_MALL, "国内商城", UMengUtils.CLSS_TYPE, TYPE);
-        }
-
     }
 
     public void setFilterTagClick(ComFilterTagClickListener filterTagClick) {
@@ -133,7 +117,7 @@ public class SortItemView extends LinearLayout {
     public void setAdapter(String tag,int type) {
         setTAG(tag);
         mLayoutManager = new GridLayoutManager(context, SPAN_COUNT);
-        mAdapterInland = new CommonSortFilterAdapter(new SortItemClickListener() {
+        mAdapterInland = new SortFilterAdapter(new OnSortItemClickListener() {
             @Override
             public void onSortItemClick(int position, List<Integer> filterTabBeen) {
                 filterTagClick.onComFilterTagClick(index,position, (ArrayList<Integer>) filterTabBeen,SORT_TYPE_NOW);
@@ -233,21 +217,21 @@ public class SortItemView extends LinearLayout {
         init(context, null);
     }
 
-    public SortItemView(Context context, @Nullable AttributeSet attrs) {
+    public SortItemView(Context context,  AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
 
     }
 
 
-    public SortItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SortItemView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public SortItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public SortItemView(Context context,  AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
 

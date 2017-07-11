@@ -8,6 +8,7 @@ import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.filter.link.LinkFilterPopupWindow;
 import com.ccj.poptabview.filter.single.MSingleFilterWindow;
 import com.ccj.poptabview.filter.sort.SortPopupWindow;
+import com.ccj.poptabview.filter.rows.RowsFilterWindow;
 
 import java.util.List;
 
@@ -37,6 +38,10 @@ public class PopTypeLoaderImp implements PopTypeLoader {
             case FilterConfig.TYPE_POPWINDOW_SORT:
                 popupWindow = new SortPopupWindow(context, data, filterSetListener, tag,type);
                 break;
+            case FilterConfig.TYPE_POPWINDOW_ROWS:
+                popupWindow = new RowsFilterWindow(context, data, filterSetListener,type);
+                break;
+
             default:
                 popupWindow = new MSingleFilterWindow(context, data, filterSetListener,type);
                 break;

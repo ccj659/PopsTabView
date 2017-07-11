@@ -5,5 +5,7 @@
     android:layout_height="24dp"
     style="@style/style_common_second_filter"
     android:layout_margin="5dp"
+    android:text="@string/app_name"
+    android:paddingLeft="5dp"
     android:maxLines="1"
     android:ellipsize="end"/>

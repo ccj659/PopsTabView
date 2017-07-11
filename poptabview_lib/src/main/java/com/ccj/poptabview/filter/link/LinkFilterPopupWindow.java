@@ -103,7 +103,6 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setTouchable(true);
         this.setFocusable(true);
-        //this.setAnimationStyle(R.style.anim_popwindow);
         this.setAnimationStyle(R.style.PopupWindowAnimation);
 
         this.setBackgroundDrawable(new ColorDrawable());

@@ -1,9 +1,8 @@
 package com.ccj.poptabview;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -96,7 +95,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param data 筛选数据
      * @param tag 筛选类别- 一级筛选,二级筛选,复杂筛选
      * @param type 筛选方式-单选or多选
-     * @return
+     * @return view 本身
      */
     public PopTabView addFilterItem(String title, List data, int tag,int type ) {
 
@@ -261,13 +260,13 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
         init(context, attrs);
     }
 
-    public PopTabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PopTabView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public PopTabView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);

@@ -9,6 +9,7 @@ public class FilterConfig {
     public  final  static int TYPE_POPWINDOW_SINGLE=0;//单选pop
     public  final  static int TYPE_POPWINDOW_LINKED=1;//二级pop
     public  final  static int TYPE_POPWINDOW_SORT=2;//筛选pop
+    public  final  static int TYPE_POPWINDOW_ROWS=3;//多列单选pop
 
 
     //通用筛选 单选,多选 判断

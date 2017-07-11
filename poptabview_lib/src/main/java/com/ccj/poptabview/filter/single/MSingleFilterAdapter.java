@@ -62,7 +62,8 @@ public class MSingleFilterAdapter extends RecyclerView.Adapter implements OnHold
     }
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int pos, int viewType) {
+        Integer position=Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
         if (checkedLists.contains(position)) {
             checkedLists.remove(position);
         } else if (single2mutiple == FilterConfig.FILTER_TYPE_SINGLE) { //单选
@@ -95,9 +96,5 @@ public class MSingleFilterAdapter extends RecyclerView.Adapter implements OnHold
                 }
             }
         }
-    }
-
-    public interface OnSingleItemClickListener {
-        void onSingleItemClick(int position);
     }
 }

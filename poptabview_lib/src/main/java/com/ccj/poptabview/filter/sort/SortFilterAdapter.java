@@ -10,7 +10,7 @@ import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
-import com.ccj.poptabview.listener.SortItemClickListener;
+import com.ccj.poptabview.listener.OnSortItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @update ccj sj
  */
-public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class SortFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    public static final int INITIAL_COUNT = 6;//初始状态显示6个项目
+    public static  int INITIAL_COUNT = 6;//初始状态显示6个项目
 
-    private SortItemClickListener mListener;
+    private OnSortItemClickListener mListener;
 
     private List<FilterTabBean> mData;
     private int mType;
@@ -32,7 +32,7 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
     private List<Integer> checkedList = new ArrayList<>();//选中的项的id
 
 
-    public CommonSortFilterAdapter(SortItemClickListener listener, int type) {
+    public SortFilterAdapter(OnSortItemClickListener listener, int type) {
         mListener = listener;
         mType = type;
     }
@@ -105,10 +105,11 @@ public class CommonSortFilterAdapter extends RecyclerView.Adapter implements OnH
     }
 
     @Override
-    public void onItemClick(int position, int viewType) {
-        if (position >= 0 && position < mData.size()) {
+    public void onItemClick(int pos, int viewType) {
+        if (pos >= 0 && pos < mData.size()) {
             //商城筛选需要记住当前选中的项目
-            if (checkedList.size()>position&&checkedList.contains(position)) {
+            Integer position=Integer.valueOf(pos);
+            if (checkedList.contains(position)) {
                 checkedList.remove(position);
             } else if (mType == FilterConfig.FILTER_TYPE_SINGLE) {//单选
                 checkedList.clear();

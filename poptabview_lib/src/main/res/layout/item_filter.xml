@@ -6,6 +6,7 @@
     android:layout_height="24dp"
     style="@style/filter_tag"
     android:layout_margin="5dp"
+    android:paddingLeft="5dp"
     android:maxLines="1"
     android:text="sss"
     android:ellipsize="end" />

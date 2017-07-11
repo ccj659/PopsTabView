@@ -24,15 +24,8 @@ import java.util.List;
  */
 public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickListener, OnMultipleItemClickListener {
 
-    public static final int TYPE_FILTER = 0;
-    public static final int TYPE_SORT = 1;
 
     private Context mContext;
-    private View mParentView;
-    private View mRootView;//根布局
-    private RecyclerView recyclerView;
-    private MSingleFilterAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
 
     private List<FilterTabBean> mData = new ArrayList<>();
     private List<FilterTabBean> mSelectedData = new ArrayList<>();
@@ -56,19 +49,16 @@ public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickL
     }
 
     private void initView() {
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
-        recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-
-        mLayoutManager = new LinearLayoutManager(mContext);
-
-        mAdapter = new MSingleFilterAdapter(mData, this, tag);
+        View mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
+        RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
+        LinearLayoutManager  mLayoutManager = new LinearLayoutManager(mContext);
+        MSingleFilterAdapter mAdapter = new MSingleFilterAdapter(mData, this, tag);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
+
         mRootView.setOnClickListener(this);
-
         setContentView(mRootView);
-
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setTouchable(true);
