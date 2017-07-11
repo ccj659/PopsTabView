@@ -27,13 +27,6 @@
 </h1>
 
 
-
-<figure class="half">
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-ecff8806963de41c.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
-    <img src="http://upload-images.jianshu.io/upload_images/1848340-7d686568d1708096.gif?imageMogr2/auto-orient/strip" width="300" height="480" >
-
-</figure>
-
 #Introduction
 ===
 用户只需要,知道自己需要哪种filter,将数据转化`FilterTabBean`,然后`addFilterItem()`,最后自己在`onPopTabSet()`回调,即可使用,简单粗暴.
@@ -193,3 +186,12 @@ public class ResultLoaderImp implements ResultLoader<String> {
 
 [github:  https//github.com/ccj659/](https//github.com/ccj659/)
 
+
+## Licence
+ Copyright 2017 ccj659
+
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
