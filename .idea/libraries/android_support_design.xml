@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="android-support-design">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/poptabview_lib/libs/android-support-design.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
