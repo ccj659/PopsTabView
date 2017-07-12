@@ -121,6 +121,7 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
             } else {
                 notifyDataSetChanged();
             }
+            notifyDataSetChanged();
 
             mListener.onSortItemClick(position, checkedList);//此处的mType无用~
         }

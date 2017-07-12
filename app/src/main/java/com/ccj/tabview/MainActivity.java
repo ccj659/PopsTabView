@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements PopTabView.OnPopT
 
         popTabView = (PopTabView) findViewById(R.id.expandpop);
         FilterGroup singleFilterList1 = getData("筛选1", FilterConfig.TYPE_POPWINDOW_ROWS);
+
         FilterGroup linkFilterList = getData("筛选2", FilterConfig.TYPE_POPWINDOW_LINKED);
         FilterGroup singleFilterList2 = getData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE);
         FilterGroup sortFilterList = getData("筛选4", FilterConfig.TYPE_POPWINDOW_SORT);
@@ -57,12 +58,12 @@ public class MainActivity extends AppCompatActivity implements PopTabView.OnPopT
     private void addMethod1(FilterGroup singleFilterList1, FilterGroup linkFilterList, FilterGroup singleFilterList2, FilterGroup sortFilterList) {
         popTabView.setOnPopTabSetListener(this)
                 .setPopEntityLoader(new PopTypeLoaderImp()) //配置 {筛选类型}  方式
-                .addFilterItem("筛选1", singleFilterList1.getFilter_tab(), singleFilterList1.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
-                .addFilterItem("筛选2", singleFilterList2.getFilter_tab(), singleFilterList2.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
+                .addFilterItem("筛选1", singleFilterList2.getFilter_tab(), singleFilterList2.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
+                .addFilterItem("筛选2", singleFilterList1.getFilter_tab(), singleFilterList1.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
                 .addFilterItem("筛选3", linkFilterList.getFilter_tab(), linkFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
                 .addFilterItem("筛选5", linkFilterList.getFilter_tab(), linkFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
-                .addFilterItem("筛选6", sortFilterList.getFilter_tab(), sortFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
-                .addFilterItem("筛选7", sortFilterList.getFilter_tab(), sortFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE);
+                .addFilterItem("筛选6", sortFilterList.getFilter_tab(), sortFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
+                .addFilterItem("筛选7", sortFilterList.getFilter_tab(), sortFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY);
 
     }
 
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PopTabView.OnPopT
 
 
         List<FilterTabBean> singleFilterList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 8; i++) {
             FilterTabBean singleFilterBean = new FilterTabBean();
             singleFilterBean.setTab_id("id" + "_" + i);
             singleFilterBean.setTab_name(groupName + "_" + i);

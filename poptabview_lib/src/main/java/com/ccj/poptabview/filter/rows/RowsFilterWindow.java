@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.SuperPopWindow;
@@ -26,10 +27,13 @@ import java.util.List;
  */
 public class RowsFilterWindow extends SuperPopWindow implements View.OnClickListener, OnSortItemClickListener {
 
+
+
     private int SPAN_COUNT = 3;
 
     private Context mContext;
-    private View mRootView,iv_expand_border;//根布局
+    private View mRootView;//根布局
+    private ImageView iv_expand_border;
     private RecyclerView recyclerView;
     private RowsFilterAdapter mAdapter;
     private GridLayoutManager mLayoutManager;
@@ -57,6 +61,20 @@ public class RowsFilterWindow extends SuperPopWindow implements View.OnClickList
         initData();
     }
 
+    /**
+     * 设置列数
+     * @return
+     */
+    public int getSPAN_COUNT() {
+        return SPAN_COUNT;
+    }
+
+    public void setSPAN_COUNT(int SPAN_COUNT) {
+        this.SPAN_COUNT = SPAN_COUNT;
+        mAdapter.notifyDataSetChanged();
+    }
+
+
     private void initData() {
         if (mData==null){
             iv_expand_border.setVisibility(View.GONE);
@@ -72,7 +90,7 @@ public class RowsFilterWindow extends SuperPopWindow implements View.OnClickList
     private void initView() {
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_rows, null);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-        iv_expand_border=mRootView.findViewById(R.id.iv_expand_border);
+        iv_expand_border= (ImageView) mRootView.findViewById(R.id.iv_expand_border);
         mLayoutManager = new GridLayoutManager(mContext,SPAN_COUNT);
         mAdapter = new RowsFilterAdapter( this, tag);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -94,8 +112,9 @@ public class RowsFilterWindow extends SuperPopWindow implements View.OnClickList
     }
 
     public void show(View anchor, int paddingTop) {
-        isMallInlandExpand = false;
-
+       // isMallInlandExpand = false;
+        //iv_expand_border.setImageResource(R.drawable.ico_more_down);
+        //mAdapter.setExpand(isMallInlandExpand);
         showAsDropDown(anchor);
     }
 
@@ -132,10 +151,11 @@ public class RowsFilterWindow extends SuperPopWindow implements View.OnClickList
 
 
     public void onClickEvent() {
-        iv_expand_border.setClickable(false);
+        iv_expand_border.setClickable(true);
         isMallInlandExpand = !isMallInlandExpand;
         mAdapter.setExpand(isMallInlandExpand);
-        iv_expand_border.animate().rotation(180 - iv_expand_border.getRotation()).setDuration(200).setInterpolator(new LinearInterpolator()).setListener(new Animator.AnimatorListener() {
+        iv_expand_border.animate().rotation(180 - iv_expand_border.getRotation()).setDuration(200)
+                .setInterpolator(new LinearInterpolator()).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
