@@ -21,23 +21,16 @@
 ===
 
 
-<h1 align="center">
+![单栏.gif](http://upload-images.jianshu.io/upload_images/1848340-88046dae08e39b02.gif?imageMogr2/auto-orient/strip)
 
 
-<img src="http://upload-images.jianshu.io/upload_images/1848340-fabaade294df8d25.gif?imageMogr2/auto-orient/strip" width="280" height="498" alt="两栏"/>
-<img src="http://upload-images.jianshu.io/upload_images/1848340-fabaade294df8d25.gif?imageMogr2/auto-orient/strip" width="280" height="498" alt="两栏"/>
-</h1>
+![两栏.gif](http://upload-images.jianshu.io/upload_images/1848340-fabaade294df8d25.gif?imageMogr2/auto-orient/strip)
 
 
+![四栏.gif](http://upload-images.jianshu.io/upload_images/1848340-c032ce82532df91a.gif?imageMogr2/auto-orient/strip)
 
 
-<h1 align="center">
-
-<img src="http://upload-images.jianshu.io/upload_images/1848340-c032ce82532df91a.gif?imageMogr2/auto-orient/strip" width="280" height="498" alt="四栏"/>
-
-<img src="http://upload-images.jianshu.io/upload_images/1848340-ab654092afc2d7ed.gif?imageMogr2/auto-orient/strip" width="280" height="498" alt="更多"/>
-
-</h1>
+![更多.gif](http://upload-images.jianshu.io/upload_images/1848340-ab654092afc2d7ed.gif?imageMogr2/auto-orient/strip)
 
 
 #Introduction
