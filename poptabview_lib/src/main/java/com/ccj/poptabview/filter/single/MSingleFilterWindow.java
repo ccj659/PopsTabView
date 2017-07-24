@@ -1,12 +1,10 @@
 package com.ccj.poptabview.filter.single;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.SuperPopWindow;
@@ -22,17 +20,10 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickListener, OnMultipleItemClickListener {
+public class MSingleFilterWindow extends SuperPopWindow implements OnMultipleItemClickListener {
 
+    private List<FilterTabBean> mSelectedData ;
 
-    private Context mContext;
-
-    private List<FilterTabBean> mData = new ArrayList<>();
-    private List<FilterTabBean> mSelectedData = new ArrayList<>();
-
-    private int tag;//单栏筛选的 tag,来标记对象的类型
-
-    private OnMultipeFilterSetListener mListener;
 
     /**
      * @param context
@@ -41,41 +32,32 @@ public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickL
      * @param tag      标记对象
      */
     public MSingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag) {
-        mContext = context;
-        mListener = listener;
-        mData = data;
-        this.tag = tag;
-        initView();
+        super(context, data, listener, tag, -1);
+
     }
 
-    private void initView() {
-        View mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
+    @Override
+    public void initView() {
+        mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
         RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-        LinearLayoutManager  mLayoutManager = new LinearLayoutManager(mContext);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         MSingleFilterAdapter mAdapter = new MSingleFilterAdapter(mData, this, tag);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
-
-
         mRootView.setOnClickListener(this);
         setContentView(mRootView);
-        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setTouchable(true);
-        this.setFocusable(true);
-        this.setAnimationStyle(R.style.PopupWindowAnimation);
-        this.setBackgroundDrawable(new ColorDrawable());
     }
 
-    public void show(View anchor, int paddingTop) {
-        showAsDropDown(anchor);
+    @Override
+    public void initData() {
+        mSelectedData = new ArrayList<>();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             default:
-                mListener.OnMultipeFilterCanceled();
+                onFilterSetListener.OnMultipeFilterCanceled();
                 this.dismiss();
                 break;
         }
@@ -87,12 +69,12 @@ public class MSingleFilterWindow extends SuperPopWindow implements View.OnClickL
         if (mSelectedData != null) {
             mSelectedData.clear();
             if (integerList.isEmpty()) {
-                mListener.onMultipeFilterSet(null);
+                onFilterSetListener.onMultipeFilterSet(null);
             } else {
                 for (int i = 0; i < integerList.size(); i++) {
                     mSelectedData.add(mData.get(integerList.get(i)));
                 }
-                mListener.onMultipeFilterSet(mSelectedData);
+                onFilterSetListener.onMultipeFilterSet(mSelectedData);
             }
         }
         dismiss();

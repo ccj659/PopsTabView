@@ -1,7 +1,6 @@
 package com.ccj.poptabview.filter.sort;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,39 +26,31 @@ import java.util.Map;
  *
  * @created by ccj on 17/6/22
  */
-public class SortPopupWindow extends SuperPopWindow implements View.OnClickListener, ComFilterTagClickListener {
+public class SortPopupWindow extends SuperPopWindow implements ComFilterTagClickListener {
 
-    private static final String TYPE = "全站筛选";
 
-    private Context mContext;
-    private View mRootView;//根布局，底部收起按钮,分类选中区域
     private LinearLayout ll_content;
     private ViewStub mErrorView;
     private View mInflatedErrorView, iv_collapse;
     private TextView tv_reset, tv_confirm;
-    private OnMultipeFilterSetListener onFilterSetListener;
-    private int tag; //一级目录下标
-    private int type;//筛选类型,单选多选
 
-    private List<FilterTabBean> data = new ArrayList<>();
-    private List<SortItemView> sortItemViewLists = new ArrayList<>();
+    private List<SortItemView> sortItemViewLists;
 
-    private HashMap<Integer, ArrayList<Integer>> checkedIndex = new HashMap<>();
+    private HashMap<Integer, ArrayList<Integer>> checkedIndex;
 
-    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int tag, int type) {
-        mContext = context;
-        this.data = data;
-        this.onFilterSetListener = onFilterSetListener;
-        this.tag = tag;
-        this.type = type;
-        initView();
-        initData(data, type);
+    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag, int type) {
+        super(context, data, listener, tag, type);
 
     }
 
-    private void initData(List data, int type) {
-        for (int i = 0; i < data.size(); i++) {
-            FilterTabBean filterTabBean = (FilterTabBean) data.get(i);
+    @Override
+    public void initData() {
+        //在一个存在继承的类中：初始化父类static成员变量,运行父类static初始化块-->初始化子类static成员变量,
+        // 运行子类static初始化块-->初始化父类实例成员变量(如果有赋值语句),执行父类普通初始化块-->父类构造方法-->初始化子类实例成员变量(如果有赋值语句)及普通初始化块-->子类构造方法。
+        sortItemViewLists = new ArrayList<>();
+        checkedIndex = new HashMap<>();
+        for (int i = 0; i < mData.size(); i++) {
+            FilterTabBean filterTabBean = mData.get(i);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             SortItemView sortItemView = new SortItemView(mContext);
             sortItemView.setLayoutParams(layoutParams);
@@ -72,32 +63,23 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         }
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.common_popup_filter_sort, null);
 
         ll_content = (LinearLayout) mRootView.findViewById(R.id.ll_content);
         tv_reset = (TextView) mRootView.findViewById(R.id.tv_reset);
         tv_confirm = (TextView) mRootView.findViewById(R.id.tv_confirm);
         iv_collapse = mRootView.findViewById(R.id.iv_collapse);
-
         mInflatedErrorView = null;
-
         mRootView.setOnClickListener(this);
         tv_reset.setOnClickListener(this);
         tv_confirm.setOnClickListener(this);
         iv_collapse.setOnClickListener(this);
-
-
-        setContentView(mRootView);
-
-        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setFocusable(true);
-        this.setAnimationStyle(R.style.PopupWindowAnimation);
-        this.setBackgroundDrawable(new ColorDrawable());
+        this.setContentView(mRootView);
     }
 
-
+    @Override
     public void show(View anchor, int paddingTop) {
         resetView();
         showAsDropDown(anchor);
@@ -106,9 +88,7 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
     }
 
     private void resetView() {
-
-
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 0; i < mData.size(); i++) {
             sortItemViewLists.get(i).resetView();
         }
         setButtonEnabled(false);
@@ -117,31 +97,15 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
 
     private void loadSortItem() {
 
-        for (int i = 0; i < data.size(); i++) {
-            sortItemViewLists.get(i).setData(data.get(i).getTabs(), checkedIndex.get(i));
+        for (int i = 0; i < mData.size(); i++) {
+            sortItemViewLists.get(i).setData(mData.get(i).getTabs(), checkedIndex.get(i));
         }
-
         ll_content.setVisibility(View.VISIBLE);
         if (checkedIndex != null && checkedIndex.size() > 0) {
             setButtonEnabled(true);
 
         } else {
             setButtonEnabled(false);
-        }
-    }
-
-    private void showErrorView() {
-        if (mInflatedErrorView == null) {
-            mInflatedErrorView = mErrorView.inflate();
-            Button btn_reload = (Button) mInflatedErrorView.findViewById(R.id.btn_reload);
-            btn_reload.setOnClickListener(this);
-        }
-        mInflatedErrorView.setVisibility(View.VISIBLE);
-    }
-
-    private void hideErrorView() {
-        if (mInflatedErrorView != null) {
-            mInflatedErrorView.setVisibility(View.GONE);
         }
     }
 
@@ -174,7 +138,7 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
     private List getSortList() {
         List list = new ArrayList();
         for (Map.Entry<Integer, ArrayList<Integer>> entry : checkedIndex.entrySet()) {
-            List list1 = data.get(entry.getKey()).getTabs();
+            List list1 = mData.get(entry.getKey()).getTabs();
             if (list1 != null) {
                 for (int j = 0; j < list1.size(); j++) {
                     if (entry.getValue().contains(j)) {
@@ -208,10 +172,24 @@ public class SortPopupWindow extends SuperPopWindow implements View.OnClickListe
         if (filterTabBeen == null) {
             return;
         }
-
         checkedIndex.put(firstPos, (ArrayList<Integer>) (filterTabBeen).clone()); //需要克隆之前的集合,避免item.clean 造成数据消失
         setButtonEnabled(true);
 
+    }
+
+    private void showErrorView() {
+        if (mInflatedErrorView == null) {
+            mInflatedErrorView = mErrorView.inflate();
+            Button btn_reload = (Button) mInflatedErrorView.findViewById(R.id.btn_reload);
+            btn_reload.setOnClickListener(this);
+        }
+        mInflatedErrorView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideErrorView() {
+        if (mInflatedErrorView != null) {
+            mInflatedErrorView.setVisibility(View.GONE);
+        }
     }
 
 }

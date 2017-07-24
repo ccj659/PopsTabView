@@ -17,6 +17,11 @@ public class FilterConfig {
     public static final int FILTER_TYPE_MUTIFY = 2;
 
 
+    //rows里面的列数
+    public static final int LINKED_SPAN_COUNT = 2;
+
+    public static final int ROWS_SPAN_COUNT = 3;
+
 }
 
 

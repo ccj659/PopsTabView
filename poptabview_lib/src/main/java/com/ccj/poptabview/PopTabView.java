@@ -190,24 +190,36 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
             //使用 自定义的结果加载器,得到自己想要的字符串结果
             String showValues = (String) resultLoader.getResultShowValues(selectedList);
             String paramsIds = resultLoader.getResultParamsIds(selectedList).toString();
+            //展示取值
             mTextViewLists.get(currentIndex).setText(showValues);
+            //进行回调
             onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), paramsIds, showValues);
 
         }
     }
 
     /*****************************筛选成功,回调~************************************/
-
+    /**
+     * 一级筛选,连接singlepopwindow,rowspopwindow的筛选回调
+     * @param selectedList
+     */
     @Override
     public void onMultipeFilterSet(List<FilterTabBean> selectedList) {
         handleFilterSetData(selectedList);
     }
-
+    /**
+     * 二级筛选,连接linkedfilterPopwindow的筛选回调
+     * @param selectedSecondList 有效筛选结果 是  二级筛选
+     */
     @Override
     public void onMultipeSecondFilterSet(int firstPos, List<FilterTabBean> selectedSecondList) {
         handleFilterSetData(selectedSecondList);
     }
 
+    /**
+     * sortPopWndow的筛选回调
+     * @param selectedList
+     */
     @Override
     public void onMultipeSortFilterSet(List<FilterTabBean> selectedList) {
         handleFilterSetData(selectedList);

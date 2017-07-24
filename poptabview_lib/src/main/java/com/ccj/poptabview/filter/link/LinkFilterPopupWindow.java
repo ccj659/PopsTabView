@@ -1,14 +1,12 @@
 package com.ccj.poptabview.filter.link;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,12 +27,8 @@ import java.util.Map;
  *
  * @author ccj on 17/3/23.
  */
-public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClickListener, FirstFilterAdapter.OnMFirstItemClickListener, SecondFilterAdapter.OnMSecondItemClickListener {
+public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilterAdapter.OnMFirstItemClickListener, SecondFilterAdapter.OnMSecondItemClickListener {
 
-    private static final int SPAN_COUNT = 2;
-
-    private Context mContext;
-    private View mRootView;//根布局，底部收起按钮
 
     private LinearLayoutManager mLayoutManagerPrimary;
     private GridLayoutManager mLayoutManagerSecondary;
@@ -44,29 +38,22 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
     private TextView tv_reset, tv_confirm;
     private ImageView iv_collapse;
 
-    private List<FilterTabBean> mData;
 
-    private HashMap<Integer, List<Integer>> mSecondSelectedMap = new HashMap<>();
-
-    private int type;
+    private HashMap<Integer, List<Integer>> mSecondSelectedMap ;
 
     private RecyclerView rv_primary, rv_secondary;
     private FirstFilterAdapter mFirstAdapter;
     private SecondFilterAdapter mSecondAdapter;
 
 
-    private OnMultipeFilterSetListener mListener;
     private int firstPosition = 0;
 
-    public LinkFilterPopupWindow(Context context, List<FilterTabBean> filterBeanList, OnMultipeFilterSetListener listener, int type) {
-        mContext = context;
-        this.mData = filterBeanList;
-        mListener = listener;
-        this.type = type;
-        initView();
+    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int type) {
+        super(context,data,listener,-1,type);
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_link, null);
         rv_primary = (RecyclerView) mRootView.findViewById(R.id.rv_primary);
         rv_secondary = (RecyclerView) mRootView.findViewById(R.id.rv_secondary);
@@ -77,7 +64,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
         rv_primary.setLayoutManager(mLayoutManagerPrimary);
         rv_primary.setAdapter(mFirstAdapter);
 
-        mLayoutManagerSecondary = new GridLayoutManager(mContext, SPAN_COUNT);
+        mLayoutManagerSecondary = new GridLayoutManager(mContext, FilterConfig.LINKED_SPAN_COUNT);
         mSecondAdapter = new SecondFilterAdapter(this, type);
 
         rv_secondary.setLayoutManager(mLayoutManagerSecondary);
@@ -95,19 +82,17 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
             tv_confirm.setOnClickListener(this);
             tv_reset.setOnClickListener(this);
         }
-
-
         setContentView(mRootView);
-
-        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setTouchable(true);
-        this.setFocusable(true);
-        this.setAnimationStyle(R.style.PopupWindowAnimation);
-
-        this.setBackgroundDrawable(new ColorDrawable());
     }
 
+    @Override
+    public void initData() {
+        mSecondSelectedMap = new HashMap<>();
+
+    }
+
+
+    @Override
     public void show(View anchor, int paddingTop) {
         showAsDropDown(anchor);
         setDataAndSelection();
@@ -170,7 +155,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
 
             List list =new ArrayList();
             list.add(filterTabBean);
-            mListener.onMultipeSecondFilterSet(firstPosition, list);
+            onFilterSetListener.onMultipeSecondFilterSet(firstPosition, list);
             dismiss();
         }else {
             mSecondSelectedMap.put(firstPos, (List<Integer>) secondFilterBean.clone());
@@ -184,12 +169,12 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.iv_collapse) {//
-            mListener.OnMultipeFilterCanceled();
+            onFilterSetListener.OnMultipeFilterCanceled();
             this.dismiss();
         } else if (i == R.id.tv_confirm) {//
 
             List<FilterTabBean> filterTabBeen= handleMutipleData();
-            mListener.onMultipeSecondFilterSet(firstPosition, filterTabBeen);
+            onFilterSetListener.onMultipeSecondFilterSet(firstPosition, filterTabBeen);
             this.dismiss();
             setConfirmButtonEnabled();
 
@@ -201,7 +186,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements View.OnClic
             setConfirmButtonEnabled();
 
         } else {
-            mListener.OnMultipeFilterCanceled();
+            onFilterSetListener.OnMultipeFilterCanceled();
             this.dismiss();
             setConfirmButtonEnabled();
 

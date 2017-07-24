@@ -2,19 +2,62 @@ package com.ccj.poptabview.base;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupWindow;
+
+import com.ccj.poptabview.R;
+import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by chenchangjun on 17/5/4.
  */
 
-public  class SuperPopWindow extends PopupWindow {
+public abstract class SuperPopWindow extends PopupWindow  implements View.OnClickListener {
 
     protected View mParentView;
+    protected View mRootView;//根布局
+    protected Context mContext;
+    protected List<FilterTabBean> mData = new ArrayList<>();
+    protected OnMultipeFilterSetListener onFilterSetListener;
+    protected int tag; //一级目录下标
+    protected int type;//筛选类型,单选多选
 
+
+    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int tag, int type) {
+        mContext = context;
+        this.mData = data;
+        this.onFilterSetListener = onFilterSetListener;
+        this.tag = tag;
+        this.type = type;
+        initView();
+        initCommonContentView();
+        initData();
+    }
+
+
+
+
+    protected void initCommonContentView(){
+        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        this.setTouchable(true);
+       // this.setFocusable(true);
+        this.setAnimationStyle(R.style.PopupWindowAnimation);
+        this.setBackgroundDrawable(new ColorDrawable());
+
+    }
+
+    public abstract void initView();
+
+    public abstract void initData();
 
 
     /**
@@ -25,6 +68,8 @@ public  class SuperPopWindow extends PopupWindow {
     public  void show(View anchor, int paddingTop){
         showAsDropDown(anchor);
     };
+
+
 
     /**
      * 适配Android7.0
@@ -43,6 +88,23 @@ public  class SuperPopWindow extends PopupWindow {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public View getmParentView() {
         return mParentView;
     }
@@ -52,8 +114,6 @@ public  class SuperPopWindow extends PopupWindow {
     }
 
 
-    public SuperPopWindow() {
-    }
 
     public SuperPopWindow(View contentView) {
         super(contentView);
