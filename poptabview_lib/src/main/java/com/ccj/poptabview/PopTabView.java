@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
+import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
@@ -146,7 +147,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
             for (int i = 0; i < mViewLists.size(); i++) {
                 if (i != position) {
                     mViewLists.get(i).dismiss();
-                }
+               }
             }
             //如果该位置正在展示,就让他消失.如果没有,就展示
             if (mViewLists.get(position).isShowing()) {
@@ -177,7 +178,8 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param selectedList
      */
     private void handleFilterSetData(List<FilterTabBean> selectedList) {
-        if (selectedList == null || selectedList.isEmpty()) { //如果没有选择,onPopTabSet为null,筛选标签设为初始值;
+        //如果没有选择,onPopTabSet为null,筛选标签设为初始值;
+        if (selectedList == null || selectedList.isEmpty()) {
             mTextViewLists.get(currentIndex).setText(mLableLists.get(currentIndex));
             onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), null, null);
 
@@ -185,6 +187,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
             if (resultLoader == null) {
                 resultLoader = new ResultLoaderImp();
             }
+            //使用 自定义的结果加载器,得到自己想要的字符串结果
             String showValues = (String) resultLoader.getResultShowValues(selectedList);
             String paramsIds = resultLoader.getResultParamsIds(selectedList).toString();
             mTextViewLists.get(currentIndex).setText(showValues);

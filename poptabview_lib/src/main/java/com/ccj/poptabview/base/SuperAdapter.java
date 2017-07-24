@@ -1,4 +1,4 @@
-package com.ccj.poptabview;
+package com.ccj.poptabview.base;
 
 import android.support.v7.widget.RecyclerView;
 

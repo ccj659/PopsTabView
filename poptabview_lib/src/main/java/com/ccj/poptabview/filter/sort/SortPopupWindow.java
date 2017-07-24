@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.SuperPopWindow;
+import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.ComFilterTagClickListener;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
