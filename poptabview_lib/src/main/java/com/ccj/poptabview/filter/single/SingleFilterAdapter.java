@@ -10,7 +10,7 @@ import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickListener;
-import com.ccj.poptabview.listener.OnMultipleItemClickListener;
+import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
-    private OnMultipleItemClickListener mListener;
+    private OnSingleItemClickListener mListener;
 
     private List<FilterTabBean> beanList;
 
@@ -31,7 +31,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     int single2mutiple;
 
-    public SingleFilterAdapter(List<FilterTabBean> beanList, OnMultipleItemClickListener listener, int single2mutiple) {
+    public SingleFilterAdapter(List<FilterTabBean> beanList, OnSingleItemClickListener listener, int single2mutiple) {
         this.beanList = beanList;
         mListener = listener;
         this.single2mutiple=single2mutiple;
@@ -73,7 +73,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
             checkedLists.add(position); //多选
         }
         notifyDataSetChanged();
-        mListener.onMultipleItemClickListener(checkedLists);
+        mListener.onSingleItemClickListener(checkedLists);
     }
 
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

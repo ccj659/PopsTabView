@@ -10,7 +10,7 @@ import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
-import com.ccj.poptabview.listener.OnMultipleItemClickListener;
+import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class SingleFilterWindow extends SuperPopWindow implements OnMultipleItemClickListener {
+public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemClickListener {
 
     private List<FilterTabBean> mSelectedData ;
 
@@ -65,7 +65,7 @@ public class SingleFilterWindow extends SuperPopWindow implements OnMultipleItem
 
 
     @Override
-    public void onMultipleItemClickListener(List<Integer> integerList) {
+    public void onSingleItemClickListener(List<Integer> integerList) {
         if (mSelectedData != null) {
             mSelectedData.clear();
             if (integerList.isEmpty()) {
