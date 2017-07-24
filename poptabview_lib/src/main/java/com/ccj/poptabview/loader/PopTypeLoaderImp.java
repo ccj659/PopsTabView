@@ -6,7 +6,7 @@ import android.widget.PopupWindow;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.filter.link.LinkFilterPopupWindow;
-import com.ccj.poptabview.filter.single.MSingleFilterWindow;
+import com.ccj.poptabview.filter.single.SingleFilterWindow;
 import com.ccj.poptabview.filter.sort.SortPopupWindow;
 import com.ccj.poptabview.filter.rows.RowsFilterWindow;
 
@@ -43,7 +43,7 @@ public class PopTypeLoaderImp implements PopEntityLoader {
                 break;
 
             default:
-                popupWindow = new MSingleFilterWindow(context, data, filterSetListener,type);
+                popupWindow = new SingleFilterWindow(context, data, filterSetListener,type);
                 break;
         }
         return popupWindow;

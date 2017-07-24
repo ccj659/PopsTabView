@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ccj on 17/3/23.
  */
-public class MSingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
 
     private OnMultipleItemClickListener mListener;
 
@@ -31,7 +31,7 @@ public class MSingleFilterAdapter extends RecyclerView.Adapter implements OnHold
 
     int single2mutiple;
 
-    public MSingleFilterAdapter(List<FilterTabBean> beanList, OnMultipleItemClickListener listener, int single2mutiple) {
+    public SingleFilterAdapter(List<FilterTabBean> beanList, OnMultipleItemClickListener listener, int single2mutiple) {
         this.beanList = beanList;
         mListener = listener;
         this.single2mutiple=single2mutiple;

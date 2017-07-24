@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.ComFilterTagClickListener;
+import com.ccj.poptabview.listener.OnSortTagClickListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class SortItemView extends LinearLayout {
 
     private boolean isCatExpand = false;///展开状态
     private boolean isMallInlandExpand;
-    private ComFilterTagClickListener filterTagClick;
+    private OnSortTagClickListener filterTagClick;
     private int index;
 
 
@@ -106,7 +106,7 @@ public class SortItemView extends LinearLayout {
         }).start();
     }
 
-    public void setFilterTagClick(ComFilterTagClickListener filterTagClick) {
+    public void setFilterTagClick(OnSortTagClickListener filterTagClick) {
         this.filterTagClick = filterTagClick;
     }
 

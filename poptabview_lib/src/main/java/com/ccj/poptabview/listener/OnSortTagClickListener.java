@@ -3,10 +3,11 @@ package com.ccj.poptabview.listener;
 import java.util.ArrayList;
 
 /**
+ * sortfilter中的单项view的回调
  * Created by chenchangjun on 17/6/22.
  */
 
-public interface ComFilterTagClickListener {
+public interface OnSortTagClickListener {
 
 
     /**

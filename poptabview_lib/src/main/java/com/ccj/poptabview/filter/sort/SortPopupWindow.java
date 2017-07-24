@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.ComFilterTagClickListener;
+import com.ccj.poptabview.listener.OnSortTagClickListener;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @created by ccj on 17/6/22
  */
-public class SortPopupWindow extends SuperPopWindow implements ComFilterTagClickListener {
+public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickListener {
 
 
     private LinearLayout ll_content;
