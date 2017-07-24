@@ -6,5 +6,13 @@
         <attr name="line_count" format="integer"/><!--行个数-->
         <attr name="row_count" format="integer"/><!--列个数-->
         <attr name="show_other_line" format="boolean"/><!--是否显示下拉图标-->
+    </declare-styleable>
 
-    </declare-styleable></resources>
+<!--    <declare-styleable name="PopsTabView">
+        <attr name="itemTextSize" format="integer"/>
+        <attr name="itemTextColor" format="integer"/>
+        <attr name="itemBackground" format="integer"/>&lt;!&ndash;行个数&ndash;&gt;
+    </declare-styleable>-->
+
+
+</resources>

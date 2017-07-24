@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+//添加这两行
+//apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
@@ -22,36 +26,29 @@ android {
 
     lintOptions {
         abortOnError false
-        checkReleaseBuilds false
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
 }
 
 
-
 /*
-publish {
-    userOrg = 'com.ccj.popstabview'
-    groupId = 'com.ccj.popstabview'
-    artifactId = 'bintray-release'
-    publishVersion = '1.1'
-    desc = 'Easy filter container,which can support multiple select and extend style.'
-    website = 'https://github.com/novoda/bintray-release'
-}
-*/
-
-
-/*
-
-
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
 
 //项目主页
 def siteUrl = 'https://github.com/ccj659/PopsTabView'
@@ -62,7 +59,7 @@ def libName = "PopsTabView"
 //发布到组织名称名字，必须填写
 group = "me.ccj.PopsTabView"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1"
+version = "1.1.0"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 //生成源文件
 task sourcesJar(type: Jar) {
@@ -152,5 +149,26 @@ javadoc {
         version true
         links "http://docs.oracle.com/javase/7/docs/api"
     }
+}*/
+allprojects {
+    repositories {
+        jcenter()
+    }
+    //加上这些
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
 }
-*/
+
+
+publish {
+    userOrg = 'ccj659'      //bintray注册的用户名
+    groupId = 'com.ccj'         //compile引用时的第1部分groupId
+    artifactId = 'popstabview'     //compile引用时的第2部分项目名
+    publishVersion = '1.1.0'    //compile引用时的第3部分版本号
+    desc = 'Easy filter container,which can support multiple select and extend style'
+    website = 'https://github.com/ccj659/PopsTabView'
+}

@@ -9,12 +9,13 @@ import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.listener.OnPopTabSetListener;
 import com.ccj.poptabview.loader.PopTypeLoaderImp;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PopTabView.OnPopTabSetListener {
+public class MainActivity extends AppCompatActivity implements OnPopTabSetListener {
 
     private PopTabView popTabView;
     private TextView tv_content;
