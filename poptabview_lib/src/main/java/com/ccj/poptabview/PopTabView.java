@@ -16,7 +16,7 @@ import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
 import com.ccj.poptabview.loader.PopEntityLoader;
-import com.ccj.poptabview.loader.PopTypeLoaderImp;
+import com.ccj.poptabview.loader.PopEntityLoaderImp;
 import com.ccj.poptabview.loader.ResultLoader;
 import com.ccj.poptabview.loader.ResultLoaderImp;
 
@@ -33,6 +33,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     private int mToggleBtnBackground;
     private int mToggleTextColor;
     private float mToggleTextSize;
+
 
     private ArrayList<SuperPopWindow> mViewLists = new ArrayList<>();//popwindow缓存集合
     private ArrayList<TextView> mTextViewLists = new ArrayList<TextView>(); //筛选标签textiew集合,用于字段展示和点击事件
@@ -75,11 +76,11 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     /**
      * @param title 筛选标题
      * @param data  筛选数据
-     * @param tag   筛选类别- 一级筛选,二级筛选,复杂筛选
-     * @param type  筛选方式-单选or多选
+     * @param filterType   筛选类别- 一级筛选,二级筛选,复杂筛选
+     * @param singleOrMutiply  筛选方式-单选or多选
      * @return view 本身
      */
-    public PopTabView addFilterItem(String title, List data, int tag, int type) {
+    public PopTabView addFilterItem(String title, List data, int filterType, int singleOrMutiply) {
 
         ////默认筛选项的布局,如果想修改筛选项样式,也可以在此布局修改
         View labView = inflate(getContext(), R.layout.item_expand_pop_window, null);
@@ -89,9 +90,9 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
 
         //筛选类型实体加载器
         if (popEntityLoader == null) {
-            popEntityLoader = new PopTypeLoaderImp();
+            popEntityLoader = new PopEntityLoaderImp();
         }
-        SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, tag, type);//得到相应的筛选类型实体
+        SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, filterType,singleOrMutiply);//得到相应的筛选类型实体
         mPopupWindow.setOnDismissListener(this);
 
         //将筛选项布局加入view

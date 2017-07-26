@@ -9,7 +9,7 @@ import android.widget.CheckedTextView;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnHolderClickedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,9 @@ import java.util.List;
  *
  * @author ccj on 17/3/23.
  */
-public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
-    private int type;
+    private int singleOrMutiply;
     private OnMSecondItemClickListener listener;
     private List<FilterTabBean> mData;
 
@@ -29,9 +29,9 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     private int firstPosition; //一级菜单 选中
 
-    public SecondFilterAdapter(OnMSecondItemClickListener listener, int type) {
+    public SecondFilterAdapter(OnMSecondItemClickListener listener, int singleOrMutiply) {
         this.listener = listener;
-        this.type = type;
+        this.singleOrMutiply = singleOrMutiply;
     }
 
     @Override
@@ -92,12 +92,12 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
 
     @Override
-    public void onItemClick(int pos, int viewType) {
+    public void onItemClick(int pos) {
         if (pos >= 0 && pos < mData.size()) {
             Integer position=Integer.valueOf(pos);
             if (mSelectedList.contains(position)) {
                 mSelectedList.remove(position);
-            } else if (type == FilterConfig.FILTER_TYPE_SINGLE) {
+            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
                 mSelectedList.clear();
                 mSelectedList.add(position);
             } else {
@@ -114,9 +114,9 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CheckedTextView tv_filter;
-        OnHolderClickListener mListener;
+        OnHolderClickedListener mListener;
 
-        public FilterViewHolder(View itemView, OnHolderClickListener listener) {
+        public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
             super(itemView);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
             tv_filter.setOnClickListener(this);
@@ -126,7 +126,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
         @Override
         public void onClick(View v) {
             if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition(), 0);
+                mListener.onItemClick(getAdapterPosition());
             }
         }
     }

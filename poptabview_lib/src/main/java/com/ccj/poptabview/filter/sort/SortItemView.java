@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnSortTagClickListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
+import com.ccj.poptabview.listener.OnSortTagClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,10 +111,10 @@ public class SortItemView extends LinearLayout {
     }
 
     /**
-     * tag 作为唯一标识,区分view类型
+     * filterType 作为唯一标识,区分view类型
      * @param tag
      */
-    public void setAdapter(String tag,int type) {
+    public void setAdapter(String tag,int singleOrMutiply) {
         setTAG(tag);
         mLayoutManager = new GridLayoutManager(context, SPAN_COUNT);
         mAdapterInland = new SortFilterAdapter(new OnSortItemClickListener() {
@@ -122,7 +122,7 @@ public class SortItemView extends LinearLayout {
             public void onSortItemClick(int position, List<Integer> filterTabBeen) {
                 filterTagClick.onComFilterTagClick(index,position, (ArrayList<Integer>) filterTabBeen,SORT_TYPE_NOW);
             }
-        }, type);//cat 则为单选
+        }, singleOrMutiply);//singleOrMutiply 则为单选
 
         rv_cat.setLayoutManager(mLayoutManager);
         rv_cat.setAdapter(mAdapterInland);

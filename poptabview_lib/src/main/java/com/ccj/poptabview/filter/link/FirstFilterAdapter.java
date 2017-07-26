@@ -8,7 +8,7 @@ import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnHolderClickedListener;
 
 import java.util.List;
 
@@ -16,18 +16,18 @@ import java.util.List;
  * 左侧一级筛选adapter
  * @author ccj on 17/3/23.
  */
-public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
     private OnMFirstItemClickListener mListener;
 
     private List<FilterTabBean> mData;
 
     private int checkedPosition=0;
-    private int type=-1;
+    private int singleOrMutiply=-1;
     public FirstFilterAdapter(List<FilterTabBean> beanList, OnMFirstItemClickListener listener, int single2mutiple) {
         this.mData = beanList;
         mListener = listener;
-        this.type=single2mutiple;
+        this.singleOrMutiply=single2mutiple;
     }
 
 
@@ -96,7 +96,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     }
 
     @Override
-    public void onItemClick(int position, int viewType) {
+    public void onItemClick(int position) {
         if (position < mData.size()) {
             checkedPosition=position;
             mListener.onFirstItemClick(position,mData.get(position) );
@@ -108,9 +108,9 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CheckedTextView tv_filter;
-        OnHolderClickListener mListener;
+        OnHolderClickedListener mListener;
 
-        public FilterViewHolder(View itemView, OnHolderClickListener listener) {
+        public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
             super(itemView);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
             tv_filter.setOnClickListener(this);
@@ -121,7 +121,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         public void onClick(View v) {
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 if (v instanceof CheckedTextView) {
-                    mListener.onItemClick(getAdapterPosition(), 0);
+                    mListener.onItemClick(getAdapterPosition());
                 }
             }
         }

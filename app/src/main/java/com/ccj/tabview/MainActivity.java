@@ -10,7 +10,7 @@ import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
-import com.ccj.poptabview.loader.PopTypeLoaderImp;
+import com.ccj.poptabview.loader.PopEntityLoaderImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements OnPopTabSetListen
 
     private void addMethod2(FilterGroup singleFilterList1) {
         popTabView.setOnPopTabSetListener(this)
-                .setPopEntityLoader(new PopTypeLoaderImp()); //配置 {筛选类型}  方式
+                .setPopEntityLoader(new PopEntityLoaderImp()); //配置 {筛选类型}  方式
         for (int i = 0; i < 5; i++) {
             /**
              *
              * @param title 筛选标题
              * @param data 筛选数据
-             * @param tag 筛选类别- 一级筛选,二级筛选,复杂筛选
+             * @param filterType 筛选类别- 一级筛选,二级筛选,复杂筛选
              * @param type 筛选方式-单选or多选
              * @return
              */
@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements OnPopTabSetListen
 
     private void addMethod1(FilterGroup singleFilterList1, FilterGroup linkFilterList, FilterGroup singleFilterList2, FilterGroup sortFilterList) {
         popTabView.setOnPopTabSetListener(this)
-                .setPopEntityLoader(new PopTypeLoaderImp()) //配置 {筛选类型}  方式
-                .addFilterItem("筛选1", singleFilterList2.getFilter_tab(), singleFilterList2.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
+                .setPopEntityLoader(new PopEntityLoaderImp()) //配置 {筛选类型}  方式
+                .addFilterItem("筛选1", singleFilterList2.getFilter_tab(),
+                        singleFilterList2.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)
                 .addFilterItem("筛选2", singleFilterList1.getFilter_tab(), singleFilterList1.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
                 .addFilterItem("筛选3", linkFilterList.getFilter_tab(), linkFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_MUTIFY)
                 .addFilterItem("筛选5", linkFilterList.getFilter_tab(), linkFilterList.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE)

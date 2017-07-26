@@ -4,11 +4,11 @@ import android.content.Context;
 import android.widget.PopupWindow;
 
 import com.ccj.poptabview.FilterConfig;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.filter.link.LinkFilterPopupWindow;
+import com.ccj.poptabview.filter.rows.RowsFilterWindow;
 import com.ccj.poptabview.filter.single.SingleFilterWindow;
 import com.ccj.poptabview.filter.sort.SortPopupWindow;
-import com.ccj.poptabview.filter.rows.RowsFilterWindow;
+import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 
 import java.util.List;
 
@@ -17,33 +17,33 @@ import java.util.List;
  * Created by chenchangjun on 17/6/28.
  */
 
-public class PopTypeLoaderImp implements PopEntityLoader {
+public class PopEntityLoaderImp implements PopEntityLoader {
 
     /**
      * 由 getPopType 得到不同的类型的filter实体
      * @param context
      * @param data
      * @param filterSetListener 监听
-     * @param tag 筛选品类
-     * @param type 筛选方式--单选 or  多选
+     * @param filterType 筛选品类
+     * @param singleOrMutiply 筛选方式--单选 or  多选
      * @return
      */
     @Override
-    public PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int tag, int type) {
+    public PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int filterType, int singleOrMutiply) {
         PopupWindow popupWindow = null;
-        switch (tag) {
+        switch (filterType) {
             case FilterConfig.TYPE_POPWINDOW_LINKED:
-                popupWindow = new LinkFilterPopupWindow(context, data, filterSetListener,type);
+                popupWindow = new LinkFilterPopupWindow(context, data, filterSetListener,filterType,singleOrMutiply);
                 break;
             case FilterConfig.TYPE_POPWINDOW_SORT:
-                popupWindow = new SortPopupWindow(context, data, filterSetListener, tag,type);
+                popupWindow = new SortPopupWindow(context, data, filterSetListener, filterType,singleOrMutiply);
                 break;
             case FilterConfig.TYPE_POPWINDOW_ROWS:
-                popupWindow = new RowsFilterWindow(context, data, filterSetListener,type);
+                popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMutiply);
                 break;
 
             default:
-                popupWindow = new SingleFilterWindow(context, data, filterSetListener,type);
+                popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMutiply);
                 break;
         }
         return popupWindow;

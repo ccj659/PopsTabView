@@ -29,10 +29,9 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
      * @param context
      * @param data     要筛选的数据
      * @param listener 监听
-     * @param tag      标记对象
      */
-    public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag) {
-        super(context, data, listener, tag, -1);
+    public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
+        super(context, data, listener, filterType, singleOrMutiply);
 
     }
 
@@ -41,7 +40,7 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
         RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-        SingleFilterAdapter mAdapter = new SingleFilterAdapter(mData, this, tag);
+        SingleFilterAdapter mAdapter = new SingleFilterAdapter(mData, this, singleOrMutiply);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         mRootView.setOnClickListener(this);

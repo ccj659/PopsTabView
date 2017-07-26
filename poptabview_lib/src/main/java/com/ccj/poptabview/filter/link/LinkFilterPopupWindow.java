@@ -48,8 +48,8 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
     private int firstPosition = 0;
 
-    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int type) {
-        super(context,data,listener,-1,type);
+    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
+        super(context,data,listener,filterType,singleOrMutiply);
     }
 
     @Override
@@ -65,14 +65,14 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
         rv_primary.setAdapter(mFirstAdapter);
 
         mLayoutManagerSecondary = new GridLayoutManager(mContext, FilterConfig.LINKED_SPAN_COUNT);
-        mSecondAdapter = new SecondFilterAdapter(this, type);
+        mSecondAdapter = new SecondFilterAdapter(this, singleOrMutiply);
 
         rv_secondary.setLayoutManager(mLayoutManagerSecondary);
         rv_secondary.setAdapter(mSecondAdapter);
 
         mRootView.setOnClickListener(this);
 
-        if (type == FilterConfig.FILTER_TYPE_MUTIFY) {
+        if (singleOrMutiply == FilterConfig.FILTER_TYPE_MUTIFY) {
             ll_bottom = (LinearLayout) mRootView.findViewById(R.id.ll_bottom);
             iv_collapse = (ImageView) mRootView.findViewById(R.id.iv_collapse);
             tv_reset = (TextView) mRootView.findViewById(R.id.tv_reset);
@@ -149,7 +149,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
     public void onSecondItemClick(int firstPos, FilterTabBean filterTabBean,ArrayList<Integer> secondFilterBean) {
 
 
-        if (type == FilterConfig.FILTER_TYPE_SINGLE) {
+        if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
             mSecondSelectedMap.clear();
             mSecondSelectedMap.put(firstPos, (List<Integer>) secondFilterBean.clone());
 
@@ -196,7 +196,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
     private void setConfirmButtonEnabled() {
 
-        if (type == FilterConfig.FILTER_TYPE_SINGLE) {
+        if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
             return;
         }
 

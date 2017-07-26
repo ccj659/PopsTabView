@@ -9,7 +9,7 @@ import android.widget.CheckedTextView;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author ccj on 17/3/23.
  */
-public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
     private OnSingleItemClickListener mListener;
 
@@ -62,7 +62,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
     }
 
     @Override
-    public void onItemClick(int pos, int viewType) {
+    public void onItemClick(int pos) {
         Integer position=Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
         if (checkedLists.contains(position)) {
             checkedLists.remove(position);
@@ -79,9 +79,9 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CheckedTextView tv_filter;
-        OnHolderClickListener mListener;
+        OnHolderClickedListener mListener;
 
-        public FilterViewHolder(View itemView, OnHolderClickListener listener) {
+        public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
             super(itemView);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
             tv_filter.setOnClickListener(this);
@@ -92,7 +92,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
         public void onClick(View v) {
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 if (v instanceof CheckedTextView) {
-                    mListener.onItemClick(getAdapterPosition(), 0);
+                    mListener.onItemClick(getAdapterPosition());
                 }
             }
         }

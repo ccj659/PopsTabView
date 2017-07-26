@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnSortTagClickListener;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnSortTagClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +38,8 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
 
     private HashMap<Integer, ArrayList<Integer>> checkedIndex;
 
-    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag, int type) {
-        super(context, data, listener, tag, type);
+    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
+        super(context, data, listener, filterType, singleOrMutiply);
 
     }
 
@@ -55,7 +55,7 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
             SortItemView sortItemView = new SortItemView(mContext);
             sortItemView.setLayoutParams(layoutParams);
             sortItemView.setLabTitle(filterTabBean.getTab_name());
-            sortItemView.setAdapter(filterTabBean.getTab_name(), type);//将getTab_name 作为 唯一标示
+            sortItemView.setAdapter(filterTabBean.getTab_name(), singleOrMutiply);//将getTab_name 作为 唯一标示
             sortItemView.setFilterTagClick(this);
             sortItemView.setIndex(i);
             sortItemViewLists.add(sortItemView);

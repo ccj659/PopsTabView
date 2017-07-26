@@ -43,10 +43,10 @@ public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClick
      * @param context
      * @param data     要筛选的数据
      * @param listener 监听
-     * @param tag      标记对象
+     * @param singleOrMutiply      标记对象
      */
-    public RowsFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int tag) {
-        super(context,data,listener,tag,-1);
+    public RowsFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
+        super(context,data,listener,filterType,singleOrMutiply);
     }
 
 
@@ -71,7 +71,7 @@ public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClick
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
         iv_expand_border= (ImageView) mRootView.findViewById(R.id.iv_expand_border);
         mLayoutManager = new GridLayoutManager(mContext, FilterConfig.ROWS_SPAN_COUNT);
-        mAdapter = new RowsFilterAdapter( this, tag);
+        mAdapter = new RowsFilterAdapter( this, singleOrMutiply);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         mAdapter.setData(mData);

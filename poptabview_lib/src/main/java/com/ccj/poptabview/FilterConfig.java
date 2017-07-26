@@ -17,9 +17,9 @@ public class FilterConfig {
     public static final int FILTER_TYPE_MUTIFY = 2;
 
 
-    //rows里面的列数
+    //二级筛选中二级list里面的GradLayout列数
     public static final int LINKED_SPAN_COUNT = 2;
-
+    //rows里面的list里面的GradLayout列数
     public static final int ROWS_SPAN_COUNT = 3;
 
 }

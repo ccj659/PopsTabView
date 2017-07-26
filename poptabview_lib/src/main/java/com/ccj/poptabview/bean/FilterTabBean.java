@@ -19,7 +19,7 @@ public class FilterTabBean implements Serializable {
 
     private String tab_id;
 
-    private List<FilterTabBean> tabs;
+    private List<TabsBean> tabs;
 
     public String getTab_id() {
         return tab_id;
@@ -37,20 +37,17 @@ public class FilterTabBean implements Serializable {
         this.tab_name = tab_name;
     }
 
-    public List<FilterTabBean> getTabs() {
+    public List<TabsBean> getTabs() {
         return tabs;
     }
 
-    public void setTabs(List<FilterTabBean> tabs) {
+    public void setTabs(List<TabsBean> tabs) {
         this.tabs = tabs;
     }
 
 
-   /* public static class TabsBean extends FilterTabBean implements Serializable {
-        *//**
-         * tag_name : 上海
-         * tab_id : p5
-         *//*
+    public static class TabsBean  implements Serializable {
+
 
         private String tab_name;
         private String tab_id;
@@ -71,7 +68,7 @@ public class FilterTabBean implements Serializable {
             this.tab_id = tab_id;
         }
 
-    }*/
+    }
 
 
 

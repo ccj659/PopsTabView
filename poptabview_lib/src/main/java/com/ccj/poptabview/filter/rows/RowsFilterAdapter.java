@@ -9,7 +9,7 @@ import android.widget.CheckedTextView;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.bean.FilterTabBean;
-import com.ccj.poptabview.listener.OnHolderClickListener;
+import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 
 import java.util.ArrayList;
@@ -20,14 +20,14 @@ import java.util.List;
  *
  * @update ccj sj
  */
-public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderClickListener {
+public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
     public static  int INITIAL_COUNT = 6;//初始状态显示6个项目
 
     private OnSortItemClickListener mListener;
 
     private List<FilterTabBean> mData;
-    private int mType;
+    private int singleOrMutiply;
     private boolean isExpand = false;//是否已展开
     private List<Integer> checkedList = new ArrayList<>();//选中的项的id
 
@@ -38,9 +38,9 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         return new FilterViewHolder(v, this);
     }
 
-    public RowsFilterAdapter(OnSortItemClickListener listener, int type) {
+    public RowsFilterAdapter(OnSortItemClickListener listener, int singleOrMutiply) {
         mListener = listener;
-        mType = type;
+        this.singleOrMutiply = singleOrMutiply;
     }
 
     @Override
@@ -105,17 +105,17 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
     }
 
     @Override
-    public void onItemClick(int pos, int viewType) {
+    public void onItemClick(int pos) {
         if (pos >= 0 && pos < mData.size()) {
             //商城筛选需要记住当前选中的项目
             Integer position=Integer.valueOf(pos);
             if (checkedList.contains(position)) {
                 checkedList.remove(position);
-            } else if (mType == FilterConfig.FILTER_TYPE_SINGLE) {//单选
+            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {//单选
                 checkedList.clear();
                 checkedList.add(position);
                 notifyDataSetChanged();
-            } else if (mType == FilterConfig.FILTER_TYPE_MUTIFY) {//多选
+            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_MUTIFY) {//多选
                 checkedList.add(position);
                 notifyDataSetChanged();
             } else {
@@ -135,9 +135,9 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CheckedTextView tv_filter;
-        OnHolderClickListener mListener;
+        OnHolderClickedListener mListener;
 
-        public FilterViewHolder(View itemView, OnHolderClickListener listener) {
+        public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
             super(itemView);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
             tv_filter.setOnClickListener(this);
@@ -147,7 +147,7 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         @Override
         public void onClick(View v) {
             if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition(), 0);
+                mListener.onItemClick(getAdapterPosition());
             }
         }
     }

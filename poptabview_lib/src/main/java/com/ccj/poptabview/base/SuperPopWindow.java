@@ -27,16 +27,16 @@ public abstract class SuperPopWindow extends PopupWindow  implements View.OnClic
     protected Context mContext;
     protected List<FilterTabBean> mData = new ArrayList<>();
     protected OnMultipeFilterSetListener onFilterSetListener;
-    protected int tag; //一级目录下标
-    protected int type;//筛选类型,单选多选
+    protected int filterType; //对应tab_group_type ,即筛选样式,单列,多列,复杂筛选等等
+    protected int singleOrMutiply;//筛选类型,单选多选
 
 
-    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int tag, int type) {
+    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int filterType, int singleOrMutiply) {
         mContext = context;
         this.mData = data;
         this.onFilterSetListener = onFilterSetListener;
-        this.tag = tag;
-        this.type = type;
+        this.filterType = filterType;
+        this.singleOrMutiply = singleOrMutiply;
         initView();
         initCommonContentView();
         initData();
