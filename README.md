@@ -43,6 +43,7 @@
 
 #Introduction
 ===
+
 用户只需要,知道自己需要哪种filter,将数据转化`FilterTabBean`,然后`addFilterItem()`,最后自己在`onPopTabSet()`回调,即可使用,简单粗暴.
 
 
