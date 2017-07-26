@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MyFilterActivity"></activity>
+        <activity android:name=".SimpleFilterActivity"></activity>
     </application>
 
 </manifest>

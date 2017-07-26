@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.sort;
 
+
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -16,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 import com.ccj.poptabview.listener.OnSortTagClickListener;
 
@@ -114,7 +115,7 @@ public class SortItemView extends LinearLayout {
      * filterType 作为唯一标识,区分view类型
      * @param tag
      */
-    public void setAdapter(String tag,int singleOrMutiply) {
+    public void setAdapter(String tag, int singleOrMultiply) {
         setTAG(tag);
         mLayoutManager = new GridLayoutManager(context, SPAN_COUNT);
         mAdapterInland = new SortFilterAdapter(new OnSortItemClickListener() {
@@ -122,7 +123,7 @@ public class SortItemView extends LinearLayout {
             public void onSortItemClick(int position, List<Integer> filterTabBeen) {
                 filterTagClick.onComFilterTagClick(index,position, (ArrayList<Integer>) filterTabBeen,SORT_TYPE_NOW);
             }
-        }, singleOrMutiply);//singleOrMutiply 则为单选
+        }, singleOrMultiply);//cat 则为单选
 
         rv_cat.setLayoutManager(mLayoutManager);
         rv_cat.setAdapter(mAdapterInland);
@@ -133,7 +134,7 @@ public class SortItemView extends LinearLayout {
 
     public void setData(List data, List index) {
 
-        List<FilterTabBean> inlandMallList = data;
+        List<BaseFilterTabBean> inlandMallList = data;
         if (inlandMallList != null && inlandMallList.size() > 0) {
             tv_empty_border.setVisibility(View.GONE);
             mAdapterInland.setData(inlandMallList);
@@ -217,21 +218,21 @@ public class SortItemView extends LinearLayout {
         init(context, null);
     }
 
-    public SortItemView(Context context,  AttributeSet attrs) {
+    public SortItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
 
     }
 
 
-    public SortItemView(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public SortItemView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
 
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SortItemView(Context context,  AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SortItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
 

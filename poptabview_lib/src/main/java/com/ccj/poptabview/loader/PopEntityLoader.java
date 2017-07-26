@@ -1,5 +1,6 @@
 package com.ccj.poptabview.loader;
 
+
 import android.content.Context;
 import android.widget.PopupWindow;
 
@@ -19,9 +20,9 @@ public interface PopEntityLoader {
      * @param context
      * @param data
      * @param filterSetListener 监听
-     * @param filterType 筛选品类
-     * @param singleOrMutiply 筛选方式--单选 or  多选
+     * @param tag 筛选品类
+     * @param type 筛选方式--单选 or  多选
      * @return
      */
-    PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int filterType, int singleOrMutiply);
+    PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int tag, int type);
 }

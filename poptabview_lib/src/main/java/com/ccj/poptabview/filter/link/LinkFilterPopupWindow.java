@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.link;
 
+
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
 import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
@@ -48,8 +50,8 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
     private int firstPosition = 0;
 
-    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
-        super(context,data,listener,filterType,singleOrMutiply);
+    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+        super(context,data,listener,filterType,singleOrMultiply);
     }
 
     @Override
@@ -65,14 +67,14 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
         rv_primary.setAdapter(mFirstAdapter);
 
         mLayoutManagerSecondary = new GridLayoutManager(mContext, FilterConfig.LINKED_SPAN_COUNT);
-        mSecondAdapter = new SecondFilterAdapter(this, singleOrMutiply);
+        mSecondAdapter = new SecondFilterAdapter(this, singleOrMultiply);
 
         rv_secondary.setLayoutManager(mLayoutManagerSecondary);
         rv_secondary.setAdapter(mSecondAdapter);
 
         mRootView.setOnClickListener(this);
 
-        if (singleOrMutiply == FilterConfig.FILTER_TYPE_MUTIFY) {
+        if (singleOrMultiply == FilterConfig.FILTER_TYPE_MUTIFY) {
             ll_bottom = (LinearLayout) mRootView.findViewById(R.id.ll_bottom);
             iv_collapse = (ImageView) mRootView.findViewById(R.id.iv_collapse);
             tv_reset = (TextView) mRootView.findViewById(R.id.tv_reset);
@@ -120,7 +122,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
      * @param position
      */
     @Override
-    public void onFirstItemClick(int position, FilterTabBean mFirstSelectedData) {
+    public void onFirstItemClick(int position, BaseFilterTabBean mFirstSelectedData) {
         firstPosition = position;
         if (mData != null && mData.size() > firstPosition) {
             if (mData.get(position) != null && mData.get(position).getTabs().size() > 0) {//二级默认选中
@@ -146,10 +148,10 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
      * @param secondFilterBean
      */
     @Override
-    public void onSecondItemClick(int firstPos, FilterTabBean filterTabBean,ArrayList<Integer> secondFilterBean) {
+    public void onSecondItemClick(int firstPos, BaseFilterTabBean filterTabBean, ArrayList<Integer> secondFilterBean) {
 
 
-        if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
+        if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) {
             mSecondSelectedMap.clear();
             mSecondSelectedMap.put(firstPos, (List<Integer>) secondFilterBean.clone());
 
@@ -173,7 +175,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
             this.dismiss();
         } else if (i == R.id.tv_confirm) {//
 
-            List<FilterTabBean> filterTabBeen= handleMutipleData();
+            List<BaseFilterTabBean> filterTabBeen= handleMutipleData();
             onFilterSetListener.onMultipeSecondFilterSet(firstPosition, filterTabBeen);
             this.dismiss();
             setConfirmButtonEnabled();
@@ -196,7 +198,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
     private void setConfirmButtonEnabled() {
 
-        if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
+        if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) {
             return;
         }
 
@@ -214,8 +216,8 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
     /**
      * @return
      */
-    public List<FilterTabBean> handleMutipleData() {
-        List<FilterTabBean> filterTabBeen = new ArrayList<>();
+    public List<BaseFilterTabBean> handleMutipleData() {
+        List<BaseFilterTabBean> filterTabBeen = new ArrayList<>();
 
         for (Map.Entry<Integer, List<Integer>> entry : mSecondSelectedMap.entrySet()) {
 

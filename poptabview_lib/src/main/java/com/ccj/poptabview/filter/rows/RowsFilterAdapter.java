@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.rows;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 
@@ -26,8 +27,8 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
 
     private OnSortItemClickListener mListener;
 
-    private List<FilterTabBean> mData;
-    private int singleOrMutiply;
+    private List<BaseFilterTabBean> mData;
+    private int singleOrMultiply;
     private boolean isExpand = false;//是否已展开
     private List<Integer> checkedList = new ArrayList<>();//选中的项的id
 
@@ -38,9 +39,9 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         return new FilterViewHolder(v, this);
     }
 
-    public RowsFilterAdapter(OnSortItemClickListener listener, int singleOrMutiply) {
+    public RowsFilterAdapter(OnSortItemClickListener listener, int singleOrMultiply) {
         mListener = listener;
-        this.singleOrMutiply = singleOrMutiply;
+        this.singleOrMultiply = singleOrMultiply;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         return mData.size();
     }
 
-    public void setData(List<FilterTabBean> data) {
+    public void setData(List<BaseFilterTabBean> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -108,14 +109,14 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
     public void onItemClick(int pos) {
         if (pos >= 0 && pos < mData.size()) {
             //商城筛选需要记住当前选中的项目
-            Integer position=Integer.valueOf(pos);
+            Integer position= Integer.valueOf(pos);
             if (checkedList.contains(position)) {
                 checkedList.remove(position);
-            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {//单选
+            } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) {//单选
                 checkedList.clear();
                 checkedList.add(position);
                 notifyDataSetChanged();
-            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_MUTIFY) {//多选
+            } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_MUTIFY) {//多选
                 checkedList.add(position);
                 notifyDataSetChanged();
             } else {
@@ -123,7 +124,7 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
             }
             notifyDataSetChanged();
 
-            mListener.onSortItemClick(position, checkedList);//此处的mType无用~
+            mListener.onSortItemClick(position, checkedList);//此处的singleOrMultiply无用~
         }
     }
 

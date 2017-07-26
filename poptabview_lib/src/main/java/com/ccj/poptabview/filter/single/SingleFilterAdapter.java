@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.single;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
@@ -24,14 +25,14 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     private OnSingleItemClickListener mListener;
 
-    private List<FilterTabBean> beanList;
+    private List<BaseFilterTabBean> beanList;
 
 
     private List<Integer> checkedLists = new ArrayList();//选中的项的id
 
     int single2mutiple;
 
-    public SingleFilterAdapter(List<FilterTabBean> beanList, OnSingleItemClickListener listener, int single2mutiple) {
+    public SingleFilterAdapter(List<BaseFilterTabBean> beanList, OnSingleItemClickListener listener, int single2mutiple) {
         this.beanList = beanList;
         mListener = listener;
         this.single2mutiple=single2mutiple;
@@ -63,7 +64,7 @@ public class SingleFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
     @Override
     public void onItemClick(int pos) {
-        Integer position=Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
+        Integer position= Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
         if (checkedLists.contains(position)) {
             checkedLists.remove(position);
         } else if (single2mutiple == FilterConfig.FILTER_TYPE_SINGLE) { //单选

@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
 import com.ccj.poptabview.loader.PopEntityLoader;
@@ -33,7 +33,6 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     private int mToggleBtnBackground;
     private int mToggleTextColor;
     private float mToggleTextSize;
-
 
     private ArrayList<SuperPopWindow> mViewLists = new ArrayList<>();//popwindow缓存集合
     private ArrayList<TextView> mTextViewLists = new ArrayList<TextView>(); //筛选标签textiew集合,用于字段展示和点击事件
@@ -173,31 +172,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     }
 
 
-    /**
-     * 处理由每个筛选项item到popwindow的数据处理
-     *
-     * @param selectedList
-     */
-    private void handleFilterSetData(List<FilterTabBean> selectedList) {
-        //如果没有选择,onPopTabSet为null,筛选标签设为初始值;
-        if (selectedList == null || selectedList.isEmpty()) {
-            mTextViewLists.get(currentIndex).setText(mLableLists.get(currentIndex));
-            onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), null, null);
 
-        } else { //如果有选择,onPopTabSet 取值,并展示;
-            if (resultLoader == null) {
-                resultLoader = new ResultLoaderImp();
-            }
-            //使用 自定义的结果加载器,得到自己想要的字符串结果
-            String showValues = (String) resultLoader.getResultShowValues(selectedList);
-            String paramsIds = resultLoader.getResultParamsIds(selectedList).toString();
-            //展示取值
-            mTextViewLists.get(currentIndex).setText(showValues);
-            //进行回调
-            onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), paramsIds, showValues);
-
-        }
-    }
 
     /*****************************筛选成功,回调~************************************/
     /**
@@ -205,25 +180,26 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param selectedList
      */
     @Override
-    public void onMultipeFilterSet(List<FilterTabBean> selectedList) {
-        handleFilterSetData(selectedList);
+    public void onMultipeFilterSet(List<BaseFilterTabBean> selectedList) {
+        handleFilterTabsBeanData(false,selectedList);
+
     }
     /**
      * 二级筛选,连接linkedfilterPopwindow的筛选回调
      * @param selectedSecondList 有效筛选结果 是  二级筛选
      */
     @Override
-    public void onMultipeSecondFilterSet(int firstPos, List<FilterTabBean> selectedSecondList) {
-        handleFilterSetData(selectedSecondList);
+    public void onMultipeSecondFilterSet(int firstPos, List<BaseFilterTabBean> selectedSecondList) {
+        handleFilterTabsBeanData(true,selectedSecondList);
     }
 
     /**
      * sortPopWndow的筛选回调
-     * @param selectedList
+     * @param selectedSecondList
      */
     @Override
-    public void onMultipeSortFilterSet(List<FilterTabBean> selectedList) {
-        handleFilterSetData(selectedList);
+    public void onMultipeSortFilterSet(List<BaseFilterTabBean> selectedSecondList) {
+        handleFilterTabsBeanData(true,selectedSecondList);
     }
 
 
@@ -234,6 +210,44 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
 
     /*****************************筛选成功,end~************************************/
 
+    /**
+     * 处理由每个筛选项item到popwindow的数据处理
+     *
+     * @param selectedList
+     */
+    private void handleFilterTabsBeanData(boolean hasSecondTabBean,List selectedList) {
+        String showValues = null;
+        Object showParams = null;
+
+        //如果没有选择,onPopTabSet为null,筛选标签设为初始值;
+        if (selectedList == null || selectedList.isEmpty()) {
+            mTextViewLists.get(currentIndex).setText(mLableLists.get(currentIndex));
+            onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), showParams, showValues);
+
+        } else { //如果有选择,onPopTabSet 取值,并展示;
+            if (resultLoader == null) {
+                resultLoader = new ResultLoaderImp();
+            }
+
+            //使用 自定义的结果加载器,得到自己想要的字符串结果
+            int tag = mViewLists.get(currentIndex).getFilterType();//拿到样式
+            //如果是二级筛选或者复杂筛选,即有FilterTabBean.ChildTabBean
+            if (hasSecondTabBean){
+                showValues =  resultLoader.getSecondResultShowValues(selectedList, tag);
+                showParams = resultLoader.getSecondResultParamsIds(selectedList,tag);
+            }else {
+                showValues =  resultLoader.getResultShowValues(selectedList, tag);
+                showParams = resultLoader.getResultParamsIds(selectedList,tag);
+            }
+
+            // TODO 可以自己修改展示效果
+            //展示取值
+            mTextViewLists.get(currentIndex).setText(showValues);
+            //进行回调
+            onPopTabSetListener.onPopTabSet(currentIndex, mLableLists.get(currentIndex), showParams, showValues);
+
+        }
+    }
 
     /**
      * 多次加载 注意清空
@@ -283,8 +297,10 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
         return resultLoader;
     }
 
-    public void setResultLoader(ResultLoader resultLoader) {
+    public PopTabView setResultLoader(ResultLoader resultLoader) {
         this.resultLoader = resultLoader;
+
+        return this;
     }
 
 

@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.single;
 
+
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.ccj.poptabview.R;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
@@ -22,16 +23,18 @@ import java.util.List;
  */
 public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemClickListener {
 
-    private List<FilterTabBean> mSelectedData ;
+    private List<BaseFilterTabBean> mSelectedData ;
 
 
     /**
      * @param context
      * @param data     要筛选的数据
      * @param listener 监听
+     * @param filterType
+     * @param singleOrMultiply      标记对象
      */
-    public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
-        super(context, data, listener, filterType, singleOrMutiply);
+    public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+        super(context, data, listener, filterType, singleOrMultiply);
 
     }
 
@@ -40,7 +43,7 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
         RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-        SingleFilterAdapter mAdapter = new SingleFilterAdapter(mData, this, singleOrMutiply);
+        SingleFilterAdapter mAdapter = new SingleFilterAdapter(mData, this, singleOrMultiply);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         mRootView.setOnClickListener(this);

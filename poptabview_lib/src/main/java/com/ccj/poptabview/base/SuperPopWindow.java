@@ -1,5 +1,6 @@
 package com.ccj.poptabview.base;
 
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 
 import java.util.ArrayList;
@@ -20,23 +20,23 @@ import java.util.List;
  * Created by chenchangjun on 17/5/4.
  */
 
-public abstract class SuperPopWindow extends PopupWindow  implements View.OnClickListener {
+public abstract class SuperPopWindow extends PopupWindow implements View.OnClickListener {
 
     protected View mParentView;
     protected View mRootView;//根布局
     protected Context mContext;
-    protected List<FilterTabBean> mData = new ArrayList<>();
+    protected List<BaseFilterTabBean> mData = new ArrayList<>();
     protected OnMultipeFilterSetListener onFilterSetListener;
-    protected int filterType; //对应tab_group_type ,即筛选样式,单列,多列,复杂筛选等等
-    protected int singleOrMutiply;//筛选类型,单选多选
+    protected int filterType; //一筛选类型,
+    protected int singleOrMultiply;//单选多选
 
 
-    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int filterType, int singleOrMutiply) {
-        mContext = context;
+    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int filterType, int singleOrMultiply) {
+        this.mContext = context;
         this.mData = data;
         this.onFilterSetListener = onFilterSetListener;
         this.filterType = filterType;
-        this.singleOrMutiply = singleOrMutiply;
+        this.singleOrMultiply = singleOrMultiply;
         initView();
         initCommonContentView();
         initData();
@@ -114,6 +114,45 @@ public abstract class SuperPopWindow extends PopupWindow  implements View.OnClic
     }
 
 
+    public View getmRootView() {
+        return mRootView;
+    }
+
+    public void setmRootView(View mRootView) {
+        this.mRootView = mRootView;
+    }
+
+    public List<BaseFilterTabBean> getmData() {
+        return mData;
+    }
+
+    public void setmData(List<BaseFilterTabBean> mData) {
+        this.mData = mData;
+    }
+
+    public OnMultipeFilterSetListener getOnFilterSetListener() {
+        return onFilterSetListener;
+    }
+
+    public void setOnFilterSetListener(OnMultipeFilterSetListener onFilterSetListener) {
+        this.onFilterSetListener = onFilterSetListener;
+    }
+
+    public int getFilterType() {
+        return filterType;
+    }
+
+    public void setFilterType(int filterType) {
+        this.filterType = filterType;
+    }
+
+    public int getSingleOrMultiply() {
+        return singleOrMultiply;
+    }
+
+    public void setSingleOrMultiply(int singleOrMultiply) {
+        this.singleOrMultiply = singleOrMultiply;
+    }
 
     public SuperPopWindow(View contentView) {
         super(contentView);

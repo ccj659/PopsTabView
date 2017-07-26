@@ -1,10 +1,10 @@
 package com.ccj.poptabview.listener;
 
 /**
- *  * ExpandPopTabView筛选器外部,回调
+ *  * popstaview和外部调用的接口
  * Created by chenchangjun on 17/7/24.
  */
-public interface OnPopTabSetListener {
+public interface OnPopTabSetListener<T> {
     /**
      *
      * @param index  操作的 filter的下标号 0.1.2.3
@@ -12,5 +12,5 @@ public interface OnPopTabSetListener {
      * @param params 选中的 参数(需要传参)
      * @param value  选中的 值
      */
-    void onPopTabSet(int index, String lable,String params, String value);
+    void onPopTabSet(int index, String lable, T params, String value);
 }

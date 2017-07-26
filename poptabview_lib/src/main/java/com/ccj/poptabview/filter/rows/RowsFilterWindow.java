@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.rows;
 
+
 import android.animation.Animator;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,8 +12,8 @@ import android.widget.ImageView;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 
@@ -24,7 +25,7 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClickListener {
+public class RowsFilterWindow extends SuperPopWindow implements OnSortItemClickListener {
 
 
 
@@ -34,7 +35,7 @@ public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClick
     private RowsFilterAdapter mAdapter;
     private GridLayoutManager mLayoutManager;
 
-    private List<FilterTabBean> mSelectedData;
+    private List<BaseFilterTabBean> mSelectedData;
 
 
     private boolean isMallInlandExpand;
@@ -43,6 +44,7 @@ public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClick
      * @param context
      * @param data     要筛选的数据
      * @param listener 监听
+     * @param filterType
      * @param singleOrMutiply      标记对象
      */
     public RowsFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
@@ -71,7 +73,7 @@ public class RowsFilterWindow extends SuperPopWindow implements  OnSortItemClick
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
         iv_expand_border= (ImageView) mRootView.findViewById(R.id.iv_expand_border);
         mLayoutManager = new GridLayoutManager(mContext, FilterConfig.ROWS_SPAN_COUNT);
-        mAdapter = new RowsFilterAdapter( this, singleOrMutiply);
+        mAdapter = new RowsFilterAdapter( this, singleOrMultiply);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         mAdapter.setData(mData);

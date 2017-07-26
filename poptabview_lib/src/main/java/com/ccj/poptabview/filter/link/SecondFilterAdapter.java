@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.link;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 
 import java.util.ArrayList;
@@ -21,17 +22,17 @@ import java.util.List;
  */
 public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
-    private int singleOrMutiply;
+    private int singleOrMultiply;
     private OnMSecondItemClickListener listener;
-    private List<FilterTabBean> mData;
+    private List<BaseFilterTabBean> mData;
 
     private ArrayList<Integer> mSelectedList = new ArrayList<>();
 
     private int firstPosition; //一级菜单 选中
 
-    public SecondFilterAdapter(OnMSecondItemClickListener listener, int singleOrMutiply) {
+    public SecondFilterAdapter(OnMSecondItemClickListener listener, int singleOrMultiply) {
         this.listener = listener;
-        this.singleOrMutiply = singleOrMutiply;
+        this.singleOrMultiply = singleOrMultiply;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
         return mData.size();
     }
 
-    public void setData(int firstPosition, List<FilterTabBean> data) {
+    public void setData(int firstPosition, List<BaseFilterTabBean> data) {
 
         this.firstPosition = firstPosition;
         mData = new ArrayList<>();
@@ -94,10 +95,10 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
     @Override
     public void onItemClick(int pos) {
         if (pos >= 0 && pos < mData.size()) {
-            Integer position=Integer.valueOf(pos);
+            Integer position= Integer.valueOf(pos);
             if (mSelectedList.contains(position)) {
                 mSelectedList.remove(position);
-            } else if (singleOrMutiply == FilterConfig.FILTER_TYPE_SINGLE) {
+            } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) {
                 mSelectedList.clear();
                 mSelectedList.add(position);
             } else {
@@ -133,7 +134,7 @@ public class SecondFilterAdapter extends RecyclerView.Adapter implements OnHolde
 
 
     public interface OnMSecondItemClickListener {
-        void onSecondItemClick(int secondPos, FilterTabBean filterTabBean, ArrayList<Integer> secondFilterBean);
+        void onSecondItemClick(int secondPos, BaseFilterTabBean filterTabBean, ArrayList<Integer> secondFilterBean);
     }
 
 }

@@ -5,11 +5,6 @@ package com.ccj.poptabview;
  */
 public class FilterConfig {
 
-    //popwindow类型
-    public  final  static int TYPE_POPWINDOW_SINGLE=0;//单选pop
-    public  final  static int TYPE_POPWINDOW_LINKED=1;//二级pop
-    public  final  static int TYPE_POPWINDOW_SORT=2;//筛选pop
-    public  final  static int TYPE_POPWINDOW_ROWS=3;//多列单选pop
 
 
     //通用筛选 单选,多选 判断
@@ -22,6 +17,19 @@ public class FilterConfig {
     //rows里面的list里面的GradLayout列数
     public static final int ROWS_SPAN_COUNT = 3;
 
+
+
+
+    //popwindow类型
+    public  final  static int TYPE_POPWINDOW_SINGLE=1;//单选pop
+    public  final  static int TYPE_POPWINDOW_LINKED=2;//二级pop
+    public  final  static int TYPE_POPWINDOW_SORT=0;//筛选pop
+    public  final  static int TYPE_POPWINDOW_ROWS=3;//三列
+
+
+
+    //金融筛选
+    public static final int JINRONG_FILTER_POSITION = 6;
 }
 
 

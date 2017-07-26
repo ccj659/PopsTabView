@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.sort;
 
+
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -11,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ccj.poptabview.R;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import com.ccj.poptabview.listener.OnSortTagClickListener;
 
@@ -38,8 +39,8 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
 
     private HashMap<Integer, ArrayList<Integer>> checkedIndex;
 
-    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
-        super(context, data, listener, filterType, singleOrMutiply);
+    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+        super(context, data, listener, filterType, singleOrMultiply);
 
     }
 
@@ -50,12 +51,12 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
         sortItemViewLists = new ArrayList<>();
         checkedIndex = new HashMap<>();
         for (int i = 0; i < mData.size(); i++) {
-            FilterTabBean filterTabBean = mData.get(i);
+            BaseFilterTabBean filterTabBean = mData.get(i);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             SortItemView sortItemView = new SortItemView(mContext);
             sortItemView.setLayoutParams(layoutParams);
             sortItemView.setLabTitle(filterTabBean.getTab_name());
-            sortItemView.setAdapter(filterTabBean.getTab_name(), singleOrMutiply);//将getTab_name 作为 唯一标示
+            sortItemView.setAdapter(filterTabBean.getTab_name(), singleOrMultiply);//将getTab_name 作为 唯一标示
             sortItemView.setFilterTagClick(this);
             sortItemView.setIndex(i);
             sortItemViewLists.add(sortItemView);

@@ -106,7 +106,7 @@
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="aaf69edcda09486b1ea3427895eb5fd274b5ef81">
+        sha1="bdc37eca734ae8e8212da94290b45e5c36978624">
         <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/PopsTabView-poptabview_lib-unspecified_78e5e975a5d02e274191bf201b7a3a3e3d8ec0b4.jar" />
     </item>
     <item

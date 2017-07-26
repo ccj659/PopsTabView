@@ -1,5 +1,6 @@
 package com.ccj.poptabview.filter.link;
 
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.bean.FilterTabBean;
+import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
 
     private OnMFirstItemClickListener mListener;
 
-    private List<FilterTabBean> mData;
+    private List<BaseFilterTabBean> mData;
 
     private int checkedPosition=0;
-    private int singleOrMutiply=-1;
-    public FirstFilterAdapter(List<FilterTabBean> beanList, OnMFirstItemClickListener listener, int single2mutiple) {
+    private int type=-1;
+    public FirstFilterAdapter(List<BaseFilterTabBean> beanList, OnMFirstItemClickListener listener, int single2mutiple) {
         this.mData = beanList;
         mListener = listener;
-        this.singleOrMutiply=single2mutiple;
+        this.type=single2mutiple;
     }
 
 
@@ -65,7 +66,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         return mData.size();
     }
 
-    public void setData(List<FilterTabBean> data) {
+    public void setData(List<BaseFilterTabBean> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -128,6 +129,6 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
     }
 
     public interface OnMFirstItemClickListener {
-        void onFirstItemClick(int position, FilterTabBean filterTabBeen);
+        void onFirstItemClick(int position, BaseFilterTabBean filterTabBeen);
     }
 }

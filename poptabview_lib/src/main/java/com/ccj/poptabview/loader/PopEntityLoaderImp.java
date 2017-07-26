@@ -1,5 +1,6 @@
 package com.ccj.poptabview.loader;
 
+
 import android.content.Context;
 import android.widget.PopupWindow;
 
@@ -25,25 +26,28 @@ public class PopEntityLoaderImp implements PopEntityLoader {
      * @param data
      * @param filterSetListener 监听
      * @param filterType 筛选品类
-     * @param singleOrMutiply 筛选方式--单选 or  多选
+     * @param singleOrMultiply 筛选方式--单选 or  多选
      * @return
      */
     @Override
-    public PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int filterType, int singleOrMutiply) {
+    public PopupWindow getPopEntity(Context context, List data, OnMultipeFilterSetListener filterSetListener, int filterType, int singleOrMultiply) {
         PopupWindow popupWindow = null;
         switch (filterType) {
             case FilterConfig.TYPE_POPWINDOW_LINKED:
-                popupWindow = new LinkFilterPopupWindow(context, data, filterSetListener,filterType,singleOrMutiply);
+                popupWindow = new LinkFilterPopupWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
             case FilterConfig.TYPE_POPWINDOW_SORT:
-                popupWindow = new SortPopupWindow(context, data, filterSetListener, filterType,singleOrMutiply);
+                popupWindow = new SortPopupWindow(context, data, filterSetListener, filterType,singleOrMultiply);
                 break;
             case FilterConfig.TYPE_POPWINDOW_ROWS:
-                popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMutiply);
+                popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
 
+            case FilterConfig.JINRONG_FILTER_POSITION:
+                popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
+                break;
             default:
-                popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMutiply);
+                popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
         }
         return popupWindow;
