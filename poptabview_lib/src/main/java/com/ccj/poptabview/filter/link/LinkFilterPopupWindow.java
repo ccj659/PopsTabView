@@ -16,8 +16,8 @@ import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnSecondItemClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author ccj on 17/3/23.
  */
-public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilterAdapter.OnMFirstItemClickListener, SecondFilterAdapter.OnMSecondItemClickListener {
+public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilterAdapter.OnFirstItemClickListener, OnSecondItemClickListener {
 
 
     private LinearLayoutManager mLayoutManagerPrimary;
@@ -50,7 +50,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
     private int firstPosition = 0;
 
-    public LinkFilterPopupWindow(Context context, List<FilterTabBean> data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+    public LinkFilterPopupWindow(Context context, List<BaseFilterTabBean> data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
         super(context,data,listener,filterType,singleOrMultiply);
     }
 
@@ -131,9 +131,9 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
 
                 List cheked=mSecondSelectedMap.get(position);
                 if (cheked != null&&!cheked.isEmpty()) {
-                    mSecondAdapter.setCheckedItem(cheked);
+                    mSecondAdapter.setCheckedList(cheked);
                 } else {
-                    mSecondAdapter.setCheckedItem(null);
+                    mSecondAdapter.setCheckedList(null);
                 }
             }
         }
@@ -181,8 +181,6 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements  FirstFilte
             setConfirmButtonEnabled();
 
         } else if (i == R.id.tv_reset) {//
-            //mFirstAdapter.clearData();
-           // mSecondAdapter.clear();
             mSecondSelectedMap.clear();
             setDataAndSelection();
             setConfirmButtonEnabled();

@@ -1,5 +1,7 @@
 package com.ccj.poptabview.listener;
 
+import com.ccj.poptabview.base.SuperListener;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  * Created by chenchangjun on 17/6/22.
  */
 
-public interface OnSortTagClickListener {
+public interface OnSortTagClickListener extends SuperListener {
 
 
     /**

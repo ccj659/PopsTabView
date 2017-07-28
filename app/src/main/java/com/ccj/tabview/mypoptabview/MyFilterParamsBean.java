@@ -66,7 +66,7 @@ public class MyFilterParamsBean implements Serializable {
     @Override
     public String toString() {
         return "MyFilterParamsBean{" +
-                "beanList=" + beanList +
+                "mData=" + beanList +
                 ", paramValues='" + paramValues + '\'' +
                 '}';
     }

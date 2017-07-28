@@ -7,31 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
-import com.ccj.poptabview.base.BaseFilterTabBean;
+import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 筛选器adapter
  *
  * @update ccj sj
  */
-public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
+public class RowsFilterAdapter extends SuperAdapter {
 
-    public static  int INITIAL_COUNT = 6;//初始状态显示6个项目
-
-    private OnSortItemClickListener mListener;
-
-    private List<BaseFilterTabBean> mData;
-    private int singleOrMultiply;
+    public static int INITIAL_COUNT = 6;//初始状态显示6个项目
     private boolean isExpand = false;//是否已展开
-    private List<Integer> checkedList = new ArrayList<>();//选中的项的id
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,8 +29,8 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
     }
 
     public RowsFilterAdapter(OnSortItemClickListener listener, int singleOrMultiply) {
-        mListener = listener;
-        this.singleOrMultiply = singleOrMultiply;
+        super(null, listener, singleOrMultiply);
+
     }
 
     @Override
@@ -50,7 +39,7 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
             viewHolder.tv_filter.setText(mData.get(position).getTab_name());
 
-            if (checkedList.contains(position)) {
+            if (checkedLists.contains(position)) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
@@ -68,10 +57,6 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         return mData.size();
     }
 
-    public void setData(List<BaseFilterTabBean> data) {
-        mData = data;
-        notifyDataSetChanged();
-    }
 
     public void clear() {
         if (mData != null) {
@@ -81,57 +66,18 @@ public class RowsFilterAdapter extends RecyclerView.Adapter implements OnHolderC
         }
     }
 
-    public void clearData() {
-        if (mData != null) {
-            mData.clear();
-            notifyDataSetChanged();
-        }
-    }
 
     public void setExpand(boolean isExpand) {
         this.isExpand = isExpand;
         notifyDataSetChanged();
     }
 
-    public void setCheckedList(List checkedIndex) {
-
-
-        if (checkedIndex == null||checkedIndex.isEmpty()) {
-            checkedList.clear();
-        } else {
-            this.checkedList.addAll(checkedIndex);
-        }
-
-        notifyDataSetChanged();
-    }
-
     @Override
     public void onItemClick(int pos) {
-        if (pos >= 0 && pos < mData.size()) {
-            //商城筛选需要记住当前选中的项目
-            Integer position= Integer.valueOf(pos);
-            if (checkedList.contains(position)) {
-                checkedList.remove(position);
-            } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) {//单选
-                checkedList.clear();
-                checkedList.add(position);
-                notifyDataSetChanged();
-            } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_MUTIFY) {//多选
-                checkedList.add(position);
-                notifyDataSetChanged();
-            } else {
-                notifyDataSetChanged();
-            }
-            notifyDataSetChanged();
-
-            mListener.onSortItemClick(position, checkedList);//此处的singleOrMultiply无用~
-        }
+        onItemClickEvent(pos);
+        ((OnSortItemClickListener) mListener).onSortItemClick(pos, checkedLists);//此处的singleOrMultiply无用~
     }
 
-    public void clearChecked() {
-        checkedList.clear();
-        notifyDataSetChanged();
-    }
 
     public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

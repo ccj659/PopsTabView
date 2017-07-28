@@ -19,13 +19,14 @@ import java.util.List;
  */
 public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
-    private OnMFirstItemClickListener mListener;
+    private OnFirstItemClickListener mListener;
 
     private List<BaseFilterTabBean> mData;
 
     private int checkedPosition=0;
     private int type=-1;
-    public FirstFilterAdapter(List<BaseFilterTabBean> beanList, OnMFirstItemClickListener listener, int single2mutiple) {
+
+    public FirstFilterAdapter(List<BaseFilterTabBean> beanList, OnFirstItemClickListener listener, int single2mutiple) {
         this.mData = beanList;
         mListener = listener;
         this.type=single2mutiple;
@@ -33,7 +34,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
 
 
 
-    public FirstFilterAdapter(OnMFirstItemClickListener listener) {
+    public FirstFilterAdapter(OnFirstItemClickListener listener) {
         mListener = listener;
     }
 
@@ -128,7 +129,7 @@ public class FirstFilterAdapter extends RecyclerView.Adapter implements OnHolder
         }
     }
 
-    public interface OnMFirstItemClickListener {
+    public interface OnFirstItemClickListener {
         void onFirstItemClick(int position, BaseFilterTabBean filterTabBeen);
     }
 }
