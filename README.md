@@ -1,31 +1,28 @@
-#PopsTabView
-===
+# PopsTabView
+
 
 **PopsTabView是个filter容器,他可以自动,快速,构建不同筛选样式,自由组合成一组tab.**
 
-**目前版本`v1.3` update:7/26 18:05**
----
-	
-1.抽象SuperPopWindow,抽象Bean.
-
-2.可自定义的筛选,详情见文章末尾**进阶---自定义筛选参数使用**
+**目前版本`v1.3`**
+	    update:17/7/26 18:05
 
 
-筛选样式 | 筛选种类 
---------|------|
-单列 | 单选,多选  | 
-多排 | 单选,多选  | 
-双列 | 单项单选,单项多选  | 
-复杂 | 单项单选,单项多选  | 
+
+
+
+筛选样式 | 筛选种类 |可自定义属性
+--------|------|--------------|
+单列 | 单选,多选  | 初始数据bean,筛选结果bean|
+多排 | 单选,多选  | 初始数据bean,筛选结果bean|
+双列 | 单项单选,单项多选  | 初始数据bean,筛选结果bean|
+复杂 | 单项单选,单项多选  | 初始数据bean,筛选结果bean|
 
 详情请参考代码,以及实例
 后续筛选会不断完善补充.
 
 [项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
 
-#Show
-===
-
+## Show
 
 
 <h1 align="center">
@@ -41,12 +38,13 @@
 </h1>
 
 
-#Introduction
-===
+
+## Introduction
+
 用户只需要,知道自己需要哪种filter,将数据转化`FilterTabBean`,然后`addFilterItem()`,最后自己在`onPopTabSet()`回调,即可使用,简单粗暴.
 
 
-##优点:
+### 优点:
 
 - 支持用`for()循环`全自动配置,自动记住位置,并在点击时,返回位置以及选取值.
 - 支持快速,构建不同筛选样式,自由组合成一组filter的tab.
@@ -55,19 +53,22 @@
 - 用接口抽象出filter样式配置器loader,与功能代码解耦.
 - 支持自定义配置 筛选过程`ResultLoader<T>`
 - 可以自由扩展,其他类型的Filter类型.
+- 回调参数,可自定义 (update:17/7/26 18:05)
 
-##待完善:
+### 待完善:
 - 增加其他类型的筛选样式
-- 回调参数,需待调整
 - view的样式可配置为可自定义
 - 代码冗余还需优化.
 
 
-#TO USE
-===
-##简单方式
-###1.设定,筛选器类型. 将`PopTypeLoader`暴露,用于用户 筛选器类型.
-===
+## TO USE
+
+### 简单方式
+
+如果业务需求很简单,用lib自带的筛选即可.
+
+#### 1.设定,筛选器类型. 将`PopTypeLoader`暴露,用于用户 筛选器类型.
+
 **需要自己按照该模式进行扩展.创建 具体 popwindow 实体对象. 创建对象和 功能代码解耦和,细节在`PopTabView.addItem()`中.若有需要,需要自由扩展,配置.**
 
 
@@ -96,8 +97,7 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
 
 
-###2.使用方式 
-===
+#### 2.使用方式 
 
 ####2.1 Builder模式,完成筛选器的创建.
 ```java
@@ -113,6 +113,14 @@ public class PopTypeLoaderImp implements PopTypeLoader {
 
         popTabView.setOnPopTabSetListener(this)
                 .setPopEntityLoader(new PopEntityLoaderImp()).setResultLoader(new ResultLoaderImp()) //配置 {筛选类型}  方式
+                  
+             /***
+             * @param title 筛选标题
+             * @param data 筛选数据
+             * @param tag 筛选类别- 一级筛选,二级筛选,复杂筛选
+             * @param type 筛选方式-单选or多选
+             * @return
+             */
                 .addFilterItem(filterGroup1.getTab_group_name(), filterGroup1.getFilter_tab(), filterGroup1.getTab_group_type(), filterGroup1.getSingle_or_mutiply())
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
@@ -121,23 +129,10 @@ public class PopTypeLoaderImp implements PopTypeLoader {
     }
 
 ```
-####2.2 `for()循环`全自动配置模式,完成筛选器的创建.
 
-```java
-  /**
-             *
-             * @param title 筛选标题
-             * @param data 筛选数据
-             * @param tag 筛选类别- 一级筛选,二级筛选,复杂筛选
-             * @param type 筛选方式-单选or多选
-             * @return
-             */
-            popTabView.addFilterItem("筛选" + i, singleFilterList1.getFilter_tab(), singleFilterList1.getTab_group_type(), FilterConfig.FILTER_TYPE_SINGLE);
 
-```
+#### 3.配置筛选后的返回值样式`ResultLoader<T>`
 
-###3.配置筛选后的返回值样式`ResultLoader<T>`
-===
 
 ```java
 
@@ -173,8 +168,8 @@ public class ResultLoaderImp implements ResultLoader<String> {
 ```
 
 
-###4.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
-===
+#### 4.成功的回调,可配置为借口传参.此处回调,可以自主修改,扩展.
+
 ```java
  /**
      * @param index  操作的 filter的下标号 0.1.2.3
@@ -191,16 +186,21 @@ public class ResultLoaderImp implements ResultLoader<String> {
     }
 ```
 
-##进阶---自定义筛选参数使用
-===
+### 进阶---自定义筛选参数使用
 
-###1.建立自己的筛选bean
-===
-**如果数据字段和上述的有出入,或者接口不愿意配合修改成上述的字段,或者得到的筛选数据不满意,可以选择自定义筛选**
+如果筛选结果,需要其他参数,或者bean中的展示字段不是tab_name,或者得到的筛选数据不满意,可以选择自定义筛选.
 
 
-举个例子
+####1.建立自己的筛选bean
+
+
+
+**举个例子**
+
+
 **如果想用自己的字段作为展示字段,只需要选择继承`FilterTabBean`,然后重写方法**.设计之美,尽在其中.
+
+**首先看 顶层抽象Bean**
 
 ```
 /**
@@ -232,8 +232,7 @@ public abstract class BaseFilterTabBean {
 ```
 
 
-####自定义自己数据bean`MyFilterTabBean`
----
+ **自定义自己数据bean`MyFilterTabBean`**
 
 
 ```
@@ -303,8 +302,8 @@ public class MyFilterTabBean extends BaseFilterTabBean {
 ```
 
 
-###2.定义自己的筛选结果bean`MyFilterParamsBean `
-===
+#### 2.定义自己的筛选结果bean`MyFilterParamsBean `
+
 
 
 ```
@@ -325,8 +324,8 @@ public class MyFilterParamsBean implements Serializable {
 ```
 
 
-###3.定义自己的结果加载器`MyResultLoaderImp`
-===
+#### 3.定义自己的结果加载器`MyResultLoaderImp`
+
 
 ```
 public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
@@ -367,8 +366,8 @@ public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
 
 ```
 
-###4.在调用popstablview处实现 `OnPopTabSetListener<MyFilterParamsBean> `
-===
+#### 4.在调用view处实现 `OnPopTabSetListener<MyFilterParamsBean> `
+
 
 ```
  /**
@@ -385,8 +384,8 @@ public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
     }
 
 ```
-###5.完成上述之后,直接加载数据,调用
-===
+#### 5.完成上述之后,直接加载数据,调用
+
 
 ```
  /**
@@ -459,16 +458,16 @@ public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
 ```
 
 
-###6.结果
-===
+#### 6.结果
+
 
 ![popstab_gif_2_1.gif](http://upload-images.jianshu.io/upload_images/1848340-1a54f4f83454cb8a.gif?imageMogr2/auto-orient/strip)
 
 
 
 
-##样式调整--待优化
-===
+## 样式调整--待优化
+
 1.可在各级`Adapter.ViewHolder` 中自己定义.
 
 2.可在`xml`文件中自定义修改
@@ -477,7 +476,7 @@ public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
 
 
 
-##About Me
+## About Me
 ===
 [CSDN：http://blog.csdn.net/ccj659/article/](http://blog.csdn.net/ccj659/article/)
 
