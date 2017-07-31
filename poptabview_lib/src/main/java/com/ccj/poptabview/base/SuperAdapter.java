@@ -29,6 +29,7 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
 
     /**
      * 设置数据
+     *
      * @param data
      */
     public void setData(List<BaseFilterTabBean> data) {
@@ -55,6 +56,7 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
 
     /**
      * 点击时逻辑处理
+     *
      * @param pos
      */
     protected void onItemClickEvent(int pos) {
@@ -81,6 +83,7 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
 
     /**
      * 设置选中 集合
+     *
      * @param checkedIndex
      */
     public void setCheckedList(List checkedIndex) {
@@ -96,5 +99,26 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
         }*/
     }
 
+    /**
+     * 设置选中并且触发点击的 集合
+     *
+     * @param checkedIndex
+     */
+    public void setClickedList(List checkedIndex) {
+      /*  if (checkedIndex == null || checkedIndex.isEmpty()) {
+            checkedLists.clear();
+        } else {
+            this.checkedLists.addAll(checkedIndex);
+        }*/
+        if (checkedIndex == null || checkedIndex.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < checkedIndex.size(); i++) {
+            onItemClick((Integer) checkedIndex.get(i));
+
+        }
+        notifyDataSetChanged();
+
+    }
 
 }

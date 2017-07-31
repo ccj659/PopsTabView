@@ -221,7 +221,7 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilter
             if (entry.getValue() != null && entry.getValue().size() > 0) {
                 for (int j = 0; j < entry.getValue().size(); j++) {
                     int pos = entry.getValue().get(j);
-                    filterTabBeen.add(mData.get(firstPosition).getTabs().get(pos));
+                    filterTabBeen.add((BaseFilterTabBean) mData.get(firstPosition).getTabs().get(pos));
                 }
             }
         }

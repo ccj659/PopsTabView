@@ -87,28 +87,25 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
         filterGroup.setSingle_or_mutiply(singleOrMutiply);
 
         List<BaseFilterTabBean> singleFilterList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {//一级fitler
             MyFilterTabBean myFilterBean = new MyFilterTabBean();
             myFilterBean.setTab_name(groupName + "_" + i);
             myFilterBean.setTag_ids("tagid" + "_" + i );
             myFilterBean.setMall_ids("mallid" + "_" + i );
             myFilterBean.setCategory_ids("Categoryid" + "_" + i);
 
-            List<BaseFilterTabBean> childFilterList = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
+            List<MyFilterTabBean.MyChildFilterBean> childFilterList = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {//二级filter
                 MyFilterTabBean.MyChildFilterBean myChildFilterBean = new MyFilterTabBean.MyChildFilterBean();
                 myChildFilterBean.setTab_name(groupName + "_" + i + "__" + j);
                 myChildFilterBean.setTag_ids("tagid" + "_" + i + "__" + j);
                 myChildFilterBean.setMall_ids("mallid" + "_" + i + "__" + j);
                 myChildFilterBean.setCategory_ids("Categoryid" + "_" + i + "__" + j);
 
-                BaseFilterTabBean secondFilterBean =myChildFilterBean;
-
-                childFilterList.add(secondFilterBean);
+                childFilterList.add(myChildFilterBean);
             }
             //增加二级tab
-            List<BaseFilterTabBean> childFilterList1 = childFilterList;
-            myFilterBean.setTabs(childFilterList1);
+            myFilterBean.setTabs(childFilterList);
 
             //增加一级tab
             singleFilterList.add(myFilterBean);

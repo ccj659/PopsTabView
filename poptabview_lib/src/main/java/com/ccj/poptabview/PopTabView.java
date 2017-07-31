@@ -76,15 +76,14 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param filterIndex
      * @param checkedPosition
      */
-    public void setSelectedItem(int filterIndex, int checkedPosition ){
+    public void setClickedItem(int filterIndex, int checkedPosition ){
+        this.currentIndex=filterIndex;
         ArrayList<Integer> list=new ArrayList();
         list.add(checkedPosition);
-        mViewLists.get(filterIndex).setCheckedItems(list);
+        mViewLists.get(filterIndex).setClickedItems(list);
     }
 
-    public void setSelectedItems(int filterIndex, List<Integer> list){
-        mViewLists.get(filterIndex).setCheckedItems(list);
-    }
+
 
 
     /**
@@ -114,8 +113,8 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
 
         //对筛选项控件进行设置,并且缓存位置信息
         labButton.setText(title);
-        labView.setTag(++mTabPostion);
-        labView.setOnClickListener(new OnClickListener() {
+        labButton.setTag(++mTabPostion);
+        labButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //当点击时,设置当前选中状态

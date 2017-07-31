@@ -51,7 +51,7 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
                 .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply());
-        popTabView.setSelectedItem(2,0);
+        popTabView.setClickedItem(2,0);
     }
 
 
@@ -88,17 +88,17 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
 
 
         List<BaseFilterTabBean> singleFilterList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {//一级filter
             FilterTabBean singleFilterBean = new FilterTabBean();
             singleFilterBean.setTab_id("id" + "_" + i);
             singleFilterBean.setTab_name(groupName + "_" + i);
 
-            List<BaseFilterTabBean> childFilterList = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
+            List<FilterTabBean.ChildTabBean> childFilterList = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {//二级filter
                 FilterTabBean.ChildTabBean secondFilterBean = new FilterTabBean.ChildTabBean();
                 secondFilterBean.setTab_id("id" + "_" + i + "__" + j);
                 secondFilterBean.setTab_name(groupName + "_" + i + "__" + j);
-                childFilterList.add(secondFilterBean);//泛型 父类可以容纳子类类型
+                childFilterList.add(secondFilterBean);
             }
 
             singleFilterBean.setTabs(childFilterList);

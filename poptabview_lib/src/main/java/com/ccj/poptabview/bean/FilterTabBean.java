@@ -12,7 +12,7 @@ import java.util.List;
  * Created by chenchangjun on 17/6/20.
  */
 
-public class FilterTabBean extends BaseFilterTabBean implements Serializable {
+public class FilterTabBean extends BaseFilterTabBean<FilterTabBean.ChildTabBean> implements Serializable {
 
     /**
      * tab_name : 热门
@@ -23,7 +23,7 @@ public class FilterTabBean extends BaseFilterTabBean implements Serializable {
     //字段可以自定义
     protected String tab_id;
     //二级bean
-    protected List<BaseFilterTabBean> tabs;
+    protected List<ChildTabBean> tabs;
 
 
     public static class ChildTabBean extends BaseFilterTabBean {
@@ -57,12 +57,12 @@ public class FilterTabBean extends BaseFilterTabBean implements Serializable {
 
 
         @Override
-        public List<BaseFilterTabBean> getTabs() {
+        public List getTabs() {
             return null;
         }
 
         @Override
-        public void setTabs(List<BaseFilterTabBean> tabs) {
+        public void setTabs(List tabs) {
 
         }
     }
@@ -92,12 +92,12 @@ public class FilterTabBean extends BaseFilterTabBean implements Serializable {
     }
 
 
-    public List<BaseFilterTabBean> getTabs() {
+    public List<ChildTabBean> getTabs() {
         return tabs;
     }
 
 
-    public void setTabs(List<BaseFilterTabBean> tabs) {
+    public void setTabs(List<ChildTabBean> tabs) {
         this.tabs = tabs;
     }
 

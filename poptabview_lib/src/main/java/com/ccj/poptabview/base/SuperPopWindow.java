@@ -59,12 +59,15 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
     public abstract void initData();
 
 
-
-    public void setCheckedItems(List items){
+    /**
+     * 设置触发点击事件的项
+     * @param items
+     */
+    public void setClickedItems(List items){
         if (adapter==null){
             return;
         }
-        adapter.setCheckedList(items);
+        adapter.setClickedList(items);
     }
 
     /**
