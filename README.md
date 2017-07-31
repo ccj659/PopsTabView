@@ -206,9 +206,10 @@ public class ResultLoaderImp implements ResultLoader<String> {
 /**
  * 筛选bean的基类, 约束子类行为
  * Created by chenchangjun on 17/7/26.
+ * 泛型T 泛型T  代表了 子类的类型.解决了 gosn Failed to invoke public **** with no args]
  */
 
-public abstract class BaseFilterTabBean {
+public abstract class BaseFilterTabBean<T extends BaseFilterTabBean> {
 
 
     /**
@@ -223,12 +224,11 @@ public abstract class BaseFilterTabBean {
      *
      * @return
      */
-    public abstract List<BaseFilterTabBean> getTabs();
+    public abstract List<T> getTabs();
 
-    public abstract  void setTabs(List<BaseFilterTabBean> tabs);
+    public abstract  void setTabs(List<T> tabs);
 
 }
-
 ```
 
 
@@ -236,7 +236,7 @@ public abstract class BaseFilterTabBean {
 
 
 ```
-public class MyFilterTabBean extends BaseFilterTabBean {
+public class MyFilterTabBean extends BaseFilterTabBean<MyFilterTabBean.MyChildFilterBean> {
 
 //省略其他get set
     /*情况1---比如,你需要如下字段*/
@@ -258,12 +258,12 @@ public class MyFilterTabBean extends BaseFilterTabBean {
     }
 
     @Override
-    public List<BaseFilterTabBean> getTabs() {
+    public List<MyChildFilterBean> getTabs() {
         return tabs;
     }
 
     @Override
-    public void setTabs(List<BaseFilterTabBean> tabs) {
+    public void setTabs(List<MyChildFilterBean> tabs) {
         this.tabs=tabs;
     }
 
@@ -290,12 +290,12 @@ public class MyFilterTabBean extends BaseFilterTabBean {
         }
 
         @Override
-        public List<BaseFilterTabBean> getTabs() {
+        public List getTabs() {
             return null;
         }
 
         @Override
-        public void setTabs(List<BaseFilterTabBean> tabs) {
+        public void setTabs(List tabs) {
 
         }
 
