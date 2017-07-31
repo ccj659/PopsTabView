@@ -23,15 +23,15 @@ import java.util.List;
  */
 public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemClickListener {
 
-    private List<BaseFilterTabBean> mSelectedData ;
+    private List<BaseFilterTabBean> mSelectedData;
 
 
     /**
      * @param context
-     * @param data     要筛选的数据
-     * @param listener 监听
+     * @param data             要筛选的数据
+     * @param listener         监听
      * @param filterType
-     * @param singleOrMultiply      标记对象
+     * @param singleOrMultiply 标记对象
      */
     public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
         super(context, data, listener, filterType, singleOrMultiply);
@@ -43,9 +43,9 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
         RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-        SingleFilterAdapter mAdapter = new SingleFilterAdapter(mData, this, singleOrMultiply);
+        adapter = new SingleFilterAdapter(mData, this, singleOrMultiply);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(adapter);
         mRootView.setOnClickListener(this);
         setContentView(mRootView);
     }

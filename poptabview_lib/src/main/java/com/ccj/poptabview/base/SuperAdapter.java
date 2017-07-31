@@ -84,15 +84,16 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
      * @param checkedIndex
      */
     public void setCheckedList(List checkedIndex) {
-
-
         if (checkedIndex == null || checkedIndex.isEmpty()) {
             checkedLists.clear();
         } else {
             this.checkedLists.addAll(checkedIndex);
         }
-
         notifyDataSetChanged();
+        /*for (int i = 0; i <checkedIndex.size() ; i++) {
+            onItemClick((Integer) checkedIndex.get(i));
+
+        }*/
     }
 
 

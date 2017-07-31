@@ -29,7 +29,7 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
     protected OnMultipeFilterSetListener onFilterSetListener;
     protected int filterType; //一筛选类型,
     protected int singleOrMultiply;//单选多选
-
+    protected SuperAdapter adapter;
 
     public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int filterType, int singleOrMultiply) {
         this.mContext = context;
@@ -44,12 +44,11 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
 
 
 
-
     protected void initCommonContentView(){
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setTouchable(true);
-       // this.setFocusable(true);
+        this.setFocusable(true);
         this.setAnimationStyle(R.style.PopupWindowAnimation);
         this.setBackgroundDrawable(new ColorDrawable());
 
@@ -59,6 +58,14 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
 
     public abstract void initData();
 
+
+
+    public void setCheckedItems(List items){
+        if (adapter==null){
+            return;
+        }
+        adapter.setCheckedList(items);
+    }
 
     /**
      * 如果有需要,子类会重写该方法,

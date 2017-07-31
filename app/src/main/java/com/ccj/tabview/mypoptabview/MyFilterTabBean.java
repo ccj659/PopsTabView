@@ -8,7 +8,7 @@ import java.util.List;
  * Created by chenchangjun on 17/7/26.
  */
 
-public class MyFilterTabBean extends BaseFilterTabBean {
+public class MyFilterTabBean extends BaseFilterTabBean<MyFilterTabBean.MyChildFilterBean> {
 
 
     /*情况1---比如,你需要如下字段*/
@@ -17,7 +17,7 @@ public class MyFilterTabBean extends BaseFilterTabBean {
     protected String category_ids;
     protected String tag_ids;
     protected String mall_ids;
-    protected List<BaseFilterTabBean> tabs;
+    protected List<MyChildFilterBean> tabs;
 
     @Override
     public String getTab_name() {
@@ -30,12 +30,12 @@ public class MyFilterTabBean extends BaseFilterTabBean {
     }
 
     @Override
-    public List<BaseFilterTabBean> getTabs() {
+    public List<MyChildFilterBean> getTabs() {
         return tabs;
     }
 
     @Override
-    public void setTabs(List<BaseFilterTabBean> tabs) {
+    public void setTabs(List<MyChildFilterBean> tabs) {
         this.tabs=tabs;
     }
 
@@ -62,12 +62,12 @@ public class MyFilterTabBean extends BaseFilterTabBean {
         }
 
         @Override
-        public List<BaseFilterTabBean> getTabs() {
+        public List getTabs() {
             return null;
         }
 
         @Override
-        public void setTabs(List<BaseFilterTabBean> tabs) {
+        public void setTabs(List tabs) {
 
         }
 

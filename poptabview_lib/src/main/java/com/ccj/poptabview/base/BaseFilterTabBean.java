@@ -5,9 +5,10 @@ import java.util.List;
 /**
  * 筛选bean的基类, 约束子类行为
  * Created by chenchangjun on 17/7/26.
+ * 泛型T  代表了 子类的类型.解决了 gosn Failed to invoke public **** with no args]
  */
 
-public abstract class BaseFilterTabBean {
+public abstract class BaseFilterTabBean<T extends BaseFilterTabBean> {
 
 
     /**
@@ -22,8 +23,8 @@ public abstract class BaseFilterTabBean {
      *
      * @return
      */
-    public abstract List<BaseFilterTabBean> getTabs();
+    public abstract List<T> getTabs();
 
-    public abstract  void setTabs(List<BaseFilterTabBean> tabs);
+    public abstract  void setTabs(List<T> tabs);
 
 }

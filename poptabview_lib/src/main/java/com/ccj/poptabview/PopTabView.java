@@ -71,6 +71,21 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     }
 
 
+    /**
+     * 设置默认选中
+     * @param filterIndex
+     * @param checkedPosition
+     */
+    public void setSelectedItem(int filterIndex, int checkedPosition ){
+        ArrayList<Integer> list=new ArrayList();
+        list.add(checkedPosition);
+        mViewLists.get(filterIndex).setCheckedItems(list);
+    }
+
+    public void setSelectedItems(int filterIndex, List<Integer> list){
+        mViewLists.get(filterIndex).setCheckedItems(list);
+    }
+
 
     /**
      * @param title 筛选标题

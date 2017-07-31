@@ -45,7 +45,6 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilter
 
     private RecyclerView rv_primary, rv_secondary;
     private FirstFilterAdapter mFirstAdapter;
-    private SecondFilterAdapter mSecondAdapter;
 
 
     private int firstPosition = 0;
@@ -67,10 +66,10 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilter
         rv_primary.setAdapter(mFirstAdapter);
 
         mLayoutManagerSecondary = new GridLayoutManager(mContext, FilterConfig.LINKED_SPAN_COUNT);
-        mSecondAdapter = new SecondFilterAdapter(this, singleOrMultiply);
+        adapter = new SecondFilterAdapter(this, singleOrMultiply);
 
         rv_secondary.setLayoutManager(mLayoutManagerSecondary);
-        rv_secondary.setAdapter(mSecondAdapter);
+        rv_secondary.setAdapter(adapter);
 
         mRootView.setOnClickListener(this);
 
@@ -127,13 +126,13 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilter
         if (mData != null && mData.size() > firstPosition) {
             if (mData.get(position) != null && mData.get(position).getTabs().size() > 0) {//二级默认选中
 
-                mSecondAdapter.setData(position, mData.get(position).getTabs());
+                ((SecondFilterAdapter) adapter).setData(position, mData.get(position).getTabs());
 
                 List cheked=mSecondSelectedMap.get(position);
                 if (cheked != null&&!cheked.isEmpty()) {
-                    mSecondAdapter.setCheckedList(cheked);
+                    adapter.setCheckedList(cheked);
                 } else {
-                    mSecondAdapter.setCheckedList(null);
+                    adapter.setCheckedList(null);
                 }
             }
         }
