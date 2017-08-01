@@ -15,7 +15,7 @@ import com.ccj.poptabview.listener.OnSortItemClickListener;
 /**
  * 筛选器adapter
  *
- * @update ccj sj
+ * @author  ccj sj
  */
 public class SortFilterAdapter extends SuperAdapter {
 

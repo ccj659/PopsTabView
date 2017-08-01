@@ -14,7 +14,7 @@ import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import java.util.List;
 
 /**
- * 由筛选器类型 --->建立实体 的loader
+ * 由筛选器类型 建立实体 的loader
  * Created by chenchangjun on 17/6/28.
  */
 

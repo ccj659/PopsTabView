@@ -9,7 +9,7 @@ import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
 import java.util.List;
 
 /**
- *  * 由业务tag --->建立实体 的loader
+ *  * 由业务tag 建立实体 的loader
  * Created by chenchangjun on 17/6/28.
  */
 

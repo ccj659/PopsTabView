@@ -4,14 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
-
-import com.ccj.poptabview.PopTabView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private PopTabView popTabView;
-    private TextView tv_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

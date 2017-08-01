@@ -270,6 +270,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
         mTextViewLists.clear();
         mLableLists.clear();
         mViewLists.clear();
+        removeAllViews();
     }
 
 

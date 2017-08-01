@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 通用复合单选PopupWindow
  *
- * @created by ccj on 17/6/22
+ * @author  by ccj on 17/6/22
  */
 public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickListener {
 
