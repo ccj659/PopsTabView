@@ -1,10 +1,14 @@
 # PopsTabView
+![](https://img.shields.io/travis/rust-lang/rust/master.svg)
+ [![Download](https://api.bintray.com/packages/ccj659/maven/PopsTabView/images/download.svg) ](https://bintray.com/ccj659/maven/PopsTabView/_latestVersion)
+[![Author](https://img.shields.io/badge/autor-ccj659-brightgreen.svg)](https://github.com/ccj659)
+[![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 
 **PopsTabView是个filter容器,他可以自动,快速,构建不同筛选样式,自由组合成一组tab.**
 
 **目前版本`v1.3`**
-	    update:17/7/26 18:05
+	    update:17/8/1 14:05
 
 
 
@@ -30,6 +34,8 @@
 `addFilterItem()` | 增加筛选项  | 是|
 `setClickedItem()` | 设置默认选中的状态,并主动回调  | 否|
 `removeItem()` | 清空容器  | 否|
+
+
 
 
 [项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
@@ -74,6 +80,27 @@
 
 
 ## TO USE
+
+### 添加依赖
+
+**In Gradle**
+
+```
+compile 'me.ccj.PopsTabView:poptabview_lib:1.3.0'
+
+```
+
+**In Maven**
+
+```
+<dependency>
+  <groupId>me.ccj.PopsTabView</groupId>
+  <artifactId>poptabview_lib</artifactId>
+  <version>1.3.0</version>
+  <type>pom</type>
+</dependency>
+
+```
 
 ### 简单方式
 
@@ -497,11 +524,4 @@ public class MyResultLoaderImp implements ResultLoader<MyFilterParamsBean> {
 [github:  https//github.com/ccj659/](https//github.com/ccj659/)
 
 
-## Licence
- Copyright 2017 ccj659
 
- Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
