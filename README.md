@@ -20,6 +20,18 @@
 详情请参考代码,以及实例
 后续筛选会不断完善补充.
 
+**`PopTabView.java` API**
+
+方法名| 功能 |是否必须
+--------|------|--------------|
+`setOnPopTabSetListener()` | 外部回调的监听  | 是|
+`setPopEntityLoader()` | 筛选样式加载类,新增类型可在此扩展  | 否|
+`setResultLoader()` | 结果集加载器,可自定义进行配置  | 是|
+`addFilterItem()` | 增加筛选项  | 是|
+`setClickedItem()` | 设置默认选中的状态,并主动回调  | 否|
+`removeItem()` | 清空容器  | 否|
+
+
 [项目地址传送门 https://github.com/ccj659/PopsTabView](https://github.com/ccj659/PopsTabView)
 
 ## Show
