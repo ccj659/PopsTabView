@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
 //添加这两行
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.novoda.bintray-release'
-
+//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -11,10 +10,9 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.4"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -33,22 +31,15 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
-
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
 }
 
 
-/*
 
 //项目主页
 def siteUrl = 'https://github.com/ccj659/PopsTabView'
@@ -59,54 +50,27 @@ def libName = "PopsTabView"
 //发布到组织名称名字，必须填写
 group = "me.ccj.PopsTabView"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.1.0"
-//上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
-//生成源文件
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-//生成Javadoc文档
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-//文档打包成jar
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-//拷贝javadoc文件
-task copyDoc(type: Copy) {
-    from "${buildDir}/docs/"
-    into "docs"
-}
-//上传到JCenter所需要的源码文件
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-// 配置maven库，生成POM.xml文件
+version = "1.3.1"
+//上面配置后上传至JCenter后的编译路径是这样的： compile 'me.ccj.CircleView:library:1.0.0'// Maven Group ID for the artifact，一般填你唯一的包名
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
         pom {
             project {
                 packaging 'aar'
-                //项目描述，随意填
-                name 'Easy filter container,which can support multiple select and extend style.'
+                // Add your description here
+                name 'Easy filter container,which can support multiple select and extend style.' 	//项目描述
                 url siteUrl
+                // Set your license
                 licenses {
                     license {
-                        //开源协议
                         name 'The Apache Software License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
                 developers {
                     developer {
-                        //开发者的个人信息
-                        id 'ccj659'
+                        id 'ccj659'		//填写的一些基本信息
                         name 'ccj659'
                         email 'chaunceychens@gmail.com'
                     }
@@ -120,55 +84,35 @@ install {
         }
     }
 }
-//上传到JCenter
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    options.encoding = "utf-8"
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    //archives javadocJar
+    archives sourcesJar
+}
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
-    key = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        //这里的repo值必须要和你创建Maven仓库的时候的名字一样
         repo = "maven"
-        //发布到JCenter上的项目名字
-        name = libName
-        //项目描述
-        desc = 'Easy filter container,which can support multiple select and extend style.'
+        name = "PopsTabView"	//发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
     }
-}
-javadoc {
-    options{
-        //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version true
-        links "http://docs.oracle.com/javase/7/docs/api"
-    }
-}*/
-allprojects {
-    repositories {
-        jcenter()
-    }
-    //加上这些
-    tasks.withType(Javadoc) {
-        options{ encoding "UTF-8"
-            charSet 'UTF-8'
-            links "http://docs.oracle.com/javase/7/docs/api"
-        }
-    }
-}
-
-
-publish {
-    userOrg = 'ccj659'      //bintray注册的用户名
-    groupId = 'com.ccj'         //compile引用时的第1部分groupId
-    artifactId = 'popstabview'     //compile引用时的第2部分项目名
-    publishVersion = '1.1.0'    //compile引用时的第3部分版本号
-    desc = 'Easy filter container,which can support multiple select and extend style'
-    website = 'https://github.com/ccj659/PopsTabView'
 }

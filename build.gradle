@@ -12,8 +12,13 @@ buildscript {
         // in the individual module build.gradle files
         //classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         //classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.novoda:bintray-release:+'
+       // classpath 'com.novoda:bintray-release:+'
+        //classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:latest.integration'
 
+        //classpath "com.github.dcendents:android-maven-gradle-plugin:latest.integration"
+        classpath'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+
+        classpath'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1'
     }
 }
 
@@ -24,8 +29,22 @@ allprojects {
     }
 }
 
+tasks.withType(Javadoc) {
 
+    options{
 
+        encoding "UTF-8"
+
+        charSet 'UTF-8'
+
+        links "http://docs.oracle.com/javase/7/docs/api"
+
+    }
+
+}
+
+tasks.getByPath(":poptabview_lib:javadoc").enabled = false
+tasks.getByPath(":poptabview_lib:javadocJar").enabled = false
 
 //tasks.getByPath(":poptabview_lib:mavenAndroidJavadocs").enabled = false
 
