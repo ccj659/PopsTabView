@@ -67,7 +67,7 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
     @Override
     public void onPopTabSet(int index, String lable, MyFilterParamsBean params, String value) {
         Toast.makeText(this, "lable=" + index + "\n&value=" + value, Toast.LENGTH_SHORT).show();
-        tv_content.setText("&筛选项=" + index + "\n&筛选传参=" + params.getBeanList().toString() + "\n&筛选值=" + value);
+        tv_content.setText("&筛选项=" + index + "\n&筛选传参=" + (params==null||params.getBeanList()==null?null:params.getBeanList().toString()) + "\n&筛选值=" + value);
     }
 
 
