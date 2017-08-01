@@ -1,4 +1,6 @@
 # PopsTabView
+
+[![Download](https://img.shields.io/badge/DownloadApp-1.9M-ff69b4.svg) ](https://github.com/ccj659/PopsTabView/blob/master/app-debug.apk)
 ![](https://img.shields.io/travis/rust-lang/rust/master.svg)
  [![Download](https://api.bintray.com/packages/ccj659/maven/PopsTabView/images/download.svg) ](https://bintray.com/ccj659/maven/PopsTabView/_latestVersion)
 [![Author](https://img.shields.io/badge/autor-ccj659-brightgreen.svg)](https://github.com/ccj659)
@@ -7,7 +9,7 @@
 
 **PopsTabView是个filter容器,他可以自动,快速,构建不同筛选样式,自由组合成一组tab.**
 
-**目前版本`v1.3`**
+**目前版本`v1.3.1`**
 	    update:17/8/1 14:05
 
 
