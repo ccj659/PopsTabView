@@ -88,7 +88,7 @@
 **In Gradle**
 
 ```
-compile 'me.ccj.PopsTabView:poptabview_lib:1.3.0'
+compile 'me.ccj.PopsTabView:poptabview_lib:1.3.1'
 
 ```
 
@@ -98,7 +98,7 @@ compile 'me.ccj.PopsTabView:poptabview_lib:1.3.0'
 <dependency>
   <groupId>me.ccj.PopsTabView</groupId>
   <artifactId>poptabview_lib</artifactId>
-  <version>1.3.0</version>
+  <version>1.3.1</version>
   <type>pom</type>
 </dependency>
 
