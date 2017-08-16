@@ -75,7 +75,7 @@ public class RowsFilterAdapter extends SuperAdapter {
     @Override
     public void onItemClick(int pos) {
         onItemClickEvent(pos);
-        ((OnSortItemClickListener) mListener).onSortItemClick(pos, checkedLists);//此处的singleOrMultiply无用~
+        ((OnSortItemClickListener) mListener).onSortItemClick(pos, checkedLists);
     }
 
 

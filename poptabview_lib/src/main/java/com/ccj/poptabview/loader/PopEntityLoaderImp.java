@@ -43,9 +43,6 @@ public class PopEntityLoaderImp implements PopEntityLoader {
                 popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
 
-            case FilterConfig.JINRONG_FILTER_POSITION:
-                popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
-                break;
             default:
                 popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;

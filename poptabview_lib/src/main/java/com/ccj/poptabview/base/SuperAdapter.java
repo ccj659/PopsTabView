@@ -62,9 +62,11 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
     protected void onItemClickEvent(int pos) {
         Integer position = Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
         if (checkedLists.contains(position)) {
-            checkedLists.remove(position);
+            if(FilterConfig.FILTER_TYPE_CAN_CANCEL) { //当点击了已经选中的项目时, 是否取消选中
+                checkedLists.remove(position);
+            }
         } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) { //单选
-            checkedLists.clear();
+                checkedLists.clear();
             checkedLists.add(position);
         } else {
             checkedLists.add(position); //多选
