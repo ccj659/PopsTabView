@@ -19,6 +19,7 @@ public class FilterConfig {
     //rows里面的list里面的GradLayout列数
     public static final int ROWS_SPAN_COUNT = 3;
 
+    public static int ROWS_INITIAL_COUNT = 6;//RowsFilter初始状态显示6个项目
 
 
 

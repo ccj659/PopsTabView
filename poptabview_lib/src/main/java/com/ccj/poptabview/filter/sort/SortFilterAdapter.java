@@ -12,6 +12,8 @@ import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
 import com.ccj.poptabview.listener.OnSortItemClickListener;
 
+import static com.ccj.poptabview.FilterConfig.ROWS_INITIAL_COUNT;
+
 /**
  * 筛选器adapter
  *
@@ -19,7 +21,6 @@ import com.ccj.poptabview.listener.OnSortItemClickListener;
  */
 public class SortFilterAdapter extends SuperAdapter {
 
-    public static int INITIAL_COUNT = 6;//初始状态显示6个项目
     private boolean isExpand = false;//是否已展开
 
 
@@ -51,8 +52,8 @@ public class SortFilterAdapter extends SuperAdapter {
     public int getItemCount() {
         if (mData == null) {
             return 0;
-        } else if (mData.size() > 6 && !isExpand) {
-            return INITIAL_COUNT;
+        } else if (mData.size() > ROWS_INITIAL_COUNT && !isExpand) {
+            return ROWS_INITIAL_COUNT;
         }
         return mData.size();
     }
