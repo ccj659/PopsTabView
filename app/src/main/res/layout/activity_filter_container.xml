@@ -11,13 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/bg_view_shape"
+        android:elevation="4dip"  />
 
-        android:elevation="4dip" />
+
+     <!--
+        可自定义属性
+        app:tab_text_color_normal="@color/colorAccent"
+        app:tab_text_color_focus="@color/colorPrimary"
+        app:tab_background_normal="@color/cardview_dark_background"
+        app:tab_background_focus="@color/color48"
+        app:tab_textsize="6dp"
+        -->
+
+
 
     <TextView
-        android:layout_gravity="center"
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </FrameLayout>

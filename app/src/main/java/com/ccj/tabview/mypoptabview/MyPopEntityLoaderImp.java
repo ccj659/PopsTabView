@@ -1,4 +1,4 @@
-package com.ccj.poptabview.loader;
+package com.ccj.tabview.mypoptabview;
 
 
 import android.content.Context;
@@ -10,6 +10,8 @@ import com.ccj.poptabview.filter.rows.RowsFilterWindow;
 import com.ccj.poptabview.filter.single.SingleFilterWindow;
 import com.ccj.poptabview.filter.sort.SortPopupWindow;
 import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.loader.PopEntityLoader;
+import com.ccj.tabview.mypoptabview.myfilter.MyFilterPopWindow;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
  * Created by chenchangjun on 17/6/28.
  */
 
-public class PopEntityLoaderImp implements PopEntityLoader {
+public class MyPopEntityLoaderImp implements PopEntityLoader {
 
     /**
      * 由 getPopType 得到不同的类型的filter实体
@@ -42,6 +44,10 @@ public class PopEntityLoaderImp implements PopEntityLoader {
             case FilterConfig.TYPE_POPWINDOW_ROWS:
                 popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
+            case FilterConfig.TYPE_POPWINDOW_MY:
+                popupWindow = new MyFilterPopWindow(context, data, filterSetListener,filterType,singleOrMultiply);
+                break;
+
             default:
                 popupWindow = new SingleFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;

@@ -9,8 +9,9 @@ import android.view.View;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
+import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.List;
 public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemClickListener {
 
     private List<BaseFilterTabBean> mSelectedData;
-
+    private RecyclerView recyclerView;
 
     /**
      * @param context
@@ -33,25 +34,35 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
      * @param filterType
      * @param singleOrMultiply 标记对象
      */
-    public SingleFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+    public SingleFilterWindow(Context context, List data, OnFilterSetListener listener, int filterType, int singleOrMultiply) {
         super(context, data, listener, filterType, singleOrMultiply);
-
     }
 
+
     @Override
-    public void initView() {
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_single, null);
-        RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-        adapter = new SingleFilterAdapter(mData, this, singleOrMultiply);
+    public View initView() {
+        View mRootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_filter_single, null);
+        recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
+        return mRootView;
+    }
+
+
+    @Override
+    public SuperAdapter setAdapter() {
+        SingleFilterAdapter adapter = new SingleFilterAdapter(getData(), this, getSingleOrMultiply());
+        return adapter;
+    }
+
+
+    @Override
+    public void initAdapter(SuperAdapter adapter) {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
-        mRootView.setOnClickListener(this);
-        setContentView(mRootView);
     }
 
     @Override
-    public void initData() {
+    public void initSelectData() {
         mSelectedData = new ArrayList<>();
     }
 
@@ -59,7 +70,7 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
     public void onClick(View v) {
         switch (v.getId()) {
             default:
-                onFilterSetListener.OnMultipeFilterCanceled();
+                getOnFilterSetListener().OnFilterCanceled();
                 this.dismiss();
                 break;
         }
@@ -68,16 +79,21 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
 
     @Override
     public void onSingleItemClickListener(List<Integer> integerList) {
-        if (mSelectedData != null) {
-            mSelectedData.clear();
-            if (integerList.isEmpty()) {
-                onFilterSetListener.onMultipeFilterSet(null);
-            } else {
-                for (int i = 0; i < integerList.size(); i++) {
-                    mSelectedData.add(mData.get(integerList.get(i)));
-                }
-                onFilterSetListener.onMultipeFilterSet(mSelectedData);
+
+        if (mSelectedData == null) {
+            dismiss();
+            return;
+        }
+
+        mSelectedData.clear();
+
+        if (integerList.isEmpty()) {
+            getOnFilterSetListener().onSingleFilterSet(null);
+        } else {
+            for (int i = 0; i < integerList.size(); i++) {
+                mSelectedData.add(getData().get(integerList.get(i)));
             }
+            getOnFilterSetListener().onSingleFilterSet(mSelectedData);
         }
         dismiss();
     }

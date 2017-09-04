@@ -10,9 +10,9 @@ import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
-import com.ccj.poptabview.loader.PopEntityLoaderImp;
 import com.ccj.tabview.mypoptabview.MyFilterParamsBean;
 import com.ccj.tabview.mypoptabview.MyFilterTabBean;
+import com.ccj.tabview.mypoptabview.MyPopEntityLoaderImp;
 import com.ccj.tabview.mypoptabview.MyResultLoaderImp;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
 
 
         popTabView.setOnPopTabSetListener(this)
-                .setPopEntityLoader(new PopEntityLoaderImp()).setResultLoader(new MyResultLoaderImp()) //配置 {筛选类型}  方式
+                .setPopEntityLoader(new MyPopEntityLoaderImp()).setResultLoader(new MyResultLoaderImp()) //配置 {筛选类型}  方式
                 .addFilterItem(filterGroup1.getTab_group_name(), filterGroup1.getFilter_tab(), filterGroup1.getTab_group_type(), filterGroup1.getSingle_or_mutiply())
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())

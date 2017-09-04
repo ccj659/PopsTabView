@@ -37,60 +37,50 @@ public class SecondFilterAdapter extends SuperAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (mData != null && position < mData.size()) {
+        if (getData() != null && position < getData().size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
-            viewHolder.tv_filter.setText(mData.get(position).getTab_name());
-            if (checkedLists.contains(position)) {
+            viewHolder.tv_filter.setText(getData().get(position).getTab_name());
+            if (getCheckedLists().contains(position)) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
             }
-
         }
     }
 
     @Override
     public int getItemCount() {
-        if (mData == null) {
+        if (getData() == null) {
             return 0;
         }
-        return mData.size();
+        return getData().size();
+    }
+
+    @Override
+    public void onFilterItemClick(int position) {
+        ((OnSecondItemClickListener) getListener()).onSecondItemClick(firstPosition, getData().get(position), (ArrayList<Integer>) getCheckedLists());
     }
 
     public void setData(int firstPosition, List<BaseFilterTabBean> data) {
 
         this.firstPosition = firstPosition;
-        mData = new ArrayList<>();
+        setData(new ArrayList<BaseFilterTabBean>());
         if (data != null) {
-            mData.addAll(data);
+            getData().addAll(data);
         }
         notifyDataSetChanged();
     }
 
-    @Override
-    public void onItemClick(int pos) {
-        onItemClickEvent(pos);
-        ((OnSecondItemClickListener) mListener).onSecondItemClick(firstPosition, mData.get(pos), (ArrayList<Integer>) checkedLists);
-    }
 
-    public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class FilterViewHolder extends SuperFilterViewHolder {
 
         CheckedTextView tv_filter;
-        OnHolderClickedListener mListener;
 
         public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
-            super(itemView);
+            super(itemView,listener);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
-            tv_filter.setOnClickListener(this);
-            mListener = listener;
         }
 
-        @Override
-        public void onClick(View v) {
-            if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition());
-            }
-        }
     }
 
 

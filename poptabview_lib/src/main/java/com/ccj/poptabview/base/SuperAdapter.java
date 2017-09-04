@@ -1,6 +1,7 @@
 package com.ccj.poptabview.base;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
@@ -15,12 +16,16 @@ import java.util.List;
 
 public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHolderClickedListener {
 
-    protected SuperListener mListener;//adapter和window之间的监听
-    protected List<BaseFilterTabBean> mData; //筛选数据
-    protected List<Integer> checkedLists = new ArrayList();//选中的项的id
-    protected int singleOrMultiply;//是否多选
+    private SuperListener mListener;//adapter和window之间的监听
+    private List<BaseFilterTabBean> mData; //筛选数据
+    private List<Integer> checkedLists = new ArrayList();//选中的项的id
+    private int singleOrMultiply;//是否多选
 
-
+    /**
+     * @param beanList       数据
+     * @param listener       监听
+     * @param single2mutiple 是否是多选
+     */
     public SuperAdapter(List<BaseFilterTabBean> beanList, SuperListener listener, int single2mutiple) {
         this.mData = beanList;
         mListener = listener;
@@ -36,6 +41,7 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
         mData = data;
         notifyDataSetChanged();
     }
+
 
     /**
      * 清除数据和选中数据
@@ -62,11 +68,11 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
     protected void onItemClickEvent(int pos) {
         Integer position = Integer.valueOf(pos);//这里的position是value,不是index,又被坑了一波
         if (checkedLists.contains(position)) {
-            if(FilterConfig.FILTER_TYPE_CAN_CANCEL) { //当点击了已经选中的项目时, 是否取消选中
+            if (FilterConfig.FILTER_TYPE_CAN_CANCEL) { //当点击了已经选中的项目时, 是否取消选中
                 checkedLists.remove(position);
             }
         } else if (singleOrMultiply == FilterConfig.FILTER_TYPE_SINGLE) { //单选
-                checkedLists.clear();
+            checkedLists.clear();
             checkedLists.add(position);
         } else {
             checkedLists.add(position); //多选
@@ -115,4 +121,65 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
 
     }
 
+    /**
+     * 子类处理点击事件
+     */
+    public abstract void onFilterItemClick(int position);
+
+
+    @Override
+    public void onItemClick(int position) {
+        onItemClickEvent(position);
+        onFilterItemClick(position);
+    }
+
+
+    public static class SuperFilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private View itemView;
+        private OnHolderClickedListener mListener;
+
+        public SuperFilterViewHolder(View itemView, OnHolderClickedListener listener) {
+            super(itemView);
+            this.itemView = itemView;
+            this.itemView.setOnClickListener(this);
+            mListener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                mListener.onItemClick(getAdapterPosition());
+            }
+        }
+    }
+
+
+    public SuperListener getListener() {
+        return mListener;
+    }
+
+    public void setListener(SuperListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public List<BaseFilterTabBean> getData() {
+        return mData;
+    }
+
+
+    public List<Integer> getCheckedLists() {
+        return checkedLists;
+    }
+
+    public void setCheckedLists(List<Integer> checkedLists) {
+        this.checkedLists = checkedLists;
+    }
+
+    public int getSingleOrMultiply() {
+        return singleOrMultiply;
+    }
+
+    public void setSingleOrMultiply(int singleOrMultiply) {
+        this.singleOrMultiply = singleOrMultiply;
+    }
 }
