@@ -10,10 +10,10 @@ import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
-import com.ccj.tabview.mypoptabview.MyFilterParamsBean;
-import com.ccj.tabview.mypoptabview.MyFilterTabBean;
-import com.ccj.tabview.mypoptabview.MyPopEntityLoaderImp;
-import com.ccj.tabview.mypoptabview.MyResultLoaderImp;
+import com.ccj.tabview.mypoptabview.myloader.MyFilterParamsBean;
+import com.ccj.tabview.mypoptabview.myloader.MyFilterTabBean;
+import com.ccj.tabview.mypoptabview.myloader.MyPopEntityLoaderImp;
+import com.ccj.tabview.mypoptabview.myloader.MyResultLoaderImp;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ccj.tabview.mypoptabview;
+package com.ccj.tabview.mypoptabview.myloader;
 
 import java.io.Serializable;
 import java.util.List;
