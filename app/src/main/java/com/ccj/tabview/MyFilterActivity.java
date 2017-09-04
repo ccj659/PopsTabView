@@ -44,6 +44,7 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
         FilterGroup filterGroup2 = getMyData("筛选2", FilterConfig.TYPE_POPWINDOW_LINKED,FilterConfig.FILTER_TYPE_MUTIFY);
         FilterGroup filterGroup3 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_SINGLE);
         FilterGroup filterGroup4 = getMyData("筛选4", FilterConfig.TYPE_POPWINDOW_SORT,FilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup5 = getMyData("筛选5", FilterConfig.TYPE_POPWINDOW_MY,FilterConfig.FILTER_TYPE_MUTIFY);//自定义
 
 
         popTabView.setOnPopTabSetListener(this)
@@ -51,7 +52,8 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
                 .addFilterItem(filterGroup1.getTab_group_name(), filterGroup1.getFilter_tab(), filterGroup1.getTab_group_type(), filterGroup1.getSingle_or_mutiply())
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
-                .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply());
+                .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply())
+                .addFilterItem(filterGroup5.getTab_group_name(), filterGroup5.getFilter_tab(), filterGroup5.getTab_group_type(), filterGroup5.getSingle_or_mutiply());
 
     }
 
@@ -66,8 +68,8 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
     //方式2
     @Override
     public void onPopTabSet(int index, String lable, MyFilterParamsBean params, String value) {
-        Toast.makeText(this, "lable=" + index + "\n&value=" + value, Toast.LENGTH_SHORT).show();
-        tv_content.setText("&筛选项=" + index + "\n&筛选传参=" + (params==null||params.getBeanList()==null?null:params.getBeanList().toString()) + "\n&筛选值=" + value);
+        Toast.makeText(this, "lable=" + (index+1) + "\n&value=" + value, Toast.LENGTH_SHORT).show();
+        tv_content.setText("&筛选项=" + (index+1) + "\n&筛选传参=" + (params==null||params.getBeanList()==null?null:params.getBeanList().toString()) + "\n&筛选值=" + value);
     }
 
 

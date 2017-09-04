@@ -27,9 +27,13 @@ public class MyFilterPopWindow extends SingleFilterWindow {
         super(context,data,listener,filterType,singleOrMutiply);
     }
 
+    /**
+     * 重写setAdapter 方法
+     * @return
+     */
     @Override
-    public SuperAdapter getAdapter() {
+    public SuperAdapter setAdapter() {
         return new MyFilterAdapter(getData(), this, getSingleOrMultiply());
-    }
 
+    }
 }

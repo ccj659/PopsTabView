@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ccj.poptabview.R;
+import com.ccj.tabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.base.SuperListener;
@@ -31,7 +31,6 @@ public class MyFilterAdapter extends SuperAdapter {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_filter, parent, false);//可以根据自己的布局,进行修改
         return new MyFilterViewHolder(v, this);
     }
-
 
 
     public MyFilterAdapter(List<BaseFilterTabBean> beanList, SuperListener listener, int single2mutiple) {

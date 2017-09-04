@@ -56,6 +56,7 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         initSelectData();
     }
 
+    public abstract SuperAdapter setAdapter() ;
 
 
     protected void initCommonContentView(){
@@ -155,7 +156,6 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         return adapter;
     }
 
-    public abstract SuperAdapter setAdapter() ;
 
     public View getmParentView() {
         return mParentView;
