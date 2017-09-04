@@ -25,7 +25,12 @@ import java.util.List;
 
 public class MyFilterAdapter extends SuperAdapter {
 
-
+    /**
+     * view和holder构建入口
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_my_filter, parent, false);//可以根据自己的布局,进行修改
@@ -37,14 +42,21 @@ public class MyFilterAdapter extends SuperAdapter {
         super(beanList, listener, single2mutiple);
     }
 
-
+    /**
+     * 这里~由于需求可能变更,这里开放监听, listener 需要进行强转,转成自己的listener, 当然也可以用listener包下的监听
+     * @param position
+     */
     @Override
     public void onFilterItemClick(int position) {
         ((OnSingleItemClickListener) getListener()).onSingleItemClickListener(getCheckedLists());//强转
     }
 
 
-
+    /**
+     * 样式选择入口
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyFilterViewHolder viewHolder = (MyFilterViewHolder) holder;
@@ -57,7 +69,9 @@ public class MyFilterAdapter extends SuperAdapter {
         }
     }
 
-
+    /**
+     * 自己的holder样式
+     */
     //根据自己的样式修改
     public static class MyFilterViewHolder extends SuperFilterViewHolder {
 
