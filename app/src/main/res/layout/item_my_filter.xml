@@ -7,7 +7,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_common_second_filter_bg"
+        style="@style/filter_tag"
         android:text="TextView" />
 
 </LinearLayout>
