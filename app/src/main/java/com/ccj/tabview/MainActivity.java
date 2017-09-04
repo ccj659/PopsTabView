@@ -23,9 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void myFilter(View view){
-        startActivity(new Intent(this,MyFilterActivity.class));
+    public void myFilterResult(View view){
+        startActivity(new Intent(this,MyFilterResultActivity.class));
 
     }
 
+
+
+    public void myFilterStyle(View view){
+        startActivity(new Intent(this,MyFilterStyleActivity.class));
+
+    }
 }

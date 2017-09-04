@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
+import com.ccj.tabview.mypoptabview.myloader.MyFilterConfig;
 import com.ccj.tabview.mypoptabview.myloader.MyFilterParamsBean;
 import com.ccj.tabview.mypoptabview.myloader.MyFilterTabBean;
 import com.ccj.tabview.mypoptabview.myloader.MyPopEntityLoaderImp;
@@ -19,10 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 自定义样式
  * Created by chenchangjun on 17/7/26.
  */
 
-public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetListener<MyFilterParamsBean> {
+public class MyFilterStyleActivity extends AppCompatActivity implements OnPopTabSetListener<MyFilterParamsBean> {
 
 
     private PopTabView popTabView;
@@ -31,7 +32,7 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter_container);
+        setContentView(R.layout.activity_filter_style);
         tv_content = (TextView) findViewById(R.id.tv_content);
         popTabView = (PopTabView) findViewById(R.id.expandpop);
         addMyMethod();
@@ -40,11 +41,11 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
 
     private void addMyMethod() {
 
-        FilterGroup filterGroup1 = getMyData("筛选1", FilterConfig.TYPE_POPWINDOW_ROWS,FilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup2 = getMyData("筛选2", FilterConfig.TYPE_POPWINDOW_LINKED,FilterConfig.FILTER_TYPE_MUTIFY);
-        FilterGroup filterGroup3 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup4 = getMyData("筛选4", FilterConfig.TYPE_POPWINDOW_SORT,FilterConfig.FILTER_TYPE_MUTIFY);
-        FilterGroup filterGroup5 = getMyData("筛选5", FilterConfig.TYPE_POPWINDOW_MY,FilterConfig.FILTER_TYPE_MUTIFY);//自定义
+        FilterGroup filterGroup1 = getMyData("筛选1", MyFilterConfig.TYPE_POPWINDOW_ROWS,MyFilterConfig.FILTER_TYPE_SINGLE);
+        FilterGroup filterGroup2 = getMyData("筛选2", MyFilterConfig.TYPE_POPWINDOW_LINKED,MyFilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup3 = getMyData("筛选3", MyFilterConfig.TYPE_POPWINDOW_SINGLE,MyFilterConfig.FILTER_TYPE_SINGLE);
+        FilterGroup filterGroup4 = getMyData("筛选4", MyFilterConfig.TYPE_POPWINDOW_SORT,MyFilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup5 = getMyData("自定义", MyFilterConfig.TYPE_POPWINDOW_MY,MyFilterConfig.FILTER_TYPE_MUTIFY);//自定义
 
 
         popTabView.setOnPopTabSetListener(this)

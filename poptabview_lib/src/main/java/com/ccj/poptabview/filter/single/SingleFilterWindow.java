@@ -64,6 +64,7 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
     @Override
     public void initSelectData() {
         mSelectedData = new ArrayList<>();
+
     }
 
     @Override

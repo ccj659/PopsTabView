@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/me.ccj.PopsTabView/poptabview_lib/1.3.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8d6ed5dc7e6ddfdc5b19eea269ea5e8afbc5c75d">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/me.ccj.PopsTabView-poptabview_lib-1.3.2_095aa5957d5290ffe106e7720d00456bc02b634d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -99,15 +108,6 @@
         revision="25.0.3"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.3.0_cda6dd41f79e5efe0a10b077dfbbb650bdc34d81.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/PopsTabView/poptabview_lib/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="bdc37eca734ae8e8212da94290b45e5c36978624">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/PopsTabView-poptabview_lib-unspecified_78e5e975a5d02e274191bf201b7a3a3e3d8ec0b4.jar" />
     </item>
     <item
         is-multidex="false"

@@ -27,8 +27,6 @@ public class FilterConfig {
     public final static int TYPE_POPWINDOW_LINKED = 2;//二级pop
     public final static int TYPE_POPWINDOW_ROWS = 3;//三列
 
-    public final static int TYPE_POPWINDOW_MY = 4; //自定义的类型
-
 
 }
 

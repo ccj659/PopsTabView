@@ -30,17 +30,6 @@ import java.util.List;
  */
 public class PopTabView extends LinearLayout implements OnFilterSetListener, OnDismissListener {
 
-
-/*           <attr name="tab_textsize" format="integer"/>
-        <attr name="tab_text_color_normal" format="color"/>
-        <attr name="tab_text_color_focus" format="color"/>
-
-        <attr name="tab_background_normal" format="color|reference"/>
-        <attr name="tab_background_focus" format="color|reference"/>
-
-        <attr name="tab_pop_anim" format="reference"/>
-        <attr name="tab_layout_id" format="reference" />*/
-
     //自定义属性,待扩展
     private double tab_textsize=-1;
     private int tab_text_color_normal=-1;
@@ -52,7 +41,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     private int tab_pop_anim=R.style.PopupWindowAnimation;
 
 
-
+    private Context mContext;
 
 
     private ArrayList<SuperPopWindow> mViewLists = new ArrayList<>();//popwindow缓存集合
@@ -68,7 +57,6 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
     private int mTabPostion = -1; //记录TAB页号,
     private int currentIndex;//当前点击的下标
-    private Context mContext;
 
 
     private void init(Context context, AttributeSet attrs) {
@@ -80,7 +68,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
             tab_pop_anim = a.getResourceId(R.styleable.PopsTabView_tab_pop_anim, R.style.PopupWindowAnimation);
 
             tab_text_color_normal = a.getColor(R.styleable.PopsTabView_tab_text_color_normal, -1);
-            tab_text_color_normal = a.getColor(R.styleable.PopsTabView_tab_text_color_normal, -1);
+            tab_text_color_focus = a.getColor(R.styleable.PopsTabView_tab_text_color_focus, -1);
 
             tab_textsize = a.getDimension(R.styleable.PopsTabView_tab_textsize, -1);
         } catch (Exception e) {
@@ -144,8 +132,8 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
         //对筛选项控件进行设置,并且缓存位置信息
         labButton.setText(title);
-        labButton.setTag(++mTabPostion);
-        labButton.setOnClickListener(new OnClickListener() {
+        labView.setTag(++mTabPostion);
+        labView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //当点击时,设置当前选中状态

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ccj.poptabview.PopTabView
+        android:id="@+id/expandpop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_view_shape"
+        app:tab_text_color_normal="@color/colorAccent"
+        app:tab_text_color_focus="@color/colorPrimary"
+        app:tab_background_normal="@color/cardview_dark_background"
+        app:tab_background_focus="@color/color48"
+        app:tab_textsize="6dp"
+        android:elevation="4dip"  />
+
+
+     <!--
+        可自定义属性
+        app:tab_text_color_normal="@color/colorAccent"
+        app:tab_text_color_focus="@color/colorPrimary"
+        app:tab_background_normal="@color/cardview_dark_background"
+        app:tab_background_focus="@color/color48"
+        app:tab_textsize="6dp"
+        app:tab_pop_anim="@anim/pop_anim"
+        -->
+
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>

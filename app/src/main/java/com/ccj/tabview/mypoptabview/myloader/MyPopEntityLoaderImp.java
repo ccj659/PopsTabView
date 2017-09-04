@@ -4,7 +4,6 @@ package com.ccj.tabview.mypoptabview.myloader;
 import android.content.Context;
 import android.widget.PopupWindow;
 
-import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.filter.link.LinkFilterPopupWindow;
 import com.ccj.poptabview.filter.rows.RowsFilterWindow;
 import com.ccj.poptabview.filter.single.SingleFilterWindow;
@@ -35,16 +34,16 @@ public class MyPopEntityLoaderImp implements PopEntityLoader {
     public PopupWindow getPopEntity(Context context, List data, OnFilterSetListener filterSetListener, int filterType, int singleOrMultiply) {
         PopupWindow popupWindow = null;
         switch (filterType) {
-            case FilterConfig.TYPE_POPWINDOW_LINKED:
+            case MyFilterConfig.TYPE_POPWINDOW_LINKED:
                 popupWindow = new LinkFilterPopupWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
-            case FilterConfig.TYPE_POPWINDOW_SORT:
+            case MyFilterConfig.TYPE_POPWINDOW_SORT:
                 popupWindow = new SortPopupWindow(context, data, filterSetListener, filterType,singleOrMultiply);
                 break;
-            case FilterConfig.TYPE_POPWINDOW_ROWS:
+            case MyFilterConfig.TYPE_POPWINDOW_ROWS:
                 popupWindow = new RowsFilterWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
-            case FilterConfig.TYPE_POPWINDOW_MY:
+            case MyFilterConfig.TYPE_POPWINDOW_MY:
                 popupWindow = new MyFilterPopWindow(context, data, filterSetListener,filterType,singleOrMultiply);
                 break;
 

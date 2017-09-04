@@ -10,47 +10,17 @@
 
     <declare-styleable name="PopsTabView">
 
-        <attr name="tab_textsize" format="dimension"/>
-        <attr name="tab_text_color_normal" format="color"/>
-        <attr name="tab_text_color_focus" format="color"/>
+        <attr name="tab_textsize" format="dimension"/> <!--tab字体大小-->
+        <attr name="tab_text_color_normal" format="color"/> <!--tab字体正常颜色-->
+        <attr name="tab_text_color_focus" format="color"/><!--tab字体选中颜色-->
 
-        <attr name="tab_background_normal" format="color|reference"/>
-        <attr name="tab_background_focus" format="color|reference"/>
+        <attr name="tab_background_normal" format="color|reference"/><!--tab正常背景-->
+        <attr name="tab_background_focus" format="color|reference"/><!--tab选中背景-->
 
-        <attr name="tab_pop_anim" format="reference"/>
+        <attr name="tab_pop_anim" format="reference"/><!--popwindow弹出动画-->
 
 
     </declare-styleable>
 
-
-
-
-    <declare-styleable name="Banner">
-        <attr name="delay_time" format="integer" />
-        <attr name="scroll_time" format="integer" />
-        <attr name="is_auto_play" format="boolean" />
-        <attr name="title_background" format="color|reference" />
-        <attr name="title_textcolor" format="color" />
-        <attr name="title_textsize" format="dimension" />
-        <attr name="title_height" format="dimension" />
-        <attr name="indicator_width" format="dimension" />
-        <attr name="indicator_height" format="dimension" />
-        <attr name="indicator_margin" format="dimension" />
-        <attr name="indicator_drawable_selected" format="reference" />
-        <attr name="indicator_drawable_unselected" format="reference" />
-        <attr name="layout_id" format="reference" />
-        <attr name="image_scale_type" format="enum">
-            <enum name="center" value="0" />
-            <enum name="center_crop" value="1" />
-            <enum name="center_inside" value="2" />
-            <enum name="fit_center" value="3" />
-            <enum name="fit_end" value="4" />
-            <enum name="fit_start" value="5" />
-            <enum name="fit_xy" value="6" />
-            <enum name="matrix" value="7" />
-        </attr>
-        <!--<attr name="indicator_animator" format="reference" />-->
-        <!--<attr name="indicator_animator_reverse" format="reference" />-->
-    </declare-styleable>
 
 </resources>

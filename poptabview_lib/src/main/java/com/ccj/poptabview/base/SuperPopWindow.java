@@ -48,15 +48,15 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         this.onFilterSetListener = onFilterSetListener;
         this.filterType = filterType;
         this.singleOrMultiply = singleOrMultiply;
-        setRootView(initView());
+        mRootView=initView();
         adapter=setAdapter();
         initAdapter(adapter);
         setContentView(mRootView);
         initCommonContentView();
         initSelectData();
+
     }
 
-    public abstract SuperAdapter setAdapter() ;
 
 
     protected void initCommonContentView(){
@@ -66,8 +66,20 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         this.setFocusable(true);
        // this.setAnimationStyle(R.style.PopupWindowAnimation);
         this.setBackgroundDrawable(new ColorDrawable());
+        mRootView.setOnClickListener(this);
+
+
 
     }
+
+
+
+
+    /**
+     * 得到子类的adapter
+     * @return
+     */
+    public abstract SuperAdapter setAdapter() ;
 
     /**
      * 初始化adapter处理
