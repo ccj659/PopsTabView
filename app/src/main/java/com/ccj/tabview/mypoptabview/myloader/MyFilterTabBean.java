@@ -1,4 +1,4 @@
-package com.ccj.tabview.mypoptabview;
+package com.ccj.tabview.mypoptabview.myloader;
 
 import com.ccj.poptabview.base.BaseFilterTabBean;
 

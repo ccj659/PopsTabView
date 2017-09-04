@@ -13,9 +13,10 @@ import android.widget.ImageView;
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
+import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
-import com.ccj.poptabview.listener.OnSortItemClickListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
+import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,73 +26,71 @@ import java.util.List;
  *
  * @author ccj on 17/6/23.
  */
-public class RowsFilterWindow extends SuperPopWindow implements OnSortItemClickListener {
-
-
+public class RowsFilterWindow extends SuperPopWindow implements OnSingleItemClickListener {
 
 
     private ImageView iv_expand_border;
     private RecyclerView recyclerView;
-    private RowsFilterAdapter mAdapter;
     private GridLayoutManager mLayoutManager;
 
     private List<BaseFilterTabBean> mSelectedData;
 
 
     private boolean isMallInlandExpand;
+    private RowsFilterAdapter mAdapter;
 
     /**
      * @param context
-     * @param data     要筛选的数据
-     * @param listener 监听
+     * @param data            要筛选的数据
+     * @param listener        监听
      * @param filterType
-     * @param singleOrMutiply      标记对象
+     * @param singleOrMutiply 标记对象
      */
-    public RowsFilterWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMutiply) {
-        super(context,data,listener,filterType,singleOrMutiply);
+    public RowsFilterWindow(Context context, List data, OnFilterSetListener listener, int filterType, int singleOrMutiply) {
+        super(context, data, listener, filterType, singleOrMutiply);
     }
 
 
     @Override
-    public void initData() {
+    public void initSelectData() {
         mSelectedData = new ArrayList<>();
 
-        if (mData==null){
+        if (getData() == null) {
             iv_expand_border.setVisibility(View.GONE);
             return;
         }
-        if (mData.size() > 6) {
+        if (getData().size() > 6) {
             iv_expand_border.setVisibility(View.VISIBLE);
         } else {
             iv_expand_border.setVisibility(View.GONE);
         }
     }
 
+
     @Override
-    public void initView() {
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.popup_filter_rows, null);
+    public View initView() {
+        View mRootView = LayoutInflater.from(getContext()).inflate(R.layout.popup_filter_rows, null);
         recyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview);
-        iv_expand_border= (ImageView) mRootView.findViewById(R.id.iv_expand_border);
-        mLayoutManager = new GridLayoutManager(mContext, FilterConfig.ROWS_SPAN_COUNT);
-        mAdapter = new RowsFilterAdapter( this, singleOrMultiply);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.setData(mData);
-        mRootView.setOnClickListener(this);
+        iv_expand_border = (ImageView) mRootView.findViewById(R.id.iv_expand_border);
         iv_expand_border.setOnClickListener(this);
-        setContentView(mRootView);
-
-
-
-
+        return mRootView;
 
     }
-
-/*
-    public void show(View anchor, int paddingTop) {
-        showAsDropDown(anchor);
+    @Override
+    public SuperAdapter setAdapter() {
+        mAdapter = new RowsFilterAdapter(this, getSingleOrMultiply());
+        return mAdapter;
     }
-*/
+
+
+    @Override
+    public void initAdapter(SuperAdapter adapter) {
+
+        mLayoutManager = new GridLayoutManager(getContext(), FilterConfig.ROWS_SPAN_COUNT);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.setData(getData());
+    }
 
     @Override
     public void onClick(View v) {
@@ -99,28 +98,10 @@ public class RowsFilterWindow extends SuperPopWindow implements OnSortItemClickL
         if (i == R.id.iv_expand_border) {
             onClickEvent();
         } else {
-            onFilterSetListener.OnMultipeFilterCanceled();
+            getOnFilterSetListener().OnFilterCanceled();
             this.dismiss();
 
         }
-    }
-
-
-
-    @Override
-    public void onSortItemClick(int position, List<Integer> integerList) {
-        if (mSelectedData != null) {
-            mSelectedData.clear();
-            if (integerList.isEmpty()) {
-                onFilterSetListener.onMultipeFilterSet(null);
-            } else {
-                for (int i = 0; i < integerList.size(); i++) {
-                    mSelectedData.add(mData.get(integerList.get(i)));
-                }
-                onFilterSetListener.onMultipeFilterSet(mSelectedData);
-            }
-        }
-        dismiss();
     }
 
 
@@ -151,5 +132,24 @@ public class RowsFilterWindow extends SuperPopWindow implements OnSortItemClickL
 
             }
         }).start();
+    }
+
+    @Override
+    public void onSingleItemClickListener(List<Integer> integerList) {
+
+        if (mSelectedData == null) {
+            dismiss();
+            return;
+        }
+        mSelectedData.clear();
+        if (integerList.isEmpty()) {
+            getOnFilterSetListener().onSingleFilterSet(null);
+        } else {
+            for (int i = 0; i < integerList.size(); i++) {
+                mSelectedData.add(getData().get(integerList.get(i)));
+            }
+            getOnFilterSetListener().onSingleFilterSet(mSelectedData);
+        }
+        dismiss();
     }
 }

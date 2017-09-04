@@ -17,7 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="自定义参数使用"
-        android:onClick="myFilter"
+        android:onClick="myFilterResult"
         />
 
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义样式使用"
+        android:onClick="myFilterStyle"
+        />
 </LinearLayout>

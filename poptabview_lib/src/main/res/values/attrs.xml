@@ -8,11 +8,19 @@
         <attr name="show_other_line" format="boolean"/><!--是否显示下拉图标-->
     </declare-styleable>
 
-<!--    <declare-styleable name="PopsTabView">
-        <attr name="itemTextSize" format="integer"/>
-        <attr name="itemTextColor" format="integer"/>
-        <attr name="itemBackground" format="integer"/>&lt;!&ndash;行个数&ndash;&gt;
-    </declare-styleable>-->
+    <declare-styleable name="PopsTabView">
+
+        <attr name="tab_textsize" format="dimension"/> <!--tab字体大小-->
+        <attr name="tab_text_color_normal" format="color"/> <!--tab字体正常颜色-->
+        <attr name="tab_text_color_focus" format="color"/><!--tab字体选中颜色-->
+
+        <attr name="tab_background_normal" format="color|reference"/><!--tab正常背景-->
+        <attr name="tab_background_focus" format="color|reference"/><!--tab选中背景-->
+
+        <attr name="tab_pop_anim" format="reference"/><!--popwindow弹出动画-->
+
+
+    </declare-styleable>
 
 
 </resources>

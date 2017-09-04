@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.ccj.poptabview.R;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,24 +21,40 @@ import java.util.List;
 
 public abstract class SuperPopWindow extends PopupWindow implements View.OnClickListener {
 
-    protected View mParentView;
-    protected View mRootView;//根布局
-    protected Context mContext;
-    protected List<BaseFilterTabBean> mData = new ArrayList<>();
-    protected OnMultipeFilterSetListener onFilterSetListener;
-    protected int filterType; //一筛选类型,
-    protected int singleOrMultiply;//单选多选
-    protected SuperAdapter adapter;
+    private View mParentView;
+    private View mRootView;//根布局
 
-    public SuperPopWindow(Context context, List data, OnMultipeFilterSetListener onFilterSetListener, int filterType, int singleOrMultiply) {
+
+
+    private Context mContext;
+    private List<BaseFilterTabBean> mData = new ArrayList<>();
+    private OnFilterSetListener onFilterSetListener;
+    private int filterType; //一筛选类型,
+    private int singleOrMultiply;//单选多选
+    private SuperAdapter adapter;
+
+
+    /**
+     *
+     * @param context
+     * @param data
+     * @param onFilterSetListener
+     * @param filterType 筛选样式
+     * @param singleOrMultiply 是否多选
+     */
+    public SuperPopWindow(Context context, List data, OnFilterSetListener onFilterSetListener, int filterType, int singleOrMultiply) {
         this.mContext = context;
         this.mData = data;
         this.onFilterSetListener = onFilterSetListener;
         this.filterType = filterType;
         this.singleOrMultiply = singleOrMultiply;
-        initView();
+        mRootView=initView();
+        adapter=setAdapter();
+        initAdapter(adapter);
+        setContentView(mRootView);
         initCommonContentView();
-        initData();
+        initSelectData();
+
     }
 
 
@@ -49,14 +64,41 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setTouchable(true);
         this.setFocusable(true);
-        this.setAnimationStyle(R.style.PopupWindowAnimation);
+       // this.setAnimationStyle(R.style.PopupWindowAnimation);
         this.setBackgroundDrawable(new ColorDrawable());
+        mRootView.setOnClickListener(this);
+
+
 
     }
 
-    public abstract void initView();
 
-    public abstract void initData();
+
+
+    /**
+     * 得到子类的adapter
+     * @return
+     */
+    public abstract SuperAdapter setAdapter() ;
+
+    /**
+     * 初始化adapter处理
+     * 需要子类实现
+     */
+    public abstract void initAdapter(SuperAdapter adapter);
+
+
+    /**
+     * 布局绑定,id绑定
+     * 需要子类实现
+     */
+    public abstract View initView();
+
+    /**
+     * 初始化SelectData
+     * 需要子类实现
+     */
+    public abstract void initSelectData();
 
 
     /**
@@ -65,7 +107,7 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
      */
     public void setClickedItems(List items){
         if (adapter==null){
-            return;
+            throw new NullPointerException("请实例化adapter");
         }
         adapter.setClickedList(items);
     }
@@ -114,6 +156,18 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
 
 
 
+    public Context getContext() {
+        return mContext;
+    }
+
+    public void setContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public SuperAdapter getAdapter() {
+        return adapter;
+    }
+
 
     public View getmParentView() {
         return mParentView;
@@ -128,11 +182,11 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         return mRootView;
     }
 
-    public void setmRootView(View mRootView) {
+    public void setRootView(View mRootView) {
         this.mRootView = mRootView;
     }
 
-    public List<BaseFilterTabBean> getmData() {
+    public List<BaseFilterTabBean> getData() {
         return mData;
     }
 
@@ -140,13 +194,14 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         this.mData = mData;
     }
 
-    public OnMultipeFilterSetListener getOnFilterSetListener() {
+    public OnFilterSetListener getOnFilterSetListener() {
         return onFilterSetListener;
     }
 
-    public void setOnFilterSetListener(OnMultipeFilterSetListener onFilterSetListener) {
+    public void setOnFilterSetListener(OnFilterSetListener onFilterSetListener) {
         this.onFilterSetListener = onFilterSetListener;
     }
+
 
     public int getFilterType() {
         return filterType;

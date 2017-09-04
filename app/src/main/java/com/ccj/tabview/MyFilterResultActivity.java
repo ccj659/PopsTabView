@@ -10,19 +10,20 @@ import com.ccj.poptabview.PopTabView;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.bean.FilterGroup;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
-import com.ccj.poptabview.loader.PopEntityLoaderImp;
-import com.ccj.tabview.mypoptabview.MyFilterParamsBean;
-import com.ccj.tabview.mypoptabview.MyFilterTabBean;
-import com.ccj.tabview.mypoptabview.MyResultLoaderImp;
+import com.ccj.tabview.mypoptabview.myloader.MyFilterParamsBean;
+import com.ccj.tabview.mypoptabview.myloader.MyFilterTabBean;
+import com.ccj.tabview.mypoptabview.myloader.MyPopEntityLoaderImp;
+import com.ccj.tabview.mypoptabview.myloader.MyResultLoaderImp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 自定义参数
  * Created by chenchangjun on 17/7/26.
  */
 
-public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetListener<MyFilterParamsBean> {
+public class MyFilterResultActivity extends AppCompatActivity implements OnPopTabSetListener<MyFilterParamsBean> {
 
 
     private PopTabView popTabView;
@@ -47,11 +48,12 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
 
 
         popTabView.setOnPopTabSetListener(this)
-                .setPopEntityLoader(new PopEntityLoaderImp()).setResultLoader(new MyResultLoaderImp()) //配置 {筛选类型}  方式
+                .setPopEntityLoader(new MyPopEntityLoaderImp()).setResultLoader(new MyResultLoaderImp()) //配置 {筛选类型}  方式
                 .addFilterItem(filterGroup1.getTab_group_name(), filterGroup1.getFilter_tab(), filterGroup1.getTab_group_type(), filterGroup1.getSingle_or_mutiply())
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
-                .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply());
+                .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply())
+        ;
 
     }
 
@@ -66,8 +68,8 @@ public class MyFilterActivity extends AppCompatActivity implements OnPopTabSetLi
     //方式2
     @Override
     public void onPopTabSet(int index, String lable, MyFilterParamsBean params, String value) {
-        Toast.makeText(this, "lable=" + index + "\n&value=" + value, Toast.LENGTH_SHORT).show();
-        tv_content.setText("&筛选项=" + index + "\n&筛选传参=" + (params==null||params.getBeanList()==null?null:params.getBeanList().toString()) + "\n&筛选值=" + value);
+        Toast.makeText(this, "lable=" + (index+1) + "\n&value=" + value, Toast.LENGTH_SHORT).show();
+        tv_content.setText("&筛选项=" + (index+1) + "\n&筛选传参=" + (params==null||params.getBeanList()==null?null:params.getBeanList().toString()) + "\n&筛选值=" + value);
     }
 
 

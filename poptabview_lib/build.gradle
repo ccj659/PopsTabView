@@ -10,15 +10,18 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.3.2"
-
+        versionCode 6
+        versionName "1.4.0"
 
     }
     buildTypes {
-        release {
+     /*   release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }*/
+
+        debug {
+            debuggable true
         }
     }
 
@@ -50,7 +53,7 @@ def libName = "PopsTabView"
 //发布到组织名称名字，必须填写
 group = "me.ccj.PopsTabView"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.3.2"
+version = "1.4.0"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.ccj.CircleView:library:1.0.0'// Maven Group ID for the artifact，一般填你唯一的包名
 install {
     repositories.mavenInstaller {
@@ -117,3 +120,6 @@ bintray {
         publish = true
     }
 }
+
+//  ./gradlew install
+//  ./gradlew bintrayUpload

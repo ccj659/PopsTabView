@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/bg_view_shape"
+        app:tab_text_color_normal="@color/colorAccent"
+        app:tab_text_color_focus="@color/colorPrimary"
+        app:tab_background_normal="@color/cardview_dark_background"
+        app:tab_background_focus="@color/color48"
+        app:tab_textsize="6dp"
         android:elevation="4dip"  />
 
 
@@ -21,6 +26,7 @@
         app:tab_background_normal="@color/cardview_dark_background"
         app:tab_background_focus="@color/color48"
         app:tab_textsize="6dp"
+        app:tab_pop_anim="@anim/pop_anim"
         -->
 
 

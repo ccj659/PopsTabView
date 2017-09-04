@@ -9,8 +9,9 @@ import android.widget.CheckedTextView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.SuperAdapter;
+import com.ccj.poptabview.base.SuperListener;
 import com.ccj.poptabview.listener.OnHolderClickedListener;
-import com.ccj.poptabview.listener.OnSortItemClickListener;
+import com.ccj.poptabview.listener.OnSingleItemClickListener;
 
 import static com.ccj.poptabview.FilterConfig.ROWS_INITIAL_COUNT;
 
@@ -29,18 +30,18 @@ public class RowsFilterAdapter extends SuperAdapter {
         return new FilterViewHolder(v, this);
     }
 
-    public RowsFilterAdapter(OnSortItemClickListener listener, int singleOrMultiply) {
+    public RowsFilterAdapter(SuperListener listener, int singleOrMultiply) {
         super(null, listener, singleOrMultiply);
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (mData != null && position < mData.size()) {
+        if (getData() != null && position < getData().size()) {
             FilterViewHolder viewHolder = (FilterViewHolder) holder;
-            viewHolder.tv_filter.setText(mData.get(position).getTab_name());
+            viewHolder.tv_filter.setText(getData().get(position).getTab_name());
 
-            if (checkedLists.contains(position)) {
+            if (getCheckedLists().contains(position)) {
                 viewHolder.tv_filter.setChecked(true);
             } else {
                 viewHolder.tv_filter.setChecked(false);
@@ -50,18 +51,24 @@ public class RowsFilterAdapter extends SuperAdapter {
 
     @Override
     public int getItemCount() {
-        if (mData == null) {
+        if (getData() == null) {
             return 0;
-        } else if (mData.size() > ROWS_INITIAL_COUNT && !isExpand) {
+        } else if (getData().size() > ROWS_INITIAL_COUNT && !isExpand) {
             return ROWS_INITIAL_COUNT;
         }
-        return mData.size();
+        return getData().size();
+    }
+
+    @Override
+    public void onFilterItemClick(int position) {
+        ((OnSingleItemClickListener) getListener()).onSingleItemClickListener( getCheckedLists());
+
     }
 
 
     public void clear() {
-        if (mData != null) {
-            mData.clear();
+        if (getData() != null) {
+            getData().clear();
             isExpand = false;
             notifyDataSetChanged();
         }
@@ -73,30 +80,15 @@ public class RowsFilterAdapter extends SuperAdapter {
         notifyDataSetChanged();
     }
 
-    @Override
-    public void onItemClick(int pos) {
-        onItemClickEvent(pos);
-        ((OnSortItemClickListener) mListener).onSortItemClick(pos, checkedLists);
-    }
 
 
-    public static class FilterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class FilterViewHolder extends SuperFilterViewHolder  {
 
         CheckedTextView tv_filter;
-        OnHolderClickedListener mListener;
 
         public FilterViewHolder(View itemView, OnHolderClickedListener listener) {
-            super(itemView);
+            super(itemView,listener);
             tv_filter = (CheckedTextView) itemView.findViewById(R.id.tv_filter);
-            tv_filter.setOnClickListener(this);
-            mListener = listener;
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v instanceof CheckedTextView) {
-                mListener.onItemClick(getAdapterPosition());
-            }
         }
     }
 }

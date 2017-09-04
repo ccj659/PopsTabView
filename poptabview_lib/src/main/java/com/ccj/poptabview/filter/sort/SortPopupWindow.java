@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
+import com.ccj.poptabview.base.SuperAdapter;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.listener.OnSortTagClickListener;
 
 import java.util.ArrayList;
@@ -39,24 +40,25 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
 
     private HashMap<Integer, ArrayList<Integer>> checkedIndex;
 
-    public SortPopupWindow(Context context, List data, OnMultipeFilterSetListener listener, int filterType, int singleOrMultiply) {
+    public SortPopupWindow(Context context, List data, OnFilterSetListener listener, int filterType, int singleOrMultiply) {
         super(context, data, listener, filterType, singleOrMultiply);
 
     }
 
+
     @Override
-    public void initData() {
+    public void initSelectData() {
         //在一个存在继承的类中：初始化父类static成员变量,运行父类static初始化块-->初始化子类static成员变量,
         // 运行子类static初始化块-->初始化父类实例成员变量(如果有赋值语句),执行父类普通初始化块-->父类构造方法-->初始化子类实例成员变量(如果有赋值语句)及普通初始化块-->子类构造方法。
         sortItemViewLists = new ArrayList<>();
         checkedIndex = new HashMap<>();
-        for (int i = 0; i < mData.size(); i++) {
-            BaseFilterTabBean filterTabBean = mData.get(i);
+        for (int i = 0; i < getData().size(); i++) {
+            BaseFilterTabBean filterTabBean = getData().get(i);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            SortItemView sortItemView = new SortItemView(mContext);
+            SortItemView sortItemView = new SortItemView(getContext());
             sortItemView.setLayoutParams(layoutParams);
             sortItemView.setLabTitle(filterTabBean.getTab_name());
-            sortItemView.setAdapter(filterTabBean.getTab_name(), singleOrMultiply);//将getTab_name 作为 唯一标示
+            sortItemView.setAdapter(filterTabBean.getTab_name(), getSingleOrMultiply());//将getTab_name 作为 唯一标示
             sortItemView.setFilterTagClick(this);
             sortItemView.setIndex(i);
             sortItemViewLists.add(sortItemView);
@@ -65,19 +67,28 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
     }
 
     @Override
-    public void initView() {
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.common_popup_filter_sort, null);
-
+    public View initView() {
+       View mRootView = LayoutInflater.from(getContext()).inflate(R.layout.common_popup_filter_sort, null);
+    
         ll_content = (LinearLayout) mRootView.findViewById(R.id.ll_content);
         tv_reset = (TextView) mRootView.findViewById(R.id.tv_reset);
         tv_confirm = (TextView) mRootView.findViewById(R.id.tv_confirm);
         iv_collapse = mRootView.findViewById(R.id.iv_collapse);
         mInflatedErrorView = null;
-        mRootView.setOnClickListener(this);
         tv_reset.setOnClickListener(this);
         tv_confirm.setOnClickListener(this);
         iv_collapse.setOnClickListener(this);
-        this.setContentView(mRootView);
+        return mRootView;
+    }
+
+    @Override
+    public SuperAdapter setAdapter() {
+        return null;
+    }
+
+    @Override
+    public void initAdapter(SuperAdapter adapter) {
+
     }
 
     @Override
@@ -89,7 +100,7 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
     }
 
     private void resetView() {
-        for (int i = 0; i < mData.size(); i++) {
+        for (int i = 0; i < getData().size(); i++) {
             sortItemViewLists.get(i).resetView();
         }
         setButtonEnabled(false);
@@ -98,8 +109,8 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
 
     private void loadSortItem() {
 
-        for (int i = 0; i < mData.size(); i++) {
-            sortItemViewLists.get(i).setData(mData.get(i).getTabs(), checkedIndex.get(i));
+        for (int i = 0; i < getData().size(); i++) {
+            sortItemViewLists.get(i).setData(getData().get(i).getTabs(), checkedIndex.get(i));
         }
         ll_content.setVisibility(View.VISIBLE);
         if (checkedIndex != null && checkedIndex.size() > 0) {
@@ -117,7 +128,7 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
 
         } else if (i == R.id.tv_confirm) {
             List list = getSortList();
-            onFilterSetListener.onMultipeSortFilterSet(list);
+            getOnFilterSetListener().onSortFilterSet(list);
             this.dismiss();
 
         } else if (i == R.id.tv_reset) {
@@ -139,7 +150,7 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
     private List getSortList() {
         List list = new ArrayList();
         for (Map.Entry<Integer, ArrayList<Integer>> entry : checkedIndex.entrySet()) {
-            List list1 = mData.get(entry.getKey()).getTabs();
+            List list1 = getData().get(entry.getKey()).getTabs();
             if (list1 != null) {
                 for (int j = 0; j < list1.size(); j++) {
                     if (entry.getValue().contains(j)) {
@@ -156,11 +167,11 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
         enabled = !checkedIndex.isEmpty();
         tv_reset.setEnabled(enabled);
         if (enabled) {
-            tv_confirm.setBackgroundColor(ContextCompat.getColor(mContext, R.color.product_color));
-            tv_confirm.setTextColor(ContextCompat.getColor(mContext, android.R.color.white));
+            tv_confirm.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.product_color));
+            tv_confirm.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
         } else {
-            tv_confirm.setBackgroundColor(ContextCompat.getColor(mContext, R.color.coloreee));
-            tv_confirm.setTextColor(ContextCompat.getColor(mContext, R.color.color666));
+            tv_confirm.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.coloreee));
+            tv_confirm.setTextColor(ContextCompat.getColor(getContext(), R.color.color666));
         }
     }
 

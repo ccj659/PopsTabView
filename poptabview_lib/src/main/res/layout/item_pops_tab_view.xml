@@ -8,14 +8,13 @@
 
     <TextView
 
-        android:id="@+id/tv_travel_type"
+        android:id="@+id/tv_lable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:drawablePadding="4dp"
         android:drawableRight="@drawable/filter_down"
         android:gravity="center"
-        android:text="全部分类"
         android:textColor="@color/color333"
         android:singleLine="true"
         android:maxEms="4"

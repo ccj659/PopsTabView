@@ -6,9 +6,8 @@ package com.ccj.poptabview;
 public class FilterConfig {
 
 
-
     //通用筛选 单选,多选 判断
-    public static final int FILTER_TYPE_SINGLE =1 ;
+    public static final int FILTER_TYPE_SINGLE = 1;
     public static final int FILTER_TYPE_MUTIFY = 2;
     //当点击了已经选中的项目时, 是否取消选中
     public static final boolean FILTER_TYPE_CAN_CANCEL = true;
@@ -22,13 +21,11 @@ public class FilterConfig {
     public static int ROWS_INITIAL_COUNT = 6;//RowsFilter初始状态显示6个项目
 
 
-
     //popwindow类型
-    public  final  static int TYPE_POPWINDOW_SORT=0;//复杂筛选pop
-    public  final  static int TYPE_POPWINDOW_SINGLE=1;//单选pop
-    public  final  static int TYPE_POPWINDOW_LINKED=2;//二级pop
-    public  final  static int TYPE_POPWINDOW_ROWS=3;//三列
-
+    public final static int TYPE_POPWINDOW_SORT = 0;//复杂筛选pop
+    public final static int TYPE_POPWINDOW_SINGLE = 1;//单选pop
+    public final static int TYPE_POPWINDOW_LINKED = 2;//二级pop
+    public final static int TYPE_POPWINDOW_ROWS = 3;//三列
 
 
 }

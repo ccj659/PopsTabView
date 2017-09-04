@@ -21,24 +21,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.4.0_b811b12e4e4f08c0f052e10e68bb06397293c419.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.3.0_22e52c4510abb0787bf980aed3d7c387e7f311fd.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -57,57 +39,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.3.0_c0852f66b965212fa4be8dac863befbd2230fd07.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/transition/25.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.3.0_b2fe1a4e0da6ee6a64a26ff72d0481248a71e643.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.3.0_3ec29b2b053589ff85f3f9754b1bb8f99049c091.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.3.0_59d24c695a12c4f8242af59ddb1d77424a2e2370.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.3.0_cda6dd41f79e5efe0a10b077dfbbb650bdc34d81.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/PopsTabView/poptabview_lib/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="bdc37eca734ae8e8212da94290b45e5c36978624">
-        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/PopsTabView-poptabview_lib-unspecified_78e5e975a5d02e274191bf201b7a3a3e3d8ec0b4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -144,6 +81,69 @@
         revision="25.0.3"
         sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
         <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.3.0_71301ec56e3e3b351778a6d229b7d8973007c0d8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.4.0_b811b12e4e4f08c0f052e10e68bb06397293c419.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/me.ccj.PopsTabView/poptabview_lib/1.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b2715d8213f441341c9b3d08ea2f40b5a3b6d5f3">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/me.ccj.PopsTabView-poptabview_lib-1.4.0_d8d1772d51e757f36491383b168213f1ca718fa4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.3.0_22e52c4510abb0787bf980aed3d7c387e7f311fd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.3.0_c0852f66b965212fa4be8dac863befbd2230fd07.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/transition/25.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.3.0_b2fe1a4e0da6ee6a64a26ff72d0481248a71e643.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.3.0_3ec29b2b053589ff85f3f9754b1bb8f99049c091.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
+        <dex dex="/Users/chenchangjun/MyOpenGitSouce/PopsTabView/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.3.0_59d24c695a12c4f8242af59ddb1d77424a2e2370.jar" />
     </item>
 
 </items>

@@ -2,6 +2,7 @@ package com.ccj.poptabview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperPopWindow;
-import com.ccj.poptabview.listener.OnMultipeFilterSetListener;
+import com.ccj.poptabview.listener.OnFilterSetListener;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
 import com.ccj.poptabview.loader.PopEntityLoader;
 import com.ccj.poptabview.loader.PopEntityLoaderImp;
@@ -27,12 +28,21 @@ import java.util.List;
  * popwindow的容器tab
  * Created by chenchangjun on 17/6/20.
  */
-public class PopTabView extends LinearLayout implements OnMultipeFilterSetListener, OnDismissListener {
+public class PopTabView extends LinearLayout implements OnFilterSetListener, OnDismissListener {
 
     //自定义属性,待扩展
-    private int mToggleBtnBackground;
-    private int mToggleTextColor;
-    private float mToggleTextSize;
+    private double tab_textsize=-1;
+    private int tab_text_color_normal=-1;
+    private int tab_text_color_focus=-1;
+
+    private int tab_background_normal=-1;
+    private int tab_background_focus=-1;
+
+    private int tab_pop_anim=R.style.PopupWindowAnimation;
+
+
+    private Context mContext;
+
 
     private ArrayList<SuperPopWindow> mViewLists = new ArrayList<>();//popwindow缓存集合
     private ArrayList<TextView> mTextViewLists = new ArrayList<TextView>(); //筛选标签textiew集合,用于字段展示和点击事件
@@ -47,23 +57,27 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
 
     private int mTabPostion = -1; //记录TAB页号,
     private int currentIndex;//当前点击的下标
-    private Context mContext;
 
 
     private void init(Context context, AttributeSet attrs) {
-   /*     TypedArray a = null;
+        TypedArray a = null;
         try {
             a = context.obtainStyledAttributes(attrs, R.styleable.PopsTabView);
-            mToggleBtnBackground = a.getResourceId(R.styleable.PopsTabView_itemBackground, -1);
-            mToggleTextColor = a.getColor(R.styleable.PopsTabView_itemTextColor, -1);
-            mToggleTextSize = a.getDimension(R.styleable.PopsTabView_itemTextSize, -1);
+            tab_background_normal = a.getResourceId(R.styleable.PopsTabView_tab_background_normal, -1);
+            tab_background_focus = a.getResourceId(R.styleable.PopsTabView_tab_background_focus, -1);
+            tab_pop_anim = a.getResourceId(R.styleable.PopsTabView_tab_pop_anim, R.style.PopupWindowAnimation);
+
+            tab_text_color_normal = a.getColor(R.styleable.PopsTabView_tab_text_color_normal, -1);
+            tab_text_color_focus = a.getColor(R.styleable.PopsTabView_tab_text_color_focus, -1);
+
+            tab_textsize = a.getDimension(R.styleable.PopsTabView_tab_textsize, -1);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (a != null) {
                 a.recycle();
             }
-        }*/
+        }
         mContext = context;
         setOrientation(LinearLayout.HORIZONTAL);
 
@@ -96,16 +110,21 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     public PopTabView addFilterItem(String title, List data, int filterType, int singleOrMutiply) {
 
         ////默认筛选项的布局,如果想修改筛选项样式,也可以在此布局修改
-        View labView = inflate(getContext(), R.layout.item_expand_pop_window, null);
-        TextView labButton = (TextView) labView.findViewById(R.id.tv_travel_type);
+        View labView = inflate(getContext(), R.layout.item_pops_tab_view, null);
+        TextView labButton = (TextView) labView.findViewById(R.id.tv_lable);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         labView.setLayoutParams(params);
+        if (tab_textsize!=-1){
+            labButton.setTextSize((float) tab_textsize);
+        }
+        setMenuDrawble(labButton, false);
 
         //筛选类型实体加载器
         if (popEntityLoader == null) {
             popEntityLoader = new PopEntityLoaderImp();
         }
         SuperPopWindow mPopupWindow = (SuperPopWindow) popEntityLoader.getPopEntity(getContext(), data, this, filterType,singleOrMutiply);//得到相应的筛选类型实体
+        mPopupWindow.setAnimationStyle(tab_pop_anim);
         mPopupWindow.setOnDismissListener(this);
 
         //将筛选项布局加入view
@@ -113,8 +132,8 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
 
         //对筛选项控件进行设置,并且缓存位置信息
         labButton.setText(title);
-        labButton.setTag(++mTabPostion);
-        labButton.setOnClickListener(new OnClickListener() {
+        labView.setTag(++mTabPostion);
+        labView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //当点击时,设置当前选中状态
@@ -140,11 +159,27 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
     private void setMenuDrawble(TextView tv_checked, boolean isUp) {
 
         if (isUp) {
-            tv_checked.setTextColor(ContextCompat.getColor(getContext(), R.color.product_color));
+            if (tab_background_focus!=-1){
+                tv_checked.setBackgroundResource(tab_background_focus);
+            }
+            if (tab_text_color_focus!=-1){
+                tv_checked.setTextColor(tab_text_color_focus);
+            }else {
+                tv_checked.setTextColor(ContextCompat.getColor(getContext(), R.color.product_color));
+            }
             tv_checked.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_up, 0);
+
         } else {
+
+            if (tab_background_normal!=-1){
+                tv_checked.setBackgroundResource(tab_background_normal);
+            }
+            if (tab_text_color_normal!=-1){
+                tv_checked.setTextColor(tab_text_color_normal);
+            }else {
+                tv_checked.setTextColor(ContextCompat.getColor(getContext(), R.color.color666));
+            }
             tv_checked.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_down, 0);
-            tv_checked.setTextColor(ContextCompat.getColor(getContext(), R.color.color666));
 
         }
     }
@@ -194,7 +229,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param selectedList
      */
     @Override
-    public void onMultipeFilterSet(List<BaseFilterTabBean> selectedList) {
+    public void onSingleFilterSet(List<BaseFilterTabBean> selectedList) {
         handleFilterTabsBeanData(false,selectedList);
 
     }
@@ -203,7 +238,7 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param selectedSecondList 有效筛选结果 是  二级筛选
      */
     @Override
-    public void onMultipeSecondFilterSet(int firstPos, List<BaseFilterTabBean> selectedSecondList) {
+    public void onSecondFilterSet(int firstPos, List<BaseFilterTabBean> selectedSecondList) {
         handleFilterTabsBeanData(true,selectedSecondList);
     }
 
@@ -212,13 +247,13 @@ public class PopTabView extends LinearLayout implements OnMultipeFilterSetListen
      * @param selectedSecondList
      */
     @Override
-    public void onMultipeSortFilterSet(List<BaseFilterTabBean> selectedSecondList) {
+    public void onSortFilterSet(List<BaseFilterTabBean> selectedSecondList) {
         handleFilterTabsBeanData(true,selectedSecondList);
     }
 
 
     @Override
-    public void OnMultipeFilterCanceled() {
+    public void OnFilterCanceled() {
 
     }
 
