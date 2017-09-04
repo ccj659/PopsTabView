@@ -43,9 +43,9 @@
 
 ## 进阶
 
-- [支持自定义参数传送门](https://github.com/ccj659/PopsTabView/README_RESULT.md)
+- [支持自定义参数传送门](https://github.com/ccj659/PopsTabView/blob/master/README_RESULT.md)
 
-- [支持自定义样式传送门](https://github.com/ccj659/PopsTabView/README_STYLE.md)
+- [支持自定义样式传送门](https://github.com/ccj659/PopsTabView/blob/master/README_STYLE.md)
 
 
 ## Show
