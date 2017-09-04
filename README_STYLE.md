@@ -1,8 +1,10 @@
 
-[自定义样式传送门 https://github.com/ccj659/PopsTabView/README_STYLE.md](https://github.com/ccj659/PopsTabView/README_STYLE.md)
 
 ## 自定义样式
 
+
+
+![popstabview_gif_style1.gif](http://upload-images.jianshu.io/upload_images/1848340-b69890c94f582fbb.gif?imageMogr2/auto-orient/strip)
 
 ### 1.筛选tab样式
 
@@ -221,19 +223,13 @@ public class MyPopEntityLoaderImp implements PopEntityLoader {
 ```
    private void addMyMethod() {
 
-        FilterGroup filterGroup1 = getMyData("筛选1", MyFilterConfig.TYPE_POPWINDOW_ROWS,MyFilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup2 = getMyData("筛选2", MyFilterConfig.TYPE_POPWINDOW_LINKED,MyFilterConfig.FILTER_TYPE_MUTIFY);
-        FilterGroup filterGroup3 = getMyData("筛选3", MyFilterConfig.TYPE_POPWINDOW_SINGLE,MyFilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup4 = getMyData("筛选4", MyFilterConfig.TYPE_POPWINDOW_SORT,MyFilterConfig.FILTER_TYPE_MUTIFY);
-        FilterGroup filterGroup5 = getMyData("自定义", MyFilterConfig.TYPE_POPWINDOW_MY,MyFilterConfig.FILTER_TYPE_MUTIFY);//自定义
+        FilterGroup filterGroup1 = getMyData("单列筛选", MyFilterConfig.TYPE_POPWINDOW_SINGLE,MyFilterConfig.FILTER_TYPE_SINGLE);
+        FilterGroup filterGroup5 = getMyData("自定义单列", MyFilterConfig.TYPE_POPWINDOW_MY,MyFilterConfig.FILTER_TYPE_MUTIFY);//自定义
 
 
         popTabView.setOnPopTabSetListener(this)
                 .setPopEntityLoader(new MyPopEntityLoaderImp()).setResultLoader(new MyResultLoaderImp()) //配置 {筛选类型}  方式
                 .addFilterItem(filterGroup1.getTab_group_name(), filterGroup1.getFilter_tab(), filterGroup1.getTab_group_type(), filterGroup1.getSingle_or_mutiply())
-                .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
-                .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
-                .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply())
                 .addFilterItem(filterGroup5.getTab_group_name(), filterGroup5.getFilter_tab(), filterGroup5.getTab_group_type(), filterGroup5.getSingle_or_mutiply());
 
     }
