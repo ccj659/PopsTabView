@@ -4,8 +4,15 @@
 .idea/workspace.xml
 
 
-app/libs/
-app/src/main/res/drawable/
 build/android-profile/
 poptabview_lib/build/
 
+build/
+gradle/
+.idea/
+
+local.properties
+gradlew
+gradlew.bat
+PopsTabView.iml
+poptabview_lib/doc
