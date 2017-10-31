@@ -61,7 +61,7 @@ public class SortItemView extends LinearLayout {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SortItemView);
             SPAN_COUNT = typedArray.getInteger(R.styleable.SortItemView_row_count, 3);
             title_lable = typedArray.getString(R.styleable.SortItemView_lable);
-
+            typedArray.recycle();
         }
 
         tv_title.setText(title_lable+"");
