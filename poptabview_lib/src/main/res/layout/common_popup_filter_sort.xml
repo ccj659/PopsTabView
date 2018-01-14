@@ -95,7 +95,7 @@
         android:id="@+id/error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/load_failed" />
+        android:layout="@layout/loadding_failed" />
 
     <include layout="@layout/loading_progress_trans"
         android:layout_width="match_parent"

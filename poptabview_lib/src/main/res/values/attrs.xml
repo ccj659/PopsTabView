@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="SortItemView">
-        <attr name="lable" format="string"/>
+        <attr name="label" format="string"/>
         <attr name="line_count" format="integer"/><!--行个数-->
         <attr name="row_count" format="integer"/><!--列个数-->
         <attr name="show_other_line" format="boolean"/><!--是否显示下拉图标-->

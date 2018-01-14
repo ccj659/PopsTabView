@@ -38,7 +38,7 @@ public class SortItemView extends LinearLayout {
     private TextView tv_title, tv_empty_border;
     private RecyclerView rv_cat;
     private ImageView iv_expand_border;
-    private String title_lable = "";
+    private String title_label = "";
     private GridLayoutManager mLayoutManager;
     private int SPAN_COUNT = 3;
     private SortFilterAdapter mAdapterInland;
@@ -60,11 +60,11 @@ public class SortItemView extends LinearLayout {
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SortItemView);
             SPAN_COUNT = typedArray.getInteger(R.styleable.SortItemView_row_count, 3);
-            title_lable = typedArray.getString(R.styleable.SortItemView_lable);
+            title_label = typedArray.getString(R.styleable.SortItemView_label);
             typedArray.recycle();
         }
 
-        tv_title.setText(title_lable+"");
+        tv_title.setText(title_label +"");
 
         iv_expand_border.setOnClickListener(new OnClickListener() {
             @Override

@@ -111,7 +111,7 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
         ////默认筛选项的布局,如果想修改筛选项样式,也可以在此布局修改
         View labView = inflate(getContext(), R.layout.item_pops_tab_view, null);
-        TextView labButton = (TextView) labView.findViewById(R.id.tv_lable);
+        TextView labButton = (TextView) labView.findViewById(R.id.tv_label);
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         labView.setLayoutParams(params);
         if (tab_textsize!=-1){
