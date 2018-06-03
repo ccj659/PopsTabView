@@ -166,19 +166,21 @@ public class LinkFilterPopupWindow extends SuperPopWindow implements FirstFilter
      * @param secondFilterBean
      */
     @Override
-    public void onSecondItemClick(int firstPos, BaseFilterTabBean filterTabBean, ArrayList<Integer> secondFilterBean) {
+    public void onSecondItemClick(int firstPos, ArrayList<Integer> secondFilterBean) {
 
+        List<Integer>  secondFilterList= (List<Integer>) secondFilterBean.clone();
 
         if (getSingleOrMultiply() == FilterConfig.FILTER_TYPE_SINGLE) {
             mSecondSelectedMap.clear();
-            mSecondSelectedMap.put(firstPos, (List<Integer>) secondFilterBean.clone());
-
-            List list = new ArrayList();
-            list.add(filterTabBean);
-            getOnFilterSetListener().onSecondFilterSet(firstPosition, list);
+            mSecondSelectedMap.put(firstPos,secondFilterList );
+            if (secondFilterList.size()==1){
+                List list = new ArrayList();
+                list.add(getData().get(firstPos).getTabs().get(secondFilterList.get(0)));
+                getOnFilterSetListener().onSecondFilterSet(firstPosition, list);
+            }
             dismiss();
         } else {
-            mSecondSelectedMap.put(firstPos, (List<Integer>) secondFilterBean.clone());
+            mSecondSelectedMap.put(firstPos, secondFilterList);
             setConfirmButtonEnabled();
         }
 

@@ -38,6 +38,11 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
     private int tab_background_normal=-1;
     private int tab_background_focus=-1;
 
+    private int tab_max_ems=-1;//字数个数超过tab_max_ems 显示...
+    private int tab_max_lines=-1;//tab item字数最大行数
+
+
+
     private int tab_pop_anim=R.style.PopupWindowAnimation;
 
 
@@ -71,6 +76,10 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
             tab_text_color_focus = a.getColor(R.styleable.PopsTabView_tab_text_color_focus, -1);
 
             tab_textsize = a.getDimension(R.styleable.PopsTabView_tab_textsize, -1);
+            tab_max_ems =  a.getInteger(R.styleable.PopsTabView_tab_max_ems, 4);
+            tab_max_lines =  a.getInteger(R.styleable.PopsTabView_tab_max_ems, 1);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -84,9 +93,9 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
 
     }
 
-
+/*************************************************/
     /**
-     * 设置默认选中
+     * 设置点击 选中,并触发onPopTabSet()方法回调,目前只适用于  一级普通筛选Single,以及一级多排筛选Rows
      * @param filterIndex
      * @param checkedPosition
      */
@@ -97,7 +106,38 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         mViewLists.get(filterIndex).setClickedItems(list);
     }
 
+    /**
+     * 设置点击 选中,并触发onPopTabSet()方法回调,目前只适用于  一级普通筛选Single,以及一级多排筛选Rows
+     * @param filterIndex
+     * @param clickedItems
+     */
+    public void setClickedItems(int filterIndex, ArrayList<Integer> clickedItems ){
+        this.currentIndex=filterIndex;
+        mViewLists.get(filterIndex).setClickedItems(clickedItems);
+    }
 
+    /**
+     * 设置默认选中,不会触发OnPopSet()回调 目前只适用于  一级普通筛选Single,以及一级多排筛选Rows
+     * @param filterIndex
+     * @param defaultCheckedItems
+     */
+    public void setDefaultCheckedItems(int filterIndex, ArrayList<Integer> defaultCheckedItems ){
+        this.currentIndex=filterIndex;
+        mViewLists.get(filterIndex).setDefaultCheckedItems(defaultCheckedItems);
+    }
+
+
+    /**
+     * 设置默认选中,不会触发OnPopSet()回调 目前只适用于  一级普通筛选Single,以及一级多排筛选Rows
+     * @param filterIndex
+     * @param defaultCheckedItem
+     */
+    public void setDefaultCheckedItem(int filterIndex,int  defaultCheckedItem){
+        this.currentIndex=filterIndex;
+        ArrayList<Integer> list=new ArrayList();
+        list.add(defaultCheckedItem);
+        mViewLists.get(filterIndex).setDefaultCheckedItems(list);
+    }
 
 
     /**
@@ -112,11 +152,19 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
         ////默认筛选项的布局,如果想修改筛选项样式,也可以在此布局修改
         View labView = inflate(getContext(), R.layout.item_pops_tab_view, null);
         TextView labButton = (TextView) labView.findViewById(R.id.tv_label);
+
+        labButton.setEms(tab_max_ems);
+        labButton.setMaxLines(tab_max_lines);
+
+
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
         labView.setLayoutParams(params);
+
+
         if (tab_textsize!=-1){
             labButton.setTextSize((float) tab_textsize);
         }
+
         setMenuDrawble(labButton, false);
 
         //筛选类型实体加载器

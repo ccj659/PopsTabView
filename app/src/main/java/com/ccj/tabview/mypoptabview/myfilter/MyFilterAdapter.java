@@ -44,10 +44,9 @@ public class MyFilterAdapter extends SuperAdapter {
 
     /**
      * 这里~由于需求可能变更,这里开放监听, listener 需要进行强转,转成自己的listener, 当然也可以用listener包下的监听
-     * @param position
      */
     @Override
-    public void onFilterItemClick(int position) {
+    public void onFilterItemClick() {
         ((OnSingleItemClickListener) getListener()).onSingleItemClickListener(getCheckedLists());//强转
     }
 

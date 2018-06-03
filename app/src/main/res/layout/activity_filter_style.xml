@@ -16,9 +16,11 @@
         app:tab_background_normal="@color/cardview_dark_background"
         app:tab_background_focus="@color/color48"
         app:tab_textsize="6dp"
+        app:tab_max_lines="1"
+        app:tab_max_ems="8"
         android:elevation="4dip"  />
 
-
+    <!--新增属性tab_max_ems,tab_max_lines-->
      <!--
         可自定义属性
         app:tab_text_color_normal="@color/colorAccent"

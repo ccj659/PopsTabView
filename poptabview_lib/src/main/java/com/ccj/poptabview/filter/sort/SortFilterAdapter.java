@@ -60,8 +60,8 @@ public class SortFilterAdapter extends SuperAdapter {
     }
 
     @Override
-    public void onFilterItemClick(int position) {
-        ((OnSortItemClickListener) getListener()).onSortItemClick(position, getCheckedLists());
+    public void onFilterItemClick() {
+        ((OnSortItemClickListener) getListener()).onSortItemClick(-1, getCheckedLists());
 
     }
 

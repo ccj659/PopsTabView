@@ -39,9 +39,9 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
 
     private void addMyMethod() {
 
-        FilterGroup filterGroup1 = getMyData("筛选1", FilterConfig.TYPE_POPWINDOW_ROWS,FilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup2 = getMyData("筛选2", FilterConfig.TYPE_POPWINDOW_LINKED,FilterConfig.FILTER_TYPE_MUTIFY);
-        FilterGroup filterGroup3 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_SINGLE);
+        FilterGroup filterGroup1 = getMyData("筛选1", FilterConfig.TYPE_POPWINDOW_ROWS,FilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup2 = getMyData("筛选2", FilterConfig.TYPE_POPWINDOW_LINKED,FilterConfig.FILTER_TYPE_SINGLE);
+        FilterGroup filterGroup3 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_MUTIFY);
         FilterGroup filterGroup4 = getMyData("筛选4", FilterConfig.TYPE_POPWINDOW_SORT,FilterConfig.FILTER_TYPE_MUTIFY);
 
 
@@ -51,7 +51,22 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
                 .addFilterItem(filterGroup2.getTab_group_name(), filterGroup2.getFilter_tab(), filterGroup2.getTab_group_type(), filterGroup2.getSingle_or_mutiply())
                 .addFilterItem(filterGroup3.getTab_group_name(), filterGroup3.getFilter_tab(), filterGroup3.getTab_group_type(), filterGroup3.getSingle_or_mutiply())
                 .addFilterItem(filterGroup4.getTab_group_name(), filterGroup4.getFilter_tab(), filterGroup4.getTab_group_type(), filterGroup4.getSingle_or_mutiply());
-        popTabView.setClickedItem(2,0);
+        //popTabView.setClickedItem(2,0);
+
+
+        ArrayList<Integer> list=new ArrayList();
+        list.add(0);
+        list.add(1);
+
+
+        //默认选中 会执行
+        // onPopTabSet()方法
+        popTabView.setClickedItems(0,list);
+
+        //默认选中
+        // 不会执行onPopTabSet()方法
+      //  popTabView.setDefaultCheckedItems(1,list);
+
     }
 
 

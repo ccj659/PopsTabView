@@ -60,7 +60,7 @@ public class RowsFilterAdapter extends SuperAdapter {
     }
 
     @Override
-    public void onFilterItemClick(int position) {
+    public void onFilterItemClick() {
         ((OnSingleItemClickListener) getListener()).onSingleItemClickListener( getCheckedLists());
 
     }

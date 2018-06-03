@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SimpleFilterActivity"></activity>
+        <activity android:name=".SimpleFilterActivity" android:theme="@style/AppThemeNoActionBar"></activity>
         <activity android:name=".MyFilterResultActivity"></activity>
         <activity android:name=".MyFilterStyleActivity"></activity>
     </application>

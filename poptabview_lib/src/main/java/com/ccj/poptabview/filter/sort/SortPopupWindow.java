@@ -180,7 +180,7 @@ public class SortPopupWindow extends SuperPopWindow implements OnSortTagClickLis
      * @param type     1分类 2商城  这里选tab_name
      */
     @Override
-    public void onComFilterTagClick(int firstPos, int secondPos, ArrayList<Integer> filterTabBeen, String type) {
+    public void onComFilterTagClick(int firstPos, int secondPos1, ArrayList<Integer> filterTabBeen, String type) {
         if (filterTabBeen == null) {
             return;
         }

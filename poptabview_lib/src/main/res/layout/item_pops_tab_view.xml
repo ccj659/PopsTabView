@@ -16,7 +16,7 @@
         android:drawableRight="@drawable/filter_down"
         android:gravity="center"
         android:textColor="@color/color333"
-        android:singleLine="true"
+        android:maxLines="1"
         android:maxEms="4"
         android:ellipsize="end"
         android:textSize="13dp" />

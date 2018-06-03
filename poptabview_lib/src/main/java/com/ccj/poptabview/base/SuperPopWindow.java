@@ -112,6 +112,18 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
         adapter.setClickedList(items);
     }
 
+
+
+    /**
+     * 设置默认选中的项
+     * @param items
+     */
+    public void setDefaultCheckedItems(List items){
+        if (adapter==null){
+            throw new NullPointerException("请实例化adapter");
+        }
+        adapter.setCheckedLists(items);
+    }
     /**
      * 如果有需要,子类会重写该方法,
      * @param anchor

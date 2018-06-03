@@ -110,27 +110,29 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
      * @param checkedIndex
      */
     public void setClickedList(List checkedIndex) {
+
+
         if (checkedIndex == null || checkedIndex.isEmpty()) {
             return;
         }
-        for (int i = 0; i < checkedIndex.size(); i++) {
-            onItemClick((Integer) checkedIndex.get(i));
 
-        }
-        notifyDataSetChanged();
+        setCheckedLists(checkedIndex);
+
+        onFilterItemClick();
 
     }
+
 
     /**
      * 子类处理点击事件
      */
-    public abstract void onFilterItemClick(int position);
+    public abstract void onFilterItemClick();
 
 
     @Override
     public void onItemClick(int position) {
         onItemClickEvent(position);
-        onFilterItemClick(position);
+        onFilterItemClick();
     }
 
 
@@ -173,6 +175,7 @@ public abstract class SuperAdapter extends RecyclerView.Adapter implements OnHol
 
     public void setCheckedLists(List<Integer> checkedLists) {
         this.checkedLists = checkedLists;
+        notifyDataSetChanged();
     }
 
     public int getSingleOrMultiply() {

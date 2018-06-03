@@ -57,8 +57,8 @@ public class SecondFilterAdapter extends SuperAdapter {
     }
 
     @Override
-    public void onFilterItemClick(int position) {
-        ((OnSecondItemClickListener) getListener()).onSecondItemClick(firstPosition, getData().get(position), (ArrayList<Integer>) getCheckedLists());
+    public void onFilterItemClick() {
+        ((OnSecondItemClickListener) getListener()).onSecondItemClick(firstPosition, (ArrayList<Integer>) getCheckedLists());
     }
 
     public void setData(int firstPosition, List<BaseFilterTabBean> data) {

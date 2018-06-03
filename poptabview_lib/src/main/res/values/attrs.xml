@@ -20,6 +20,10 @@
         <attr name="tab_pop_anim" format="reference"/><!--popwindow弹出动画-->
 
 
+        <attr name="tab_max_ems" format="integer"/> <!--tab单行最多字数-->
+        <attr name="tab_max_lines" format="integer"/> <!--tab单行最大行数-->
+
+
     </declare-styleable>
 
 
