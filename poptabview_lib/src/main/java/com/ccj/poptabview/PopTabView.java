@@ -243,12 +243,12 @@ public class PopTabView extends LinearLayout implements OnFilterSetListener, OnD
             //遍历, 将 不是该位置的window消失
             for (int i = 0; i < mViewLists.size(); i++) {
                 if (i != position) {
-                    mViewLists.get(i).dismiss();
+                    mViewLists.get(i).onSuperPopWindowDismiss(false);
                }
             }
             //如果该位置正在展示,就让他消失.如果没有,就展示
             if (mViewLists.get(position).isShowing()) {
-                mViewLists.get(position).dismiss();
+                mViewLists.get(position).onSuperPopWindowDismiss(true);
             }else {
                 mViewLists.get(position).show(this, 0);
             }

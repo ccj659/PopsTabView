@@ -76,6 +76,7 @@ public class RowsFilterWindow extends SuperPopWindow implements OnSingleItemClic
         return mRootView;
 
     }
+
     @Override
     public SuperAdapter setAdapter() {
         mAdapter = new RowsFilterAdapter(this, getSingleOrMultiply());
@@ -103,7 +104,6 @@ public class RowsFilterWindow extends SuperPopWindow implements OnSingleItemClic
 
         }
     }
-
 
 
     public void onClickEvent() {
@@ -142,14 +142,34 @@ public class RowsFilterWindow extends SuperPopWindow implements OnSingleItemClic
             return;
         }
         mSelectedData.clear();
+
         if (integerList.isEmpty()) {
-            getOnFilterSetListener().onSingleFilterSet(null);
+            //getOnFilterSetListener().onSingleFilterSet(null);
         } else {
             for (int i = 0; i < integerList.size(); i++) {
                 mSelectedData.add(getData().get(integerList.get(i)));
             }
-            getOnFilterSetListener().onSingleFilterSet(mSelectedData);
+
+
+            if (getSingleOrMultiply() == FilterConfig.FILTER_TYPE_SINGLE) {
+                dismiss();
+            }
         }
-        dismiss();
+    }
+
+
+    @Override
+    public void dismiss() {
+        if (isShowing()) {
+            if (mSelectedData.isEmpty()) {
+                getOnFilterSetListener().onSingleFilterSet(null);
+            } else {
+                getOnFilterSetListener().onSingleFilterSet(mSelectedData);
+            }
+        }
+
+        super.dismiss();
+
+
     }
 }

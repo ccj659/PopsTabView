@@ -18,8 +18,9 @@
         </activity>
 
         <activity android:name=".SimpleFilterActivity" android:theme="@style/AppThemeNoActionBar"></activity>
-        <activity android:name=".MyFilterResultActivity"></activity>
-        <activity android:name=".MyFilterStyleActivity"></activity>
+        <activity android:name=".MyFilterResultActivity" android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".MyFilterStyleActivity" android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".MultifyFilterActivity" android:theme="@style/AppThemeNoActionBar" ></activity>
     </application>
 
 </manifest>

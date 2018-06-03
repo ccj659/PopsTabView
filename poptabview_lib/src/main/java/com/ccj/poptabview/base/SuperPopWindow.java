@@ -151,22 +151,24 @@ public abstract class SuperPopWindow extends PopupWindow implements View.OnClick
     }
 
 
+    @Override
+    public void dismiss() {
+        super.dismiss();
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 1.5 多选 不消失弹窗.点击外层 消失
+     * @param callData
+     */
+    public   void onSuperPopWindowDismiss(boolean callData){
+        if (callData){
+            getAdapter().onFilterItemClick();
+            dismiss();
+        }else {
+            dismiss();
+        }
+    }
 
     public Context getContext() {
         return mContext;

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.R;
 import com.ccj.poptabview.base.BaseFilterTabBean;
 import com.ccj.poptabview.base.SuperAdapter;
@@ -85,17 +86,35 @@ public class SingleFilterWindow extends SuperPopWindow implements OnSingleItemCl
             dismiss();
             return;
         }
-
         mSelectedData.clear();
 
         if (integerList.isEmpty()) {
-            getOnFilterSetListener().onSingleFilterSet(null);
+            //getOnFilterSetListener().onSingleFilterSet(null);
         } else {
             for (int i = 0; i < integerList.size(); i++) {
                 mSelectedData.add(getData().get(integerList.get(i)));
             }
-            getOnFilterSetListener().onSingleFilterSet(mSelectedData);
+
+
+            if (getSingleOrMultiply() == FilterConfig.FILTER_TYPE_SINGLE) {
+                dismiss();
+            }
         }
-        dismiss();
+    }
+
+
+    @Override
+    public void dismiss() {
+        if (isShowing()) {
+            if (mSelectedData.isEmpty()) {
+                getOnFilterSetListener().onSingleFilterSet(null);
+            } else {
+                getOnFilterSetListener().onSingleFilterSet(mSelectedData);
+            }
+        }
+
+        super.dismiss();
+
+
     }
 }

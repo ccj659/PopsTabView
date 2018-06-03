@@ -13,6 +13,14 @@
      android:onClick="simpleFilter"
      />
 
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单选多选使用"
+        android:onClick="multifyFilter"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

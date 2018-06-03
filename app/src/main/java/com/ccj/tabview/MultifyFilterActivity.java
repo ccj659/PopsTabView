@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * v 1.5 多选测试 默认选中,默认点击
  * Created by chenchangjun on 17/7/26.
  */
 
-public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabSetListener<String> {
+public class MultifyFilterActivity extends AppCompatActivity implements OnPopTabSetListener<String> {
 
 
     private PopTabView popTabView;
@@ -40,9 +41,9 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
     private void addMyMethod() {
 
         FilterGroup filterGroup1 = getMyData("筛选0", FilterConfig.TYPE_POPWINDOW_ROWS,FilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup2 = getMyData("筛选1", FilterConfig.TYPE_POPWINDOW_LINKED,FilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup2 = getMyData("筛选1", FilterConfig.TYPE_POPWINDOW_ROWS,FilterConfig.FILTER_TYPE_MUTIFY);
         FilterGroup filterGroup3 = getMyData("筛选2", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_SINGLE);
-        FilterGroup filterGroup4 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SORT,FilterConfig.FILTER_TYPE_MUTIFY);
+        FilterGroup filterGroup4 = getMyData("筛选3", FilterConfig.TYPE_POPWINDOW_SINGLE,FilterConfig.FILTER_TYPE_MUTIFY);
 
 
         popTabView.setOnPopTabSetListener(this)

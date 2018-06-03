@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void multifyFilter(View view){
+        startActivity(new Intent(this,MultifyFilterActivity.class));
+    }
 
     public void myFilterResult(View view){
         startActivity(new Intent(this,MyFilterResultActivity.class));
