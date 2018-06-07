@@ -58,7 +58,7 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
         list.add(0);
         list.add(1);
 
-
+/*
         //默认选中 会执行
         // onPopTabSet()方法
         popTabView.setClickedItems(0
@@ -66,7 +66,7 @@ public class SimpleFilterActivity extends AppCompatActivity implements OnPopTabS
 
         //默认选中
         // 不会执行onPopTabSet()方法
-      //  popTabView.setDefaultCheckedItems(1,list);
+      //  popTabView.setDefaultCheckedItems(1,list);*/
 
     }
 
