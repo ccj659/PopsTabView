@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//添加这两行
 //apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -120,6 +119,3 @@ bintray {
         publish = true
     }
 }
-
-//  ./gradlew install
-//  ./gradlew bintrayUpload

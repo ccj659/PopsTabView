@@ -9,11 +9,16 @@
 
 **PopsTabView是个filter容器,他可以自动,快速,构建不同筛选样式,自由组合成一组tab.**
 
+----
+
+**更新日志**
+
+v 1.5.0  单项列表(仅限`SingleFilterWindow`,`RowsFilterWindow`)
+- 应`issues`需求,修复多选会弹回问题.
+- 应`issues`需求,增加可默认选项(可默认选中多个).
 
 
-
-
-
+---
 
 筛选样式 | 筛选种类 |可自定义属性
 --------|------|--------------|
@@ -34,7 +39,8 @@
 `setPopEntityLoader()` | 筛选样式加载类,新增类型可在此扩展  | 否|
 `setResultLoader()` | 结果集加载器,可自定义进行配置  | 是|
 `addFilterItem()` | 增加筛选项  | 是|
-`setClickedItem()` | 设置默认选中的状态,并主动回调  | 否|
+`setClickedItem()` | 设置默认选中的状态,并主动回调 `v1.5.0 新增`  | 否|
+`setDefaultCheckedItems()` | 设置默认选中,不会触发OnPopSet()回调  | 否|
 `removeItem()` | 清空容器  | 否|
 
 
@@ -242,6 +248,14 @@ public class ResultLoaderImp implements ResultLoader<String> {
 - [自定义样式传送门](https://github.com/ccj659/PopsTabView/README_STYLE.md)
 
 
+## 混淆规则
+
+```
+-dontwarn com.ccj.poptabview.**
+-keep class com.ccj.poptabview.**{*;}
+```
+
+
 ## 样式调整--待优化
 
 1.可在各级`Adapter.ViewHolder` 中自己定义.
@@ -254,6 +268,7 @@ public class ResultLoaderImp implements ResultLoader<String> {
 
 ## About Me
 ===
+
 [CSDN：http://blog.csdn.net/ccj659/article/](http://blog.csdn.net/ccj659/article/)
 
 [简书：http://www.jianshu.com/u/94423b4ef5cf](http://www.jianshu.com/u/94423b4ef5cf)
@@ -261,4 +276,7 @@ public class ResultLoaderImp implements ResultLoader<String> {
 [github:  https//github.com/ccj659/](https//github.com/ccj659/)
 
 
+我的微信
+
+![image.png](https://upload-images.jianshu.io/upload_images/1848340-373112cf4079f1c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
