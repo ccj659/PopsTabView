@@ -96,7 +96,7 @@ v 1.5.0  单项列表(仅限`SingleFilterWindow`,`RowsFilterWindow`)
 **In Gradle**
 
 ```
-compile 'me.ccj.PopsTabView:poptabview_lib:1.4.0'
+compile 'me.ccj.PopsTabView:poptabview_lib:1.5.0'
 
 ```
 
@@ -106,7 +106,7 @@ compile 'me.ccj.PopsTabView:poptabview_lib:1.4.0'
 <dependency>
   <groupId>me.ccj.PopsTabView</groupId>
   <artifactId>poptabview_lib</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0</version>
   <type>pom</type>
 </dependency>
 
