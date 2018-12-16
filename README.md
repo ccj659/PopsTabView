@@ -256,14 +256,6 @@ public class ResultLoaderImp implements ResultLoader<String> {
 ```
 
 
-## 样式调整--待优化
-
-1.可在各级`Adapter.ViewHolder` 中自己定义.
-
-2.可在`xml`文件中自定义修改
-
-3.O__O "….....好吧,还是我太懒了....以后会补充的~~
-
 
 
 ## About Me
